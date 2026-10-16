@@ -15,7 +15,7 @@ export function AccordionTrigger({ className, children, ...props }: React.Compon
     <A.Header className="flex">
       <A.Trigger
         className={cn(
-          "group flex flex-1 items-center justify-between gap-4 py-4 text-left text-sm font-medium text-fg transition-colors hover:text-primary-text",
+          "group flex min-w-0 flex-1 items-center justify-between gap-4 py-4 text-left text-sm font-medium text-fg transition-colors hover:text-primary-text",
           className,
         )}
         {...props}

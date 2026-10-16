@@ -90,7 +90,7 @@ export function Sidebar() {
           <p className="mt-1 font-display text-lg font-semibold tabular">
             {streak.current} {streak.current === 1 ? "day" : "days"}
           </p>
-          <p className="text-[11px] text-faint">Best: {streak.best} days</p>
+          <p className="text-[11px] text-faint">Best: {streak.best} {streak.best === 1 ? "day" : "days"}</p>
         </Link>
         <Tooltip content={collapsed ? "Expand sidebar" : "Collapse sidebar"} side="right">
           <button

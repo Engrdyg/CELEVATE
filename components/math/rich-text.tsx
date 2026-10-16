@@ -33,6 +33,35 @@ export function RichText({ text, className }: { text: string; className?: string
 }
 
 /** Strips rich-text syntax for plain-text contexts (search, aria labels). */
+const TEX_PLAIN: [RegExp, string][] = [
+  [/\^\{?\\circ\}?/g, "°"],
+  [/\\circ/g, "°"],
+  [/\\%/g, "%"],
+  [/\\times/g, "×"],
+  [/\\cdot/g, "·"],
+  [/\\pi/g, "π"],
+  [/\\theta/g, "θ"],
+  [/\\gamma/g, "γ"],
+  [/\\Delta/g, "Δ"],
+  [/\\phi/g, "φ"],
+  [/\\beta_?1?/g, "β1"],
+  [/\\sigma/g, "σ"],
+  [/\\(?:text|mathrm)\{([^}]*)\}/g, "$1"],
+  [/\\frac\{([^}]*)\}\{([^}]*)\}/g, "$1/$2"],
+  [/\\sqrt\{([^}]*)\}/g, "√($1)"],
+  [/\\[,;! ]/g, " "],
+  [/'/g, "′"],
+];
+
+/** Strips rich-text syntax for plain-text contexts (search, previews, aria labels). */
 export function plainText(text: string) {
-  return text.replace(/\$([^$]+)\$/g, (_, t: string) => t.replace(/\\[a-zA-Z]+/g, " ").replace(/[{}^_]/g, "")).replace(/\*\*/g, "").replace(/\s+/g, " ").trim();
+  return text
+    .replace(/\$([^$]+)\$/g, (_, t: string) => {
+      let out = t;
+      for (const [re, rep] of TEX_PLAIN) out = out.replace(re, rep);
+      return out.replace(/\\[a-zA-Z]+/g, " ").replace(/[{}]/g, "").replace(/\^/g, "").replace(/_/g, "");
+    })
+    .replace(/\*\*/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }

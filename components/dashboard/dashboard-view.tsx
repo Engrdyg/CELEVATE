@@ -68,7 +68,7 @@ function DashboardSkeleton() {
           <Skeleton key={i} className="h-32 rounded-xl" />
         ))}
       </div>
-      <div className="mt-4 grid gap-4 lg:grid-cols-3">
+      <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
         <CardSkeleton className="h-72" lines={5} />
         <CardSkeleton className="h-72 lg:col-span-2" lines={5} />
       </div>
@@ -238,7 +238,7 @@ function Dashboard() {
       </Stagger>
 
       {/* Readiness + activity */}
-      <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
+      <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
         <Card>
           <CardHeader>
             <div>
@@ -298,7 +298,7 @@ function Dashboard() {
       </div>
 
       {/* Mastery + continue/recommend */}
-      <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-start">
+      <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-start">
         <Card>
           <CardHeader>
             <div>
@@ -388,7 +388,7 @@ function Dashboard() {
       </div>
 
       {/* Exam + achievements */}
-      <div className="mt-4 grid gap-4 md:grid-cols-2 md:items-start">
+      <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:items-start">
         <Card>
           <CardHeader>
             <div>

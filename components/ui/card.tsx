@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export function Card({ className, interactive, ...props }: React.HTMLAttributes<HTMLDivElement> & { interactive?: boolean }) {
+export function Card({ className, interactive, ...props }: React.ComponentProps<"div"> & { interactive?: boolean }) {
   return (
     <div
       className={cn(

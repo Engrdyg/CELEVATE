@@ -24,7 +24,7 @@ export function Select({
       <S.Trigger
         aria-label={label}
         className={cn(
-          "inline-flex h-9 min-w-36 items-center justify-between gap-2 rounded-lg border border-line-strong bg-surface px-3 text-[13px] font-medium text-fg shadow-elev-1 outline-none hover:bg-subtle focus-visible:border-primary focus-visible:shadow-[0_0_0_3px_var(--primary-soft)]",
+          "inline-flex h-9 min-w-36 items-center justify-between gap-2 rounded-lg border border-line-strong bg-surface px-3 text-left text-[13px] font-medium text-fg shadow-elev-1 outline-none [&>span:first-child]:truncate hover:bg-subtle focus-visible:border-primary focus-visible:shadow-[0_0_0_3px_var(--primary-soft)]",
           className,
         )}
       >

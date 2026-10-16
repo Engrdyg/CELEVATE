@@ -1,0 +1,15 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+/** Current time (ms), updated every `interval` ms. Null until mounted (avoids SSR clock reads). */
+export function useNow(interval = 1000, enabled = true) {
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => {
+    if (!enabled) return;
+    setNow(Date.now());
+    const id = window.setInterval(() => setNow(Date.now()), interval);
+    return () => window.clearInterval(id);
+  }, [interval, enabled]);
+  return now;
+}
