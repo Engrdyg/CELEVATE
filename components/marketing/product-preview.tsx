@@ -17,7 +17,7 @@ import {
   Timer,
   TrendingUp,
 } from "lucide-react";
-import { LogoMark } from "@/components/brand/logo";
+import { LogoMark, Wordmark } from "@/components/brand/logo";
 import { cn } from "@/lib/utils";
 
 /* Illustrative values only — the preview is labelled "Sample data" wherever it appears. */
@@ -110,7 +110,7 @@ function MiniApp() {
       <div className="flex w-[196px] shrink-0 flex-col border-r border-line bg-surface/70 px-3 py-4">
         <div className="flex items-center gap-2 px-2">
           <LogoMark className="size-6" />
-          <span className="font-display text-[12px] font-bold tracking-[0.14em]">CELEVATE</span>
+          <Wordmark className="text-[12px]" />
         </div>
         <div className="mt-6 space-y-0.5">
           {NAV.map(([Icon, label], i) => (

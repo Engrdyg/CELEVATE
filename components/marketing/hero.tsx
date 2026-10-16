@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowRight, CheckCircle2, ChevronDown, Flame, Sigma } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Wordmark } from "@/components/brand/logo";
 import { Tex } from "@/components/math/tex";
 import { ease } from "@/lib/motion";
 import { BlueprintField, StructuralLines } from "./blueprint-backdrop";
@@ -50,17 +51,15 @@ export function Hero() {
       </motion.div>
 
       <motion.div style={{ y: copyY, opacity: copyOpacity }} className="relative mx-auto max-w-page px-4 text-center sm:px-6 lg:px-8">
-        <motion.div {...intro(0.05, reduce)} className="flex justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 py-1 pr-3 pl-1 text-[12px] font-medium text-muted shadow-elev-1 backdrop-blur">
-            <span className="rounded-full bg-primary-soft px-2 py-0.5 font-mono text-[10px] tracking-wider text-primary-text uppercase">CELE</span>
-            Built for the Philippine Civil Engineering Licensure Exam
-          </span>
+        <motion.div {...intro(0.05, reduce)} className="flex flex-col items-center">
+          <Wordmark labels className="text-[2.6rem] sm:text-[3.4rem]" />
+          <p className="mt-2 text-[12px] font-medium text-muted sm:text-[13px]">Review for the Philippine Civil Engineering Licensure Examination</p>
         </motion.div>
 
         <motion.h1
           id="hero-title"
           {...intro(0.15, reduce)}
-          className="mx-auto mt-7 max-w-4xl font-display text-display-2xl font-semibold text-fg"
+          className="mx-auto mt-6 max-w-4xl font-display text-display-2xl font-semibold text-fg"
         >
           Engineer Your <span className="text-gradient">Future.</span>
         </motion.h1>
