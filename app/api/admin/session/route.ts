@@ -1,13 +1,14 @@
 import { connection } from "next/server";
 import { z } from "zod";
-import { clearStaffCookie, currentStaff, login, setStaffCookie, staffConfigured } from "@/lib/server/staff-auth";
+import { clearStaffCookie, currentStaff, login, setStaffCookie, staffConfigured, staffDiagnostics } from "@/lib/server/staff-auth";
 import { getStore } from "@/lib/server/qbank";
 import { assertSameOrigin, errorResponse, json, readJson } from "@/lib/server/http";
 
 export async function GET() {
   await connection();
   const store = await getStore();
-  return json({ configured: staffConfigured(), staff: await currentStaff(), storage: store.kind, writable: store.writable });
+  const configured = staffConfigured();
+  return json({ configured, staff: await currentStaff(), storage: store.kind, writable: store.writable, diagnostics: configured ? undefined : staffDiagnostics() });
 }
 
 export async function POST(req: Request) {

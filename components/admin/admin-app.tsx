@@ -29,6 +29,7 @@ const TABS: { id: AdminTab; label: string; icon: typeof LayoutDashboard }[] = [
 ];
 
 interface SessionInfo {
+  diagnostics?: { staffVarPresent: boolean; signingSecretSet: boolean; issues: string[] };
   configured: boolean;
   staff: Staff | null;
   storage: string;
@@ -56,7 +57,7 @@ export function AdminApp() {
         <Skeleton className="mt-6 h-72 rounded-2xl" />
       </div>
     );
-  if (!session.configured) return <NotConfigured />;
+  if (!session.configured) return <NotConfigured diagnostics={session.diagnostics} />;
   if (!session.staff) return <Login onDone={refresh} />;
   return <Console staff={session.staff} storage={session.storage} writable={session.writable} onSignOut={refresh} />;
 }
@@ -69,7 +70,7 @@ function Centered({ children }: { children: React.ReactNode }) {
   );
 }
 
-function NotConfigured() {
+function NotConfigured({ diagnostics }: { diagnostics?: SessionInfo["diagnostics"] }) {
   return (
     <Centered>
       <Card className="p-6">
@@ -77,8 +78,27 @@ function NotConfigured() {
         <h1 className="mt-3 font-display text-lg font-semibold">Admin access isn&apos;t configured</h1>
         <p className="mt-2 text-[13px] leading-6 text-muted">
           Set <code className="font-mono text-[12px]">CELEVATE_STAFF</code> (for example <code className="font-mono text-[12px]">Ana Reyes:admin:&lt;token&gt;;Ben Cruz:reviewer:&lt;token&gt;</code>) and{" "}
-          <code className="font-mono text-[12px]">CELEVATE_SIGNING_SECRET</code> on the server, then reload. Tokens must be at least 24 characters.
+          <code className="font-mono text-[12px]">CELEVATE_SIGNING_SECRET</code> on the server, then redeploy. Tokens must be at least 24 characters.
         </p>
+        {diagnostics && (
+          <div className="mt-4 rounded-lg border border-line bg-subtle/60 p-3 text-[12px] leading-5">
+            <p className="font-semibold">What this deployment sees</p>
+            <ul className="mt-1.5 space-y-1 text-muted">
+              <li>CELEVATE_STAFF: {diagnostics.staffVarPresent ? "present" : "missing"}</li>
+              <li>CELEVATE_SIGNING_SECRET: {diagnostics.signingSecretSet ? "set (32+ characters)" : "missing or shorter than 32 characters"}</li>
+              {diagnostics.issues.map((m) => (
+                <li key={m} className="text-warning">
+                  {m}
+                </li>
+              ))}
+            </ul>
+            {!diagnostics.staffVarPresent && (
+              <p className="mt-2 text-muted">
+                In Vercel, check the variable is enabled for the <strong className="text-fg">Production</strong> environment, then redeploy the latest production deployment.
+              </p>
+            )}
+          </div>
+        )}
         <Button asChild variant="outline" className="mt-5">
           <Link href="/">Back to CELEVATE</Link>
         </Button>

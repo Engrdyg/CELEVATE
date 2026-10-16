@@ -32,6 +32,31 @@ export function staffAccounts(): StaffAccount[] {
 
 export const staffConfigured = () => staffAccounts().length > 0;
 
+/**
+ * Why staff config was rejected — never includes names or tokens, only shapes,
+ * so a misconfigured deployment can be fixed without exposing secrets.
+ */
+export function staffDiagnostics() {
+  const raw = process.env.CELEVATE_STAFF;
+  const issues: string[] = [];
+  if (raw === undefined) issues.push("CELEVATE_STAFF is not set in this deployment's environment.");
+  else if (!raw.trim()) issues.push("CELEVATE_STAFF is set but empty.");
+  else {
+    if (/^\s*["']|["']\s*$/.test(raw)) issues.push("The value starts or ends with a quote — remove the quotes.");
+    raw.split(";").forEach((entry, i) => {
+      if (!entry.trim()) return;
+      const parts = entry.split(":").map((s) => s.trim());
+      const n = i + 1;
+      if (parts.length !== 3) issues.push(`Entry ${n} has ${parts.length} part(s); expected Name:role:token.`);
+      else {
+        if (!["admin", "reviewer", "author"].includes(parts[1])) issues.push(`Entry ${n}: role must be admin, reviewer or author.`);
+        if (parts[2].length < 24) issues.push(`Entry ${n}: token is ${parts[2].length} characters; it must be at least 24.`);
+      }
+    });
+  }
+  return { staffVarPresent: raw !== undefined, signingSecretSet: (process.env.CELEVATE_SIGNING_SECRET ?? "").length >= 32, issues };
+}
+
 const attempts = new Map<string, { n: number; until: number }>();
 
 export function login(token: string, ip: string): Actor {
