@@ -1,0 +1,386 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(mste|hge|psad)-q\\d{3,4}$"
+    },
+    "subject": {
+      "type": "string",
+      "enum": [
+        "mste",
+        "hge",
+        "psad"
+      ]
+    },
+    "topic": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subtopic": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "computational",
+        "conceptual"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 120
+    },
+    "stem": {
+      "type": "string",
+      "minLength": 1
+    },
+    "figure": {
+      "type": "string",
+      "enum": [
+        "right-triangle",
+        "simple-curve",
+        "differential-leveling",
+        "closed-traverse",
+        "vertical-curve",
+        "soil-phase-diagram",
+        "hydrostatic-plane",
+        "pipe-flow",
+        "simple-beam-udl",
+        "cantilever-point-load",
+        "rc-beam-section",
+        "column-buckling"
+      ]
+    },
+    "choices": {
+      "minItems": 4,
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "key",
+          "text"
+        ]
+      }
+    },
+    "answer": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "moderate",
+        "difficult"
+      ]
+    },
+    "estimatedTimeSeconds": {
+      "type": "integer",
+      "minimum": 30,
+      "maximum": 900
+    },
+    "given": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": {
+      "type": "string",
+      "minLength": 1
+    },
+    "formulas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tex": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "label",
+          "tex"
+        ]
+      }
+    },
+    "variables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "minLength": 1
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol",
+          "meaning"
+        ]
+      }
+    },
+    "solution": {
+      "minItems": 2,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tex": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "title",
+          "text"
+        ]
+      }
+    },
+    "finalAnswer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "insight": {
+      "type": "string",
+      "minLength": 1
+    },
+    "commonErrors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "relatedConcepts": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "relatedLessonIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "formulaIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "python-recompute",
+            "conceptual-review"
+          ]
+        },
+        "script": {
+          "type": "string"
+        },
+        "computedValue": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "tolerance": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 0.05
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "passed",
+            "failed",
+            "not-run"
+          ]
+        },
+        "checkedAt": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "method",
+        "status"
+      ]
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "validation": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "technical_review",
+            "verified",
+            "needs_review",
+            "rejected"
+          ]
+        },
+        "publication": {
+          "type": "string",
+          "enum": [
+            "unpublished",
+            "published",
+            "archived"
+          ]
+        },
+        "smeReview": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "approved",
+            "changes_requested"
+          ]
+        }
+      },
+      "required": [
+        "validation",
+        "publication",
+        "smeReview"
+      ]
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string",
+          "minLength": 1
+        },
+        "createdAt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "updatedAt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "reviewedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "smeReviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "updatedBy": {
+          "type": "string"
+        },
+        "changeReason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "author",
+        "createdAt",
+        "updatedAt",
+        "version",
+        "reviewedBy"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "subject",
+    "topic",
+    "subtopic",
+    "type",
+    "title",
+    "stem",
+    "choices",
+    "answer",
+    "difficulty",
+    "estimatedTimeSeconds",
+    "given",
+    "required",
+    "formulas",
+    "variables",
+    "solution",
+    "finalAnswer",
+    "insight",
+    "commonErrors",
+    "relatedConcepts",
+    "relatedLessonIds",
+    "formulaIds",
+    "references",
+    "verification",
+    "status",
+    "meta"
+  ]
+}

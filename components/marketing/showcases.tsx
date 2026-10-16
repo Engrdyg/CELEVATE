@@ -1,15 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { ArrowRight, Bot, Check, Clock, Copy, Flag, NotebookPen, Sparkles, X } from "lucide-react";
+import { ArrowRight, Bot, Check, Clock, Copy, Flag, NotebookPen, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tex } from "@/components/math/tex";
 import { RichText } from "@/components/math/rich-text";
 import { Reveal } from "@/components/motion/reveal";
-import { allQuestions, getSubject, type ChoiceId } from "@/lib/content";
+import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
+import { QuestionBody } from "@/components/practice/question-card";
+import { getSubject } from "@/lib/content";
+import { catalog, getCatalogEntry } from "@/lib/qbank/catalog";
+import { topicTitle } from "@/lib/qbank/taxonomy";
+import type { ChoiceKey } from "@/lib/qbank/schema";
+import { useInView } from "@/hooks/use-in-view";
+import { useSingleQuestion } from "@/hooks/use-single-question";
 import { ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { SampleChip, SectionHeading } from "./section-heading";
@@ -20,17 +28,18 @@ import { useParallaxFactor } from "./use-parallax";
 /*  04 — Interactive review experience: a real question from the bank  */
 /* ------------------------------------------------------------------ */
 
+const DEMO_ID = catalog.find((q) => q.subject === "mste" && q.difficulty === "easy")?.id ?? catalog[0]?.id;
+
 export function TryAQuestion() {
-  const question = useMemo(
-    () => allQuestions.find((q) => q.subjectId === "mste" && q.difficulty === "easy" && !q.figure) ?? allQuestions[0],
-    [],
-  );
-  const [selected, setSelected] = useState<ChoiceId | null>(null);
-  const [submitted, setSubmitted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const visible = useInView(ref, "400px");
+  const { q, error, check, checking, submit, reset } = useSingleQuestion(DEMO_ID, visible);
+  const [selected, setSelected] = useState<ChoiceKey | null>(null);
   const reduce = useReducedMotion();
-  if (!question) return null;
-  const correct = submitted && selected === question.answer;
-  const subject = getSubject(question.subjectId);
+  if (!DEMO_ID) return null;
+  const entry = getCatalogEntry(DEMO_ID)!;
+  const correct = !!check?.item.isCorrect;
+  const subject = getSubject(entry.subject);
 
   return (
     <section className="relative py-24 sm:py-32" aria-labelledby="try-title">
@@ -39,92 +48,68 @@ export function TryAQuestion() {
           index="04"
           eyebrow="Interactive review"
           title={<span id="try-title">Try a problem. See the reasoning.</span>}
-          description="This is a real item from the CELEVATE practice bank. Pick an answer and submit — the full solution, governing formula and common errors appear instantly in practice mode."
+          description="This is a real item from the CELEVATE question bank, graded on the server. Pick an answer and check it — the full solution and common errors appear instantly in practice mode."
         />
         <Reveal>
-          <div className="surface-card overflow-hidden rounded-2xl">
+          <div ref={ref} className="surface-card overflow-hidden rounded-2xl">
             <div className="flex flex-wrap items-center gap-2 border-b border-line px-5 py-3">
               <Badge tone="primary">{subject?.code}</Badge>
-              <Badge tone="neutral">{question.topic}</Badge>
+              <Badge tone="neutral">{topicTitle(entry.topic)}</Badge>
               <Badge tone="success" className="capitalize">
-                {question.difficulty}
+                {entry.difficulty}
               </Badge>
               <span className="ml-auto font-mono text-[11px] text-faint">Practice mode</span>
             </div>
             <div className="p-5 sm:p-6">
-              <p className="text-[15px] leading-7 text-fg">
-                <RichText text={question.stem} />
-              </p>
-              <div role="radiogroup" aria-label="Answer choices" className="mt-5 grid gap-2">
-                {question.choices.map((c) => {
-                  const isSel = selected === c.id;
-                  const isAns = submitted && c.id === question.answer;
-                  const isWrong = submitted && isSel && !isAns;
-                  return (
-                    <button
-                      key={c.id}
-                      type="button"
-                      role="radio"
-                      aria-checked={isSel}
-                      disabled={submitted}
-                      onClick={() => setSelected(c.id)}
-                      className={cn(
-                        "flex items-center gap-3 rounded-xl border px-3.5 py-3 text-left text-[14px] transition-[border-color,background-color] duration-150",
-                        !submitted && "hover:border-line-strong hover:bg-subtle/60",
-                        isSel && !submitted && "border-primary bg-primary-soft",
-                        !isSel && !isAns && "border-line",
-                        isAns && "border-success bg-success-soft",
-                        isWrong && "border-danger bg-danger-soft",
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          "grid size-7 shrink-0 place-items-center rounded-lg border font-mono text-[12px] font-semibold",
-                          isSel && !submitted ? "border-primary bg-primary-strong text-primary-fg" : "border-line bg-surface text-muted",
-                          isAns && "border-success bg-success text-white",
-                          isWrong && "border-danger bg-danger text-white",
-                        )}
+              {error ? (
+                <p className="text-[14px] text-muted">The sample question couldn&apos;t be loaded right now. You can try it in Practice.</p>
+              ) : !q ? (
+                <div role="status" aria-label="Loading question" className="space-y-3">
+                  <Skeleton className="h-16" />
+                  <Skeleton className="h-40" />
+                </div>
+              ) : (
+                <>
+                  <QuestionBody q={q} name="landing-try" selected={check?.item.selected ?? selected} onSelect={setSelected} answer={check?.item.answer} />
+                  <div className="mt-5 flex flex-wrap items-center gap-3">
+                    {!check ? (
+                      <Button
+                        onClick={() => selected && submit(selected).catch((e: Error) => toast.error(e.message))}
+                        disabled={!selected}
+                        loading={checking}
                       >
-                        {isAns ? <Check className="size-3.5" /> : isWrong ? <X className="size-3.5" /> : c.id}
-                      </span>
-                      <RichText text={c.text} />
-                    </button>
-                  );
-                })}
-              </div>
-              <div className="mt-5 flex flex-wrap items-center gap-3">
-                {!submitted ? (
-                  <Button onClick={() => setSubmitted(true)} disabled={!selected}>
-                    Submit answer
-                  </Button>
-                ) : (
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setSubmitted(false);
-                      setSelected(null);
-                    }}
-                  >
-                    Try again
-                  </Button>
-                )}
-                <AnimatePresence>
-                  {submitted && (
-                    <motion.p
-                      initial={reduce ? false : { opacity: 0, x: -6 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0 }}
-                      role="status"
-                      className={cn("text-[14px] font-medium", correct ? "text-success" : "text-danger")}
-                    >
-                      {correct ? "Correct — nicely done." : `Not quite. The answer is ${question.answer}.`}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
+                        Check answer
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          reset();
+                          setSelected(null);
+                        }}
+                      >
+                        Try again
+                      </Button>
+                    )}
+                    <AnimatePresence>
+                      {check && (
+                        <motion.p
+                          initial={reduce ? false : { opacity: 0, x: -6 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0 }}
+                          role="status"
+                          className={cn("text-[14px] font-medium", correct ? "text-success" : "text-danger")}
+                        >
+                          {correct ? "Correct — nicely done." : `Not quite. The answer is ${check.item.answerLabel}.`}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </>
+              )}
             </div>
             <AnimatePresence initial={false}>
-              {submitted && (
+              {check && (
                 <motion.div
                   initial={reduce ? false : { height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
@@ -134,20 +119,22 @@ export function TryAQuestion() {
                 >
                   <div className="p-5 sm:p-6">
                     <p className="font-display text-[14px] font-semibold">Solution</p>
-                    <p className="mt-1 text-[14px] leading-6 text-muted">
-                      <RichText text={question.solution.summary} />
-                    </p>
                     <ol className="mt-4 space-y-3">
-                      {question.solution.steps.map((s, i) => (
+                      {check.review.solution.map((s, i) => (
                         <li key={i} className="flex gap-3">
                           <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-primary-soft font-mono text-[10px] font-semibold text-primary-text">{i + 1}</span>
                           <div className="min-w-0 flex-1 text-[14px] leading-6">
+                            <p className="font-medium">{s.title}</p>
                             <RichText text={s.text} />
                             {s.tex && <Tex tex={s.tex} display className="mt-1.5 text-fg" />}
                           </div>
                         </li>
                       ))}
                     </ol>
+                    <p className="mt-4 rounded-lg border border-success/30 bg-success-soft px-3 py-2 text-[14px]">
+                      <span className="font-semibold">Final answer: </span>
+                      <RichText text={check.review.finalAnswer} />
+                    </p>
                     <div className="mt-5 flex justify-end">
                       <Button asChild variant="link" size="sm">
                         <Link href="/practice">

@@ -2,7 +2,10 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { ChoiceId, SubjectId } from "@/lib/content/types";
+import type { SubjectId } from "@/lib/content/types";
+import type { ChoiceKey, QDifficulty } from "@/lib/qbank/schema";
+import type { PublicQuestion, SessionResult } from "@/lib/qbank/client";
+import { getCatalogEntry } from "@/lib/qbank/catalog";
 import { dayKey, uid } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
@@ -23,8 +26,11 @@ export interface Profile {
 export interface Attempt {
   questionId: string;
   subjectId: SubjectId;
+  /** Taxonomy topic id (e.g. "hge-statics"). */
   topic: string;
-  selected: ChoiceId | null;
+  subtopic?: string;
+  difficulty?: QDifficulty;
+  selected: ChoiceKey | null;
   correct: boolean;
   at: string;
   seconds: number;
@@ -52,31 +58,45 @@ export interface Note {
   createdAt: string;
 }
 
-export interface ExamConfig {
-  title: string;
-  subjects: SubjectId[];
-  questionCount: number;
-  minutes: number;
-  /** When true the exam auto-submits at the deadline. */
-  autoSubmit: boolean;
-  /** Whether results show the correct answers & solutions. */
+/** Result summary kept on the device after the server grades a session. */
+export interface StoredResult {
+  percent: number;
+  correct: number;
+  incorrect: number;
+  unanswered: number;
+  total: number;
+  rawScore: string;
+  durationSeconds: number;
+  late: boolean;
+  bySubject: SessionResult["score"]["bySubject"];
+  byTopic: SessionResult["score"]["byTopic"];
+  byDifficulty: SessionResult["score"]["byDifficulty"];
+  items: { id: string; position: number; title: string; subject: SubjectId; topic: string; difficulty: QDifficulty; selectedLabel: ChoiceKey | null; answerLabel: ChoiceKey | null; isCorrect: boolean; flagged: boolean }[];
+  resultToken: string;
   revealSolutions: boolean;
-  shuffle: boolean;
 }
 
 export interface ExamSession {
+  /** Server-issued session id. */
   id: string;
-  config: ExamConfig;
-  questionIds: string[];
-  answers: Record<string, ChoiceId>;
+  /** Signed session token (no answers inside); dropped after submission. */
+  token: string | null;
+  title: string;
+  presetId?: string;
+  questions: PublicQuestion[];
+  answers: Record<string, ChoiceKey>;
   flagged: string[];
   visited: string[];
+  times: Record<string, number>;
   currentIndex: number;
   startedAt: string;
-  deadline: string;
+  deadline: string | null;
+  autoSubmit: boolean;
+  revealSolutions: boolean;
+  status: "in-progress" | "submitted";
   submittedAt?: string;
   autoSubmitted?: boolean;
-  status: "in-progress" | "submitted";
+  result?: StoredResult;
 }
 
 export interface LastLocation {
@@ -121,11 +141,12 @@ interface ProgressActions {
   setLastLocation: (loc: Omit<LastLocation, "at">) => void;
   addNote: (n: Omit<Note, "id" | "createdAt">) => string;
   deleteNote: (id: string) => void;
-  startExam: (config: ExamConfig, questionIds: string[]) => string;
-  answerExam: (examId: string, questionId: string, choice: ChoiceId | null) => void;
+  startExam: (s: { sessionId: string; token: string; title: string; presetId?: string; questions: PublicQuestion[]; startedAt: number; deadline: number | null; autoSubmit: boolean; revealSolutions: boolean }) => string;
+  answerExam: (examId: string, questionId: string, choice: ChoiceKey | null) => void;
   toggleExamFlag: (examId: string, questionId: string) => void;
   setExamIndex: (examId: string, index: number) => void;
-  submitExam: (examId: string, auto?: boolean) => void;
+  addExamTime: (examId: string, questionId: string, seconds: number) => void;
+  finishExam: (examId: string, result: SessionResult) => void;
   discardExam: (examId: string) => void;
   scheduleExam: (s: ScheduledExam | null) => void;
   markNotificationsRead: (ids: string[]) => void;
@@ -150,6 +171,15 @@ export const initialProgress: ProgressState = {
 };
 
 export const PROGRESS_KEY = "celevate-progress";
+
+/** Maps phase-0 ids (mste-q01, psad-q13 …) to question-bank ids (mste-q001, mste-q016 …). */
+export function migrateQuestionId(id: string) {
+  const m = id.match(/^(mste|hge|psad)-q(\d{2})$/);
+  if (!m) return id;
+  const n = Number(m[2]);
+  if (m[1] === "psad" && n >= 13) return `mste-q${String(n + 3).padStart(3, "0")}`;
+  return `${m[1]}-q${String(n).padStart(3, "0")}`;
+}
 
 const now = () => new Date().toISOString();
 
@@ -214,24 +244,27 @@ export const useProgress = create<ProgressStore>()(
           bookmarks: s.bookmarks.filter((b) => !(b.kind === "note" && b.refId === id)),
         })),
 
-      startExam: (config, questionIds) => {
-        const id = uid("exam");
-        const started = new Date();
+      startExam: (x) => {
         const session: ExamSession = {
-          id,
-          config,
-          questionIds,
+          id: x.sessionId,
+          token: x.token,
+          title: x.title,
+          presetId: x.presetId,
+          questions: x.questions,
           answers: {},
           flagged: [],
-          visited: questionIds.length ? [questionIds[0]] : [],
+          visited: x.questions.length ? [x.questions[0].id] : [],
+          times: {},
           currentIndex: 0,
-          startedAt: started.toISOString(),
-          deadline: new Date(started.getTime() + config.minutes * 60_000).toISOString(),
+          startedAt: new Date(x.startedAt).toISOString(),
+          deadline: x.deadline ? new Date(x.deadline).toISOString() : null,
+          autoSubmit: x.autoSubmit,
+          revealSolutions: x.revealSolutions,
           status: "in-progress",
         };
         // Only one active session at a time: discard any unfinished one.
         set((s) => ({ exams: [...s.exams.filter((e) => e.status === "submitted"), session] }));
-        return id;
+        return session.id;
       },
 
       answerExam: (examId, questionId, choice) =>
@@ -249,12 +282,7 @@ export const useProgress = create<ProgressStore>()(
         set((s) => ({
           exams: s.exams.map((e) =>
             e.id === examId && e.status === "in-progress"
-              ? {
-                  ...e,
-                  flagged: e.flagged.includes(questionId)
-                    ? e.flagged.filter((q) => q !== questionId)
-                    : [...e.flagged, questionId],
-                }
+              ? { ...e, flagged: e.flagged.includes(questionId) ? e.flagged.filter((q) => q !== questionId) : [...e.flagged, questionId] }
               : e,
           ),
         })),
@@ -263,22 +291,55 @@ export const useProgress = create<ProgressStore>()(
         set((s) => ({
           exams: s.exams.map((e) => {
             if (e.id !== examId || e.status !== "in-progress") return e;
-            const qid = e.questionIds[index];
-            return {
-              ...e,
-              currentIndex: index,
-              visited: qid && !e.visited.includes(qid) ? [...e.visited, qid] : e.visited,
-            };
+            const qid = e.questions[index]?.id;
+            return { ...e, currentIndex: index, visited: qid && !e.visited.includes(qid) ? [...e.visited, qid] : e.visited };
           }),
         })),
 
-      submitExam: (examId, auto) => {
-        const exam = get().exams.find((e) => e.id === examId);
-        if (!exam || exam.status === "submitted") return;
-        const submittedAt = auto ? exam.deadline : now();
+      addExamTime: (examId, questionId, seconds) =>
         set((s) => ({
           exams: s.exams.map((e) =>
-            e.id === examId ? { ...e, status: "submitted", submittedAt, autoSubmitted: !!auto } : e,
+            e.id === examId && e.status === "in-progress" ? { ...e, times: { ...e.times, [questionId]: Math.round(((e.times[questionId] ?? 0) + seconds) * 10) / 10 } } : e,
+          ),
+        })),
+
+      finishExam: (examId, r) => {
+        const exam = get().exams.find((e) => e.id === examId);
+        if (!exam || exam.status === "submitted") return;
+        const result: StoredResult = {
+          percent: r.score.percent,
+          correct: r.score.correct,
+          incorrect: r.score.incorrect,
+          unanswered: r.score.unanswered,
+          total: r.score.total,
+          rawScore: r.score.rawScore,
+          durationSeconds: r.durationSeconds,
+          late: r.late,
+          bySubject: r.score.bySubject,
+          byTopic: r.score.byTopic,
+          byDifficulty: r.score.byDifficulty,
+          items: r.items.map((i) => ({ id: i.id, position: i.position, title: i.title, subject: i.subject, topic: i.topic, difficulty: i.difficulty, selectedLabel: i.selectedLabel, answerLabel: i.answerLabel, isCorrect: i.isCorrect, flagged: i.flagged })),
+          resultToken: r.resultToken,
+          revealSolutions: r.revealSolutions,
+        };
+        const attempts: Attempt[] = r.items.map((i) => ({
+          questionId: i.id,
+          subjectId: i.subject,
+          topic: i.topic,
+          subtopic: i.subtopic,
+          difficulty: i.difficulty,
+          selected: i.selected,
+          correct: i.isCorrect,
+          at: new Date(r.submittedAt).toISOString(),
+          seconds: Math.round(exam.times[i.id] ?? 0),
+          mode: "exam",
+        }));
+        set((s) => ({
+          attempts: [...s.attempts, ...attempts],
+          exams: s.exams.map((e) =>
+            e.id === examId
+              ? { ...e, status: "submitted", token: null, questions: [], submittedAt: new Date(r.submittedAt).toISOString(), autoSubmitted: r.autoSubmitted, result }
+              : e,
           ),
         }));
       },
@@ -294,7 +355,28 @@ export const useProgress = create<ProgressStore>()(
 
       resetAll: () => set({ ...initialProgress }),
     }),
-    { name: PROGRESS_KEY, version: 1, skipHydration: true },
+    {
+      name: PROGRESS_KEY,
+      version: 2,
+      skipHydration: true,
+      // v1 exam sessions graded on the client and referenced retired question ids.
+      migrate: (persisted, version) => {
+        const s = persisted as ProgressState;
+        if (version < 2) {
+          return {
+            ...s,
+            exams: [],
+            attempts: (s.attempts ?? []).map((a) => {
+              const id = migrateQuestionId(a.questionId);
+              const c = getCatalogEntry(id);
+              return c ? { ...a, questionId: id, subjectId: c.subject, topic: c.topic, subtopic: c.subtopic, difficulty: c.difficulty } : { ...a, questionId: id };
+            }),
+            bookmarks: (s.bookmarks ?? []).map((b) => (b.kind === "question" ? { ...b, refId: migrateQuestionId(b.refId) } : b)),
+          } as ProgressState;
+        }
+        return s;
+      },
+    },
   ),
 );
 

@@ -19,7 +19,7 @@ import { Heatmap } from "@/components/charts/heatmap";
 import { MetricCard } from "@/components/dashboard/metric-card";
 import { useProgress } from "@/lib/store/progress";
 import { useStoreReady } from "@/hooks/use-hydrated";
-import { dailySeries, recommendations, scoreExam, submittedExams, subjectMastery, topicStats, weakestTopics, weeklySeries } from "@/lib/analytics";
+import { dailySeries, recommendations, submittedExams, subjectMastery, topicStats, weakestTopics, weeklySeries } from "@/lib/analytics";
 import { subjects, type SubjectId } from "@/lib/content";
 import { SUBJECT_COLOR } from "@/lib/subject-style";
 import { addDays, dayKey, formatDuration, formatMinutes } from "@/lib/utils";
@@ -58,7 +58,7 @@ function Analytics() {
     const accuracySeries = range === "90" ? weeklySeries(state, 13, sid) : series;
     const topic = topicStats(state);
     const mastery = subjectMastery(state);
-    const exams = submittedExams(state).map(scoreExam).reverse();
+    const exams = submittedExams(state).reverse();
     // 12-week consistency calendar (minutes per day)
     const start = addDays(new Date(), -83);
     const calendar = Array.from({ length: 84 }, (_, i) => {
@@ -195,7 +195,7 @@ function Analytics() {
                   label: s.code,
                   cells: d.topic
                     .filter((t) => t.subjectId === s.id)
-                    .map((t) => ({ key: t.topic, label: t.topic, value: t.accuracy, detail: `${t.attempts} attempts` })),
+                    .map((t) => ({ key: t.topic, label: t.title, value: t.accuracy, detail: `${t.attempts} attempts` })),
                 }))}
             />
           </CardContent>
@@ -251,15 +251,15 @@ function Analytics() {
               <ul className="space-y-3">
                 {d.weak.map((t) => (
                   <li key={`${t.subjectId}-${t.topic}`}>
-                    <Link href={`/practice?subject=${t.subjectId}&topic=${encodeURIComponent(t.topic)}`} className="group block">
+                    <Link href={`/practice?mode=topic&topic=${encodeURIComponent(t.topic)}`} className="group block">
                       <div className="flex items-center justify-between text-[13px]">
                         <span className="flex items-center gap-2">
                           <span className="size-2 rounded-full" style={{ background: SUBJECT_COLOR[t.subjectId] }} aria-hidden />
-                          <span className="group-hover:text-primary-text">{t.topic}</span>
+                          <span className="group-hover:text-primary-text">{t.title}</span>
                         </span>
                         <span className="font-mono text-xs text-muted">{t.accuracy}%</span>
                       </div>
-                      <ProgressBar value={t.accuracy ?? 0} size="sm" tone="warning" className="mt-1.5" label={`${t.topic} accuracy`} />
+                      <ProgressBar value={t.accuracy ?? 0} size="sm" tone="warning" className="mt-1.5" label={`${t.title} accuracy`} />
                     </Link>
                   </li>
                 ))}
@@ -294,16 +294,16 @@ function Analytics() {
                     </tr>
                   </thead>
                   <tbody>
-                    {d.exams.map((r) => (
-                      <tr key={r.exam.id} className="border-t border-line hover:bg-subtle/40">
-                        <td className="px-3 py-2.5 text-muted">{new Date(r.exam.submittedAt!).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</td>
+                    {d.exams.map((e) => (
+                      <tr key={e.id} className="border-t border-line hover:bg-subtle/40">
+                        <td className="px-3 py-2.5 text-muted">{new Date(e.submittedAt!).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</td>
                         <td className="px-3 py-2.5">
-                          <Link href={`/exams/results?id=${r.exam.id}`} className="font-medium hover:text-primary-text">
-                            {r.exam.config.title}
+                          <Link href={`/exams/results?id=${e.id}`} className="font-medium hover:text-primary-text">
+                            {e.title}
                           </Link>
                         </td>
-                        <td className="px-3 py-2.5 text-right font-mono">{r.percent}%</td>
-                        <td className="px-3 py-2.5 text-right font-mono text-muted">{formatDuration(r.secondsUsed)}</td>
+                        <td className="px-3 py-2.5 text-right font-mono">{e.result!.percent}%</td>
+                        <td className="px-3 py-2.5 text-right font-mono text-muted">{formatDuration(e.result!.durationSeconds)}</td>
                       </tr>
                     ))}
                   </tbody>

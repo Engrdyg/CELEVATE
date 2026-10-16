@@ -31,7 +31,7 @@ export function deriveNotifications(state: ProgressState, now = new Date()): App
       id: `exam-${exam.id}`,
       kind: "exam",
       title: "Unfinished mock exam",
-      body: `${exam.config.title} is still in progress. Your answers are autosaved.`,
+      body: `${exam.title} is still in progress. Your answers are autosaved.`,
       href: "/exams/take",
       at: exam.startedAt,
     });

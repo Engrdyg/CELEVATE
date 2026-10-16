@@ -1,37 +1,24 @@
-/**
- * CELE examination configuration.
- *
- * Subject labels, codes and weights are kept here so they can be aligned with
- * the applicable PRC syllabus / Board of Civil Engineering resolution without
- * touching UI code. Always verify against the latest official PRC issuance.
- */
-export const CELE_SUBJECTS = {
-  mste: {
-    code: "MSTE",
-    name: "Mathematics, Surveying and Transportation Engineering",
-    shortName: "Math, Surveying & Transpo",
-    weight: 0.35,
-  },
-  hge: {
-    code: "HGE",
-    name: "Hydraulics and Geotechnical Engineering",
-    shortName: "Hydraulics & Geotech",
-    weight: 0.3,
-  },
-  psad: {
-    code: "PSAD",
-    name: "Structural Engineering and Construction",
-    shortName: "Structural & Construction",
-    weight: 0.35,
-  },
-} as const;
+import taxonomy from "@/data/question-bank/taxonomy.json";
+import examConfig from "@/data/question-bank/exam-config.json";
 
-export type SubjectId = keyof typeof CELE_SUBJECTS;
-export const SUBJECT_IDS = Object.keys(CELE_SUBJECTS) as SubjectId[];
+/**
+ * CELE examination configuration, derived from the administrator-editable
+ * files in data/question-bank/ (taxonomy.json and exam-config.json).
+ * Subject titles and weights follow the PRC examination program; always
+ * re-verify against the latest PRC Board of Civil Engineering issuance.
+ */
+type SubjectEntry = { code: string; name: string; officialTitle: string; shortName: string; weight: number };
+
+export const CELE_SUBJECTS = Object.fromEntries(
+  taxonomy.subjects.map((s) => [s.id, { code: s.code, name: s.name, officialTitle: s.officialTitle, shortName: s.shortName, weight: s.weight }]),
+) as Record<"mste" | "hge" | "psad", SubjectEntry>;
+
+export type SubjectId = "mste" | "hge" | "psad";
+export const SUBJECT_IDS: SubjectId[] = ["mste", "hge", "psad"];
 
 /** Commonly cited rating rules. Treat as configurable reference values. */
 export const CELE_RULES = {
-  passingAverage: 70,
-  minimumSubjectGrade: 50,
-  note: "Rating rules shown for orientation only. Confirm current requirements with the Professional Regulation Commission (PRC).",
+  passingAverage: examConfig.passingReference.generalAverage,
+  minimumSubjectGrade: examConfig.passingReference.minimumSubjectGrade,
+  note: examConfig.passingReference.note,
 };

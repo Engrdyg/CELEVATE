@@ -1,0 +1,2190 @@
+[
+ {
+  "id": "hge-q001",
+  "subject": "hge",
+  "topic": "hge-statics",
+  "subtopic": "hge-statics-pressure",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Gauge pressure under two immiscible liquid layers",
+  "stem": "An open tank contains a 2.5 m layer of oil ($SG = 0.85$) floating on 1.5 m of water. What is the gauge pressure at the bottom of the tank? Use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [
+   "hge-l-fluid-pressure"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q002",
+  "subject": "hge",
+  "topic": "hge-statics",
+  "subtopic": "hge-statics-pressure",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Open U-tube mercury manometer on a water pipe",
+  "stem": "A pipe carrying water is connected to an open U-tube mercury manometer ($SG = 13.6$). The centre of the pipe, point A, is 0.40 m above the mercury surface in the leg attached to the pipe. The mercury in the open leg stands 0.25 m above the mercury surface in the pipe leg. Find the gauge pressure at A. Use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "hge-l-fluid-pressure"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q003",
+  "subject": "hge",
+  "topic": "hge-statics",
+  "subtopic": "hge-statics-plane",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Total force on a vertical rectangular gate",
+  "stem": "A vertical rectangular gate 2 m wide and 3 m high holds back water. Its top edge is 1.5 m below the water surface. What is the total hydrostatic force on the gate? Use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [
+   "hge-l-hydrostatic-force-plane"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q004",
+  "subject": "hge",
+  "topic": "hge-statics",
+  "subtopic": "hge-statics-plane",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Force to hold a hinged inclined gate closed",
+  "stem": "A rectangular gate 1.5 m wide and 2.4 m long (measured along its slope) is inclined at $60^\\circ$ to the horizontal and holds back water on one side. It is hinged along its top edge, which is 1.2 m vertically below the water surface. What force, applied normal to the gate at its bottom edge, is needed to keep it closed? Neglect the weight of the gate and use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 300,
+  "relatedLessonIds": [
+   "hge-l-hydrostatic-force-plane"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q005",
+  "subject": "hge",
+  "topic": "hge-flow",
+  "subtopic": "hge-flow-energy",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Velocity in a contracted pipe by continuity",
+  "stem": "Water flows through a pipe that reduces from 300 mm to 150 mm in diameter. The velocity in the 300 mm section is 1.2 m/s. What is the velocity in the 150 mm section?",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [
+   "hge-l-energy-equation"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q006",
+  "subject": "hge",
+  "topic": "hge-flow",
+  "subtopic": "hge-flow-energy",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Pressure drop at a horizontal pipe contraction",
+  "stem": "A horizontal pipe reduces from 300 mm to 150 mm in diameter and carries water at $0.10\\text{ m}^3/\\text{s}$. The pressure in the 300 mm section is 150 kPa. Neglecting losses, what is the pressure in the 150 mm section? Use $g = 9.81\\text{ m/s}^2$ and $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "hge-l-energy-equation"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q007",
+  "subject": "hge",
+  "topic": "hge-flow",
+  "subtopic": "hge-flow-friction",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Darcy-Weisbach head loss in a long pipe",
+  "stem": "Water flows at $0.06\\text{ m}^3/\\text{s}$ through an 800 m long, 250 mm diameter pipe with friction factor $f = 0.02$. What is the head loss due to friction? Use $g = 9.81\\text{ m/s}^2$.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "hge-l-energy-equation",
+   "hge-l-pipes-series-parallel"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q008",
+  "subject": "hge",
+  "topic": "hge-flow",
+  "subtopic": "hge-flow-networks",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Discharge from a reservoir through a free-discharging pipe",
+  "stem": "A 300 mm pipe, 400 m long, draws water from a reservoir and discharges freely into the air at a point 30 m below the reservoir water surface. Take $f = 0.02$, $g = 9.81\\text{ m/s}^2$ and neglect minor losses. What is the discharge?",
+  "estimatedTimeSeconds": 270,
+  "relatedLessonIds": [
+   "hge-l-energy-equation",
+   "hge-l-pipes-series-parallel"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q009",
+  "subject": "hge",
+  "topic": "hge-soil",
+  "subtopic": "hge-soil-phase",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Porosity from void ratio",
+  "stem": "A soil has a void ratio of 0.65. What is its porosity?",
+  "estimatedTimeSeconds": 45,
+  "relatedLessonIds": [
+   "hge-l-soil-phase-relationships"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q010",
+  "subject": "hge",
+  "topic": "hge-soil",
+  "subtopic": "hge-soil-phase",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Moist unit weight from w, Gs and S",
+  "stem": "A soil has water content $w = 18\\%$, specific gravity of solids $G_s = 2.70$, and degree of saturation $S = 80\\%$. What is its moist unit weight? Use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "hge-l-soil-phase-relationships"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q011",
+  "subject": "hge",
+  "topic": "hge-soil",
+  "subtopic": "hge-soil-phase",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Degree of saturation from a field density test",
+  "stem": "A field density test gives a moist unit weight of $18.5\\text{ kN/m}^3$ and a water content of 15%. The specific gravity of solids is 2.68. What is the degree of saturation? Use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "hge-l-soil-phase-relationships"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q012",
+  "subject": "hge",
+  "topic": "hge-stress",
+  "subtopic": "hge-stress-effective",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Effective stress in a sand-over-clay profile",
+  "stem": "A soil profile has 3 m of sand ($\\gamma = 17\\text{ kN/m}^3$) over clay ($\\gamma_{sat} = 19\\text{ kN/m}^3$). The water table is at the top of the clay. What is the effective vertical stress at a depth of 8 m below the ground surface? Use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q013",
+  "subject": "hge",
+  "topic": "hge-stress",
+  "subtopic": "hge-stress-effective",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Change in effective stress after lowering the water table",
+  "stem": "The water table in a uniform soil is initially at the ground surface. The soil has $\\gamma_{sat} = 19.5\\text{ kN/m}^3$, and its moist unit weight when above the water table is $17.5\\text{ kN/m}^3$. If the water table is lowered permanently to 2 m below the surface, by how much does the effective stress at a depth of 6 m change? Take an increase as positive and use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q014",
+  "subject": "hge",
+  "topic": "hge-shear",
+  "subtopic": "hge-shear-mohr",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Friction angle from a drained triaxial test",
+  "stem": "A consolidated-drained triaxial test on a normally consolidated clay ($c' = 0$) is run at a cell pressure of 100 kPa. Failure occurs at a deviator stress of 180 kPa. What is the effective angle of internal friction?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "hge-l-shear-strength-bearing",
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q015",
+  "subject": "hge",
+  "topic": "hge-consol",
+  "subtopic": "hge-consol-settlement",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Primary consolidation settlement of an NC clay under fill",
+  "stem": "A profile consists of 5 m of sand over a 4 m layer of normally consolidated clay. The water table is 2 m below the ground surface. Sand: $\\gamma = 17\\text{ kN/m}^3$ above the water table, $\\gamma_{sat} = 19\\text{ kN/m}^3$ below. Clay: $\\gamma_{sat} = 18.5\\text{ kN/m}^3$, $e_0 = 1.10$, $C_c = 0.35$. A wide fill adds a uniform 60 kPa at the clay. Estimate the primary consolidation settlement of the clay using the stress at mid-depth of the clay and $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 330,
+  "relatedLessonIds": [
+   "hge-l-consolidation-settlement",
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q016",
+  "subject": "hge",
+  "topic": "hge-fluid",
+  "subtopic": "hge-fluid-props",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Capillary rise of water in a glass tube",
+  "stem": "A clean glass tube with an internal diameter of 2.0 mm is inserted vertically into water. The surface tension of water is $\\sigma = 0.0728\\text{ N/m}$ and the contact angle is $0^\\circ$. Using $\\gamma_w = 9.81\\text{ kN/m}^3$, how high will the water rise in the tube above the outside water surface?",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [
+   "hge-l-fluid-pressure"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q017",
+  "subject": "hge",
+  "topic": "hge-fluid",
+  "subtopic": "hge-fluid-props",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Kinematic viscosity of a lubricating oil",
+  "stem": "A lubricating oil has a dynamic viscosity of $0.048\\text{ Pa}\\cdot\\text{s}$ and a specific gravity of 0.92. Taking the density of water as $1000\\text{ kg/m}^3$, what is the kinematic viscosity of the oil in centistokes ($1\\text{ cSt} = 10^{-6}\\text{ m}^2/\\text{s}$)?",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [
+   "hge-l-fluid-pressure"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q018",
+  "subject": "hge",
+  "topic": "hge-fluid",
+  "subtopic": "hge-fluid-props",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Terminal velocity of a plate sliding on an oil film",
+  "stem": "A flat plate 0.50 m by 0.80 m weighing 120 N slides down a plane inclined at $20^\\circ$ to the horizontal. The plate is separated from the plane by an oil film 1.2 mm thick with dynamic viscosity $\\mu = 0.15\\text{ Pa}\\cdot\\text{s}$. Assuming a linear velocity profile in the film, what is the terminal (steady) velocity of the plate?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q019",
+  "subject": "hge",
+  "topic": "hge-statics",
+  "subtopic": "hge-statics-curved",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Resultant force on a quarter-circle gate",
+  "stem": "A gate in the shape of a quarter-cylinder of radius 2.0 m and length 3.0 m (perpendicular to the page) forms the lower corner of a water tank. Its vertical projection is 2.0 m high and the water surface is level with the top edge of the gate. The water lying vertically above the curved surface occupies exactly the quarter-circle region of the cross-section. Using $\\gamma_w = 9.81\\text{ kN/m}^3$, find the magnitude of the resultant hydrostatic force on the gate.",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [
+   "hge-l-hydrostatic-force-plane"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q020",
+  "subject": "hge",
+  "topic": "hge-statics",
+  "subtopic": "hge-statics-buoyancy",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Apparent weight of a stone submerged in oil",
+  "stem": "A stone weighs 420 N in air and 260 N when fully submerged in water. What will it weigh when fully submerged in an oil of specific gravity 0.82? Use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "hge-l-buoyancy-stability"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q021",
+  "subject": "hge",
+  "topic": "hge-statics",
+  "subtopic": "hge-statics-buoyancy",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Righting moment of a heeled rectangular barge",
+  "stem": "A rectangular barge 12 m long and 6 m wide weighs 1400 kN and floats in fresh water ($\\gamma_w = 9.81\\text{ kN/m}^3$). Its centre of gravity is 1.80 m above the bottom. Compute the righting moment when the barge heels by $4^\\circ$ about its longitudinal axis, using the small-angle metacentric formula $M = W\\,GM\\sin\\theta$.",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [
+   "hge-l-buoyancy-stability"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q022",
+  "subject": "hge",
+  "topic": "hge-statics",
+  "subtopic": "hge-statics-relative",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Maximum speed of a rotating open cylinder",
+  "stem": "An open cylindrical tank 0.80 m in diameter and 1.50 m high contains water to a depth of 1.10 m. The tank is rotated about its vertical axis. At what speed, in revolutions per minute, will water just begin to spill over the rim? Use $g = 9.81\\text{ m/s}^2$.",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [
+   "hge-l-fluid-pressure"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q023",
+  "subject": "hge",
+  "topic": "hge-statics",
+  "subtopic": "hge-statics-curved",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Factor of safety against overturning of a gravity dam",
+  "stem": "A concrete gravity dam has a vertical upstream face, a top width of 2 m, a base width of 8 m and a height of 12 m; the downstream face slopes uniformly from the top downstream corner to the toe. Water stands 11 m deep against the upstream face and there is no tailwater. Uplift pressure varies linearly from full hydrostatic head at the heel to zero at the toe and acts over the whole base. Using $\\gamma_c = 23.5\\text{ kN/m}^3$ and $\\gamma_w = 9.81\\text{ kN/m}^3$, compute the factor of safety against overturning about the toe, per metre length of dam.",
+  "estimatedTimeSeconds": 420,
+  "relatedLessonIds": [
+   "hge-l-hydrostatic-force-plane"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q024",
+  "subject": "hge",
+  "topic": "hge-flow",
+  "subtopic": "hge-flow-networks",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Flow division between two parallel pipes",
+  "stem": "Two pipes connect junctions A and B in parallel. Pipe 1: length 600 m, diameter 300 mm, $f = 0.020$. Pipe 2: length 800 m, diameter 200 mm, $f = 0.025$. The total flow from A to B is $0.20\\text{ m}^3/\\text{s}$. Neglecting minor losses, how much flow, in litres per second, passes through pipe 2?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "hge-l-pipes-series-parallel"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q025",
+  "subject": "hge",
+  "topic": "hge-flow",
+  "subtopic": "hge-flow-measurement",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Discharge through a sharp-edged orifice",
+  "stem": "Water discharges from a large open tank through a 50 mm diameter sharp-edged orifice in its side. The water surface is maintained 4.0 m above the centre of the orifice. The coefficient of contraction is 0.62 and the coefficient of velocity is 0.98. What is the discharge in litres per second? Use $g = 9.81\\text{ m/s}^2$.",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "hge-l-flow-measurement"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q026",
+  "subject": "hge",
+  "topic": "hge-flow",
+  "subtopic": "hge-flow-measurement",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Francis formula for a contracted rectangular weir",
+  "stem": "A sharp-crested rectangular weir 2.5 m long has end contractions at both ends. The head over the crest is 0.40 m. Neglecting velocity of approach, compute the discharge using the Francis formula $Q = 1.84\\,(L - 0.1nH)\\,H^{3/2}$ (SI units).",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [
+   "hge-l-flow-measurement"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q027",
+  "subject": "hge",
+  "topic": "hge-flow",
+  "subtopic": "hge-flow-momentum",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Force of a water jet on a fixed flat plate",
+  "stem": "A horizontal water jet 75 mm in diameter with a velocity of 20 m/s strikes a large fixed flat plate held perpendicular to the jet. The water leaves the plate radially in the plane of the plate. Taking $\\rho = 1000\\text{ kg/m}^3$, what force does the jet exert on the plate?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "hge-l-energy-equation"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q028",
+  "subject": "hge",
+  "topic": "hge-flow",
+  "subtopic": "hge-flow-energy",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Input power of a pump lifting water between reservoirs",
+  "stem": "A pump delivers $0.12\\text{ m}^3/\\text{s}$ of water from a lower reservoir with water surface at elevation 100 m to an upper reservoir with water surface at elevation 145 m. The total head loss in the suction and discharge pipes is 6.5 m. If the pump efficiency is 78%, what power must be supplied to the pump? Use $\\gamma_w = 9.81\\text{ kN/m}^3$.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "hge-l-energy-equation"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q029",
+  "subject": "hge",
+  "topic": "hge-open",
+  "subtopic": "hge-open-uniform",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Uniform flow in a trapezoidal canal by Manning",
+  "stem": "An irrigation canal in Nueva Ecija has a trapezoidal section with a bottom width of 3.0 m and side slopes of 1.5 horizontal to 1 vertical. It is lined with concrete ($n = 0.015$) and laid on a slope of 0.0008. Compute the discharge when water flows uniformly at a depth of 1.2 m.",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q030",
+  "subject": "hge",
+  "topic": "hge-open",
+  "subtopic": "hge-open-uniform",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Most efficient rectangular channel section",
+  "stem": "A rectangular concrete channel ($n = 0.013$) laid on a slope of 0.001 must carry $3.0\\text{ m}^3/\\text{s}$ in uniform flow. If the most efficient (best hydraulic) rectangular section is used, what is the required bottom width?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q031",
+  "subject": "hge",
+  "topic": "hge-open",
+  "subtopic": "hge-open-energy",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Critical depth in a rectangular channel",
+  "stem": "A rectangular channel 4.0 m wide carries $12\\text{ m}^3/\\text{s}$. What is the critical depth? Use $g = 9.81\\text{ m/s}^2$.",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q032",
+  "subject": "hge",
+  "topic": "hge-open",
+  "subtopic": "hge-open-energy",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Energy loss in a hydraulic jump",
+  "stem": "Water flows in a 3.0 m wide rectangular channel at $15\\text{ m}^3/\\text{s}$ with a depth of 0.50 m just upstream of a hydraulic jump. Using $g = 9.81\\text{ m/s}^2$, determine the head loss across the jump.",
+  "estimatedTimeSeconds": 300,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q033",
+  "subject": "hge",
+  "topic": "hge-soil",
+  "subtopic": "hge-soil-classification",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Liquidity index of a clay from moisture-can data",
+  "stem": "A clay from a Pampanga borrow pit has a liquid limit of 48% and a plastic limit of 22%. A moisture-content sample of the natural soil has a moist mass of 182.4 g and an oven-dry mass of 139.0 g. What is the liquidity index of the soil in its natural state?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "hge-l-atterberg-classification"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q034",
+  "subject": "hge",
+  "topic": "hge-soil",
+  "subtopic": "hge-soil-compaction",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Relative compaction from a sand-cone test",
+  "stem": "A sand-cone test on a compacted embankment fill gives the following: volume of the test hole $= 950\\text{ cm}^3$, mass of moist soil removed $= 1.89\\text{ kg}$, and water content $= 11.5\\%$. The laboratory standard Proctor test on the same soil gave a maximum dry unit weight of $18.6\\text{ kN/m}^3$. Using $g = 9.81\\text{ m/s}^2$, what is the relative compaction of the fill?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "hge-l-soil-phase-relationships"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q035",
+  "subject": "hge",
+  "topic": "hge-soil",
+  "subtopic": "hge-soil-phase",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Relative density of a sand deposit",
+  "stem": "Laboratory tests on a clean sand give a maximum void ratio of 0.85 and a minimum void ratio of 0.45. The specific gravity of solids is 2.66. In the field, the sand has a dry unit weight of $16.2\\text{ kN/m}^3$. Using $\\gamma_w = 9.81\\text{ kN/m}^3$, what is the relative density of the deposit?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "hge-l-soil-phase-relationships"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q036",
+  "subject": "hge",
+  "topic": "hge-seepage",
+  "subtopic": "hge-seepage-permeability",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Hydraulic conductivity from a constant-head test",
+  "stem": "In a constant-head permeability test, a sand specimen 250 mm long and 100 mm in diameter is subjected to a constant head difference of 600 mm. A volume of $450\\text{ cm}^3$ of water is collected in 3 minutes. What is the coefficient of permeability?",
+  "estimatedTimeSeconds": 105,
+  "relatedLessonIds": [
+   "hge-l-permeability-seepage"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q037",
+  "subject": "hge",
+  "topic": "hge-seepage",
+  "subtopic": "hge-seepage-permeability",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Hydraulic conductivity from a falling-head test",
+  "stem": "A falling-head permeability test is run on a silty clay specimen 15 cm long with a cross-sectional area of $30\\text{ cm}^2$. The standpipe has a cross-sectional area of $1.2\\text{ cm}^2$. The head in the standpipe drops from 90 cm to 45 cm in 8 minutes. What is the coefficient of permeability, in units of $10^{-6}\\text{ m/s}$?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "hge-l-permeability-seepage"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q038",
+  "subject": "hge",
+  "topic": "hge-seepage",
+  "subtopic": "hge-seepage-flownet",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Daily seepage under a sheet-pile cofferdam from a flow net",
+  "stem": "A flow net drawn for seepage beneath a sheet-pile wall has 4 flow channels and 12 equipotential drops. The head difference between the upstream and downstream water levels is 6.0 m, and the coefficient of permeability of the sand is $2.5 \\times 10^{-5}\\text{ m/s}$. What is the total seepage, in cubic metres per day, under a 30 m length of the wall?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "hge-l-permeability-seepage"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q039",
+  "subject": "hge",
+  "topic": "hge-seepage",
+  "subtopic": "hge-seepage-flownet",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Effective stress under upward seepage",
+  "stem": "A 2.0 m thick sand layer ($\\gamma_{sat} = 19.8\\text{ kN/m}^3$) lies at the bottom of an excavation, with water ponded at its top surface. Artesian pressure in an underlying gravel causes water to flow upward through the sand with a total head loss of 1.4 m across the layer. Using $\\gamma_w = 9.81\\text{ kN/m}^3$, what is the vertical effective stress at the bottom of the sand layer?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "hge-l-permeability-seepage",
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q040",
+  "subject": "hge",
+  "topic": "hge-stress",
+  "subtopic": "hge-stress-distribution",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Stress increase below a square footing by the 2:1 method",
+  "stem": "A 2.0 m by 2.0 m square footing carries a total vertical load of 800 kN. Using the 2:1 (two vertical to one horizontal) load-spread method, estimate the average vertical stress increase at a depth of 3.0 m below the base of the footing.",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q041",
+  "subject": "hge",
+  "topic": "hge-stress",
+  "subtopic": "hge-stress-distribution",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Boussinesq stress from a point load at an offset",
+  "stem": "A vertical point load of 500 kN acts on the surface of a deep, homogeneous, elastic soil mass. Using Boussinesq's solution, determine the vertical stress increase at a depth of 4.0 m and a horizontal distance of 3.0 m from the line of action of the load.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q042",
+  "subject": "hge",
+  "topic": "hge-consol",
+  "subtopic": "hge-consol-time",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Field consolidation time from a laboratory test",
+  "stem": "A 25 mm thick specimen of clay, drained at both top and bottom in an oedometer, reaches 50% consolidation in 4.5 minutes. The same clay exists in the field as a 5.0 m thick layer drained only at its top (the bottom rests on impervious rock). Assuming the same coefficient of consolidation, how many days will the field layer take to reach 50% consolidation?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "hge-l-consolidation-settlement"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q043",
+  "subject": "hge",
+  "topic": "hge-consol",
+  "subtopic": "hge-consol-settlement",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Settlement of an overconsolidated clay crossing its preconsolidation pressure",
+  "stem": "A 5.0 m thick clay layer lies beneath 3.0 m of sand ($\\gamma = 18\\text{ kN/m}^3$). The water table is at the top of the clay. The clay has $\\gamma_{sat} = 17.8\\text{ kN/m}^3$, $e_0 = 0.95$, compression index $C_c = 0.40$, swell (recompression) index $C_s = 0.06$, and preconsolidation pressure $\\sigma'_c = 120\\text{ kPa}$. A new warehouse floor increases the vertical stress at mid-depth of the clay by 80 kPa. Using the mid-depth stresses and $\\gamma_w = 9.81\\text{ kN/m}^3$, estimate the primary consolidation settlement.",
+  "estimatedTimeSeconds": 420,
+  "relatedLessonIds": [
+   "hge-l-consolidation-settlement",
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q044",
+  "subject": "hge",
+  "topic": "hge-shear",
+  "subtopic": "hge-shear-mohr",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Friction angle from two direct shear tests",
+  "stem": "Two direct shear tests are performed on specimens of a compacted silty sand in a 60 mm by 60 mm shear box. In the first test, a normal load of 360 N produces failure at a shear load of 270 N. In the second test, a normal load of 720 N produces failure at a shear load of 420 N. Assuming a linear Mohr-Coulomb envelope, what is the angle of internal friction?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "hge-l-shear-strength-bearing"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q045",
+  "subject": "hge",
+  "topic": "hge-shear",
+  "subtopic": "hge-shear-mohr",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Deviator stress at failure in a drained triaxial test",
+  "stem": "A soil has effective strength parameters $c' = 12\\text{ kPa}$ and $\\phi' = 30^\\circ$. A consolidated-drained triaxial test is run at an effective cell pressure of 150 kPa. What deviator stress will cause failure?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "hge-l-shear-strength-bearing"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q046",
+  "subject": "hge",
+  "topic": "hge-found",
+  "subtopic": "hge-found-bearing",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Allowable load on a strip footing by Terzaghi",
+  "stem": "A strip footing 1.5 m wide is founded at a depth of 1.2 m in a soil with $\\gamma = 18\\text{ kN/m}^3$, $c = 15\\text{ kPa}$ and $\\phi = 25^\\circ$. The water table is very deep. Use Terzaghi's equation for general shear failure, $q_u = cN_c + qN_q + 0.5\\gamma BN_\\gamma$, with $N_c = 25.13$, $N_q = 12.72$ and $N_\\gamma = 8.34$. With a factor of safety of 3 on the ultimate (gross) bearing capacity, what is the allowable load per metre length of footing?",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [
+   "hge-l-shear-strength-bearing"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q047",
+  "subject": "hge",
+  "topic": "hge-found",
+  "subtopic": "hge-found-bearing",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Column load on a square footing with a high water table",
+  "stem": "A 2.0 m by 2.0 m square footing is founded at a depth of 1.5 m in a sand with $c = 0$ and $\\phi = 32^\\circ$. The water table is 1.0 m below the ground surface. The sand has $\\gamma = 17.5\\text{ kN/m}^3$ above the water table and $\\gamma_{sat} = 20.0\\text{ kN/m}^3$ below it. Use Terzaghi's equation for a square footing, $q_u = 1.3cN_c + qN_q + 0.4\\gamma BN_\\gamma$, with $N_q = 28.52$ and $N_\\gamma = 26.87$, and $\\gamma_w = 9.81\\text{ kN/m}^3$. With a factor of safety of 3 on the gross ultimate bearing capacity, what is the maximum allowable column load?",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [
+   "hge-l-shear-strength-bearing",
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q048",
+  "subject": "hge",
+  "topic": "hge-found",
+  "subtopic": "hge-found-lateral",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Rankine active thrust with a uniform surcharge",
+  "stem": "A 6.0 m high retaining wall with a smooth vertical back supports a horizontal backfill of dry sand with $\\gamma = 18\\text{ kN/m}^3$, $c = 0$ and $\\phi = 32^\\circ$. A uniform surcharge of 15 kPa acts on the backfill surface. Using Rankine's active earth pressure coefficient $K_a = \\tan^2(45^\\circ - \\phi/2)$, determine the total active thrust on the wall per metre length.",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "hge-l-shear-strength-bearing"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q049",
+  "subject": "hge",
+  "topic": "hge-found",
+  "subtopic": "hge-found-piles",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Allowable capacity of a bored pile in clay",
+  "stem": "A 400 mm diameter bored concrete pile is installed to a depth of 15 m in a uniform clay with undrained shear strength $c_u = 50\\text{ kPa}$. Use an adhesion factor $\\alpha = 0.75$ for skin friction and $N_c = 9$ for end bearing ($q_b = 9c_u$). With a factor of safety of 2.5, what is the allowable axial load of the pile?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "hge-l-shear-strength-bearing"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "hge-q050",
+  "subject": "hge",
+  "topic": "hge-found",
+  "subtopic": "hge-found-slope",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Infinite slope with seepage parallel to the surface",
+  "stem": "A long natural slope in Benguet is inclined at $25^\\circ$ to the horizontal. A potential slip surface lies parallel to the ground at a vertical depth of 3.0 m. During the rainy season the water table rises to the ground surface and seepage is parallel to the slope. The soil has $c' = 8\\text{ kPa}$, $\\phi' = 30^\\circ$ and $\\gamma_{sat} = 19.5\\text{ kN/m}^3$. Using the infinite-slope method and $\\gamma_w = 9.81\\text{ kN/m}^3$, what is the factor of safety against sliding?",
+  "estimatedTimeSeconds": 300,
+  "relatedLessonIds": [
+   "hge-l-shear-strength-bearing",
+   "hge-l-effective-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q001",
+  "subject": "mste",
+  "topic": "mste-trig",
+  "subtopic": "mste-trig-plane",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Law of sines: side opposite a known angle",
+  "stem": "In triangle ABC, angle $A = 40^\\circ$, angle $B = 65^\\circ$, and side $a = 12\\text{ m}$ (opposite angle A). Find side $b$ (opposite angle B).",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [
+   "mste-l-solution-of-triangles"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q002",
+  "subject": "mste",
+  "topic": "mste-trig",
+  "subtopic": "mste-trig-plane",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Law of cosines: third side of a triangular lot",
+  "stem": "Two sides of a triangular lot measure 25 m and 40 m, and the angle between them is $110^\\circ$. Find the length of the third side.",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [
+   "mste-l-solution-of-triangles"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q003",
+  "subject": "mste",
+  "topic": "mste-trig",
+  "subtopic": "mste-trig-plane",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Height of a tower from two angles of elevation",
+  "stem": "From point P on level ground, the angle of elevation to the top of a tower is $32^\\circ$. After walking 50 m directly toward the tower to point Q, the angle of elevation becomes $47^\\circ$. Neglecting the height of the observer, find the height of the tower.",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "mste-l-solution-of-triangles"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q004",
+  "subject": "mste",
+  "topic": "mste-calc",
+  "subtopic": "mste-calc-diff",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Maximum area fenced on three sides along a river",
+  "stem": "A rectangular lot beside a straight river is to be fenced on three sides only; the side along the river needs no fence. If 240 m of fencing is available, what is the maximum area that can be enclosed?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "mste-l-derivatives-optimization"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q005",
+  "subject": "mste",
+  "topic": "mste-calc",
+  "subtopic": "mste-calc-diff",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Open-top cylindrical tank of minimum sheet metal",
+  "stem": "An open-top cylindrical tank (bottom and side only) must hold $10\\text{ m}^3$. Find the radius that minimizes the sheet metal used.",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "mste-l-derivatives-optimization"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q006",
+  "subject": "mste",
+  "topic": "mste-stat",
+  "subtopic": "mste-stat-prob",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Binomial probability of defective hollow blocks",
+  "stem": "Five percent of the concrete hollow blocks from a supplier are defective. If 10 blocks are selected at random, what is the probability that exactly 2 are defective? Assume independent selections.",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [
+   "mste-l-probability-basics"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q007",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-leveling",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Differential leveling through one turning point",
+  "stem": "The elevation of BM-A is 125.430 m. A level run to BM-B records: BS on BM-A = 1.425 m, FS on TP-1 = 2.310 m, BS on TP-1 = 0.875 m, FS on BM-B = 1.940 m. Find the elevation of BM-B.",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "mste-l-differential-leveling"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q008",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-leveling",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Combined curvature and refraction correction",
+  "stem": "A level sight is taken on a rod 1.5 km away. Using $h_{cr} = 0.0675K^2$ (m, with $K$ in km), what is the combined correction for Earth curvature and atmospheric refraction?",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [
+   "mste-l-differential-leveling"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q009",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-traverse",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Departure of a traverse course",
+  "stem": "A traverse course has a bearing of N $35^\\circ 20'$ E and a length of 120.50 m. What is its departure?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "mste-l-traverse-computations"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q010",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-traverse",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Area of a four-sided lot by coordinates",
+  "stem": "The corners of a four-sided lot, taken in order, have coordinates (E, N) in meters: A (1000.00, 1000.00), B (1120.00, 1015.00), C (1150.00, 1095.00), D (1030.00, 1110.00). Find the area of the lot.",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "mste-l-traverse-computations"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q011",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-hcurve",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Radius from the arc-basis degree of curve",
+  "stem": "A simple curve has a degree of curve of $4^\\circ$ using the arc basis with a 20-m arc. What is its radius?",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [
+   "mste-l-horizontal-simple-curves"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q012",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-hcurve",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Stationing of the PT of a simple curve",
+  "stem": "A simple curve of radius 300 m connects two tangents that intersect at station 10+250.000 with an intersection angle of $36^\\circ$. Find the station of the PT. (Choices give the station both as a running distance in meters and in station notation.)",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "mste-l-horizontal-simple-curves"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q013",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-vcurve",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Highest point of an unequal-grade summit curve",
+  "stem": "A symmetrical parabolic summit curve 200 m long connects a $+3\\%$ grade to a $-2\\%$ grade. The PVI is at station 5+100 with elevation 150.00 m. Find the elevation of the highest point on the curve.",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "mste-l-vertical-parabolic-curves"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q014",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-sight",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Stopping sight distance on a downgrade",
+  "stem": "Compute the stopping sight distance for a design speed of 90 km/h on a 4% downgrade. Use a perception-reaction time of 2.5 s, a coefficient of longitudinal friction of 0.30, and $SSD = 0.278Vt + V^2/[254(f \\pm G)]$ with $V$ in km/h.",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [
+   "mste-l-sight-distance-traffic-flow"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q015",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-traffic",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Flow rate from density and space-mean speed",
+  "stem": "On a freeway lane, the observed density is 40 veh/km and the space-mean speed is 54 km/h. What is the flow rate?",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [
+   "mste-l-sight-distance-traffic-flow"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q016",
+  "subject": "mste",
+  "topic": "mste-cm",
+  "subtopic": "mste-cm-scheduling",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "CPM total float of a non-critical activity",
+  "stem": "A project network has the following activities (duration in days; predecessors in parentheses): P = 4 (none), Q = 3 (none), R = 5 (P), S = 2 (Q), T = 4 (R and S). What is the total float of activity S?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "mste-l-cpm-scheduling"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q017",
+  "subject": "mste",
+  "topic": "mste-cm",
+  "subtopic": "mste-cm-scheduling",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Effect of an activity delay on project duration",
+  "stem": "A project network has these activities (duration in days; predecessors in parentheses): A = 3 (none), B = 5 (none), C = 4 (A), D = 6 (A), E = 2 (B and C), F = 4 (D and E). If activity B is delayed by 4 days and everything else proceeds as planned, what will the new project duration be?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "mste-l-cpm-scheduling"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q018",
+  "subject": "mste",
+  "topic": "mste-cm",
+  "subtopic": "mste-cm-quantity",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Cement bags for footings and columns",
+  "stem": "A small structure has 4 isolated footings, each 1.5 m × 1.5 m × 0.40 m thick, and 4 columns, each 0.35 m × 0.35 m in section and 3.2 m high above the footing. For the concrete mix specified, use 9.0 bags of cement (40 kg) per cubic meter of concrete. How many bags of cement are required? Round up to the next whole bag.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "mste-l-quantity-estimates"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q019",
+  "subject": "mste",
+  "topic": "mste-alg",
+  "subtopic": "mste-alg-progressions",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Total blocks laid with a daily increase (arithmetic progression)",
+  "stem": "A masonry crew lays 120 concrete hollow blocks on the first day of a project. As the crew gains rhythm, it lays 15 more blocks each day than on the previous day. How many blocks in total will the crew have laid at the end of the 12th day?",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q020",
+  "subject": "mste",
+  "topic": "mste-alg",
+  "subtopic": "mste-alg-word",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Filling a tank with two pumps and an open drain",
+  "stem": "Pump A alone can fill an elevated water tank in 6 h and pump B alone can fill it in 9 h. A drain valve, if left open, can empty the full tank in 12 h. Starting with an empty tank, both pumps are switched on but the drain is accidentally left open. Assuming constant rates, how long will it take to fill the tank?",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q021",
+  "subject": "mste",
+  "topic": "mste-alg",
+  "subtopic": "mste-alg-explog",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Years for a city population to reach a target (logarithms)",
+  "stem": "A city in Mindanao has a population of 1.80 million and is growing at 2.1% per year, compounded annually. Assuming the growth rate stays constant, how many years will it take for the population to reach 2.50 million?",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q022",
+  "subject": "mste",
+  "topic": "mste-alg",
+  "subtopic": "mste-alg-equations",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Width of a slab from its area (quadratic equation)",
+  "stem": "A rectangular floor slab has an area of $180\\text{ m}^2$. Its length is 3 m more than twice its width. Find the width of the slab.",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q023",
+  "subject": "mste",
+  "topic": "mste-trig",
+  "subtopic": "mste-geom-plane",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Cross-sectional area of a regular octagonal column",
+  "stem": "A decorative column has a regular octagonal cross-section with each side measuring 0.25 m. Find the cross-sectional area of the column.",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q024",
+  "subject": "mste",
+  "topic": "mste-trig",
+  "subtopic": "mste-geom-solid",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Volume of a frustum-shaped sand stockpile",
+  "stem": "A stockpile of washed sand at a batching plant has the shape of a frustum of a right circular cone with a base radius of 6.0 m, a top radius of 3.0 m and a height of 4.0 m. Find the volume of the stockpile.",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q025",
+  "subject": "mste",
+  "topic": "mste-trig",
+  "subtopic": "mste-trig-spherical",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Great-circle distance from Manila to Tokyo",
+  "stem": "Take Manila at latitude 14.60° N, longitude 120.98° E and Tokyo at latitude 35.68° N, longitude 139.69° E. Treating the Earth as a sphere of radius 6371 km, find the great-circle distance between the two cities.",
+  "estimatedTimeSeconds": 300,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q026",
+  "subject": "mste",
+  "topic": "mste-angeo",
+  "subtopic": "mste-angeo-lines",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Distance from a control point to a boundary line",
+  "stem": "On a local grid (in meters), a property boundary follows the line $5x + 12y - 20 = 0$. Find the perpendicular distance from control point P(7, 4) to the boundary line.",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q027",
+  "subject": "mste",
+  "topic": "mste-angeo",
+  "subtopic": "mste-angeo-conics",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Clearance under a semi-elliptical arch",
+  "stem": "A semi-elliptical arch over a drainage channel has a span of 20 m and a rise of 6 m at the center. Find the height of the arch at a point 3 m from one springing (end of the span), measured along the span.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "mste-l-conic-sections"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q028",
+  "subject": "mste",
+  "topic": "mste-angeo",
+  "subtopic": "mste-angeo-conics",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Focal length of a parabolic dish",
+  "stem": "A parabolic reflector dish has a rim diameter of 3.0 m and a depth of 0.40 m at its center. How far from the vertex should the receiver be placed so that it sits at the focus?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "mste-l-conic-sections"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q029",
+  "subject": "mste",
+  "topic": "mste-calc",
+  "subtopic": "mste-calc-int",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Area between a parabola and a line",
+  "stem": "Find the area of the region bounded by the parabola $y = 6x - x^2$ and the line $y = x$.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "mste-l-integration-areas"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q030",
+  "subject": "mste",
+  "topic": "mste-calc",
+  "subtopic": "mste-calc-int",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Water volume in a paraboloid-shaped tank",
+  "stem": "A water tank has the shape of the surface generated by rotating the parabola $y = 0.5x^2$ (x and y in meters, y measured upward from the bottom) about the y-axis. Find the volume of water in the tank when the water depth is 2.0 m.",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "mste-l-integration-areas"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q031",
+  "subject": "mste",
+  "topic": "mste-calc",
+  "subtopic": "mste-calc-de",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Newton's law of cooling for a concrete element",
+  "stem": "A freshly cast concrete element at 70°C is left in air at a constant 30°C. Two hours later its temperature is 55°C. Assuming Newton's law of cooling, $dT/dt = -k(T - T_a)$, find its temperature 5 hours after casting.",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q032",
+  "subject": "mste",
+  "topic": "mste-calc",
+  "subtopic": "mste-calc-diff",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Rate of rise of water in a conical tank",
+  "stem": "Water is pumped at 0.80 m³/min into a conical tank with its vertex down. The tank is 5.0 m deep and 2.0 m in radius at the top. How fast is the water level rising when the water is 3.0 m deep?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "mste-l-derivatives-optimization"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q033",
+  "subject": "mste",
+  "topic": "mste-stat",
+  "subtopic": "mste-stat-prob",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Probability of low cylinder strength (normal distribution)",
+  "stem": "The 28-day compressive strengths of concrete cylinders from a project are normally distributed with a mean of 28.0 MPa and a standard deviation of 3.2 MPa. What is the probability that a randomly selected cylinder has a strength below 24.0 MPa?",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [
+   "mste-l-probability-basics"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q034",
+  "subject": "mste",
+  "topic": "mste-stat",
+  "subtopic": "mste-stat-econ",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Future worth with quarterly compounding",
+  "stem": "A contractor deposits PHP 500,000 in a fund that earns 6% nominal annual interest compounded quarterly. How much will be in the fund after 5 years?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q035",
+  "subject": "mste",
+  "topic": "mste-stat",
+  "subtopic": "mste-stat-econ",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Book value of a backhoe by double-declining balance",
+  "stem": "A backhoe costs PHP 4,500,000 and has an estimated salvage value of PHP 500,000 after a useful life of 8 years. Using the double-declining-balance method, what is its book value at the end of the 3rd year?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q036",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-distance",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Temperature correction for a taped line",
+  "stem": "A line was measured as 846.25 m with a 50-m steel tape that is of standard length at 20°C. The average tape temperature during the measurement was 33°C. Taking the coefficient of thermal expansion of steel as $11.6 \\times 10^{-6}$ per °C, what is the total temperature correction to the measured length?",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [
+   "mste-l-taping-corrections"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q037",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-distance",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Combined temperature, pull and sag corrections",
+  "stem": "A 30.000-m steel tape is of standard length at 20°C under a 50-N pull when fully supported. It is used to measure a line recorded as 360.000 m (exactly 12 full tape lengths), with the tape supported only at its ends, at a temperature of 31°C and a pull of 90 N. The tape has a cross-sectional area of 3.0 mm², $E = 200\\text{ GPa}$, $\\alpha = 11.6 \\times 10^{-6}$ per °C, and a weight of 0.30 N/m. Find the total correction to the recorded length.",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [
+   "mste-l-taping-corrections"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q038",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-leveling",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Two-peg test: correct rod reading on the far peg",
+  "stem": "In a two-peg test, the level is first set up midway between pegs A and B and gives rod readings of 1.523 m on A and 1.087 m on B. The level is then moved close to A, where the readings are 1.402 m on A and 0.920 m on B. Assuming the reading on the near rod A is free of collimation error, what should the reading on B be for a truly horizontal line of sight?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "mste-l-differential-leveling"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q039",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-stadia",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Horizontal distance from an inclined stadia sight",
+  "stem": "A transit with a stadia interval factor $K = 100$ and an instrument constant $C = 0.30\\text{ m}$ is sighted on a rod. The stadia intercept is 1.850 m and the vertical angle is $+12.5^\\circ$. Find the horizontal distance from the instrument to the rod.",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q040",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-stadia",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Difference in elevation by stadia",
+  "stem": "A transit ($K = 100$, $C = 0$) is set up over station A with the height of instrument above the station equal to 1.52 m. Sighting a rod held at B, the stadia intercept is 2.360 m, the vertical angle is $+8.25^\\circ$, and the middle-hair reading is 2.85 m. Find the difference in elevation between A and B (elevation of B minus elevation of A).",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q041",
+  "subject": "mste",
+  "topic": "mste-surv",
+  "subtopic": "mste-surv-traverse",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Missing closing course of a traverse",
+  "stem": "A closed traverse ABCD has the following measured courses: AB, N $32^\\circ 15'$ E, 186.40 m; BC, S $68^\\circ 40'$ E, 142.75 m; CD, S $21^\\circ 10'$ W, 214.30 m. Course DA was not measured. Assuming the three measured courses are error-free, find the length of DA.",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [
+   "mste-l-traverse-computations"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q042",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-hcurve",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "External distance of a simple curve from its degree of curve",
+  "stem": "A simple curve has a degree of curve of $3^\\circ$ (arc basis, 20-m arc) and an intersection angle of $40^\\circ$. Find the external distance of the curve.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "mste-l-horizontal-simple-curves"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q043",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-sight",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Lateral clearance for stopping sight distance on a curve",
+  "stem": "A two-lane highway curves with a radius of 250 m measured to the centerline of the inside lane. The design speed is 80 km/h, the perception-reaction time is 2.5 s and the coefficient of friction is 0.35 on a level grade. Using $SSD = 0.278Vt + V^2/(254f)$ with V in km/h and assuming the sight distance lies within the curve, find the minimum clear distance from the centerline of the inside lane to a roadside obstruction so that the stopping sight distance is available. Use $M = R[1 - \\cos(S/2R)]$ with the angle in radians.",
+  "estimatedTimeSeconds": 300,
+  "relatedLessonIds": [
+   "mste-l-sight-distance-traffic-flow",
+   "mste-l-horizontal-simple-curves"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q044",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-vcurve",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Minimum length of a crest curve for stopping sight distance",
+  "stem": "A crest vertical curve joins a +2.5% grade to a −3.0% grade. The required stopping sight distance is 160 m. Using a driver eye height $h_1 = 1.08\\text{ m}$ and an object height $h_2 = 0.60\\text{ m}$, and the formula $L = AS^2/[200(\\sqrt{h_1} + \\sqrt{h_2})^2]$ for $S < L$ (A in percent), find the minimum length of the curve. Check that the assumption $S < L$ holds.",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "mste-l-vertical-parabolic-curves",
+   "mste-l-sight-distance-traffic-flow"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q045",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-traffic",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Space-mean speed from a short trap",
+  "stem": "Five vehicles were timed over a 100-m trap on a provincial highway. Their travel times were 3.6 s, 5.4 s, 4.5 s, 6.0 s and 4.0 s. Find the space-mean speed in km/h.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "mste-l-sight-distance-traffic-flow"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q046",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-earthwork",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Earthwork volume by the average end area method",
+  "stem": "Cross-section areas of a road cut are 42.6 m² at station 1+020 and 58.2 m² at station 1+040. Using the average end area method, find the volume of excavation between the two stations.",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q047",
+  "subject": "mste",
+  "topic": "mste-transpo",
+  "subtopic": "mste-transpo-pavement",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Design ESALs with the fourth-power law and traffic growth",
+  "stem": "A pavement is to carry 400 trucks per day (in the design lane) in the first year. Each truck has a 50-kN front single axle and a 110-kN rear single axle. Using the fourth-power law with a standard 80-kN single axle, a traffic growth rate of 3% per year, 365 days per year and a 10-year design period, find the cumulative design ESALs. Use the growth factor $[(1+r)^n - 1]/r$.",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q048",
+  "subject": "mste",
+  "topic": "mste-cm",
+  "subtopic": "mste-cm-equipment",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Hourly production of a hydraulic excavator",
+  "stem": "A hydraulic excavator has a heaped bucket capacity of 1.20 m³ (loose), a bucket fill factor of 0.90 and a cycle time of 20 s. The job efficiency is 50 working minutes per hour. The excavated soil swells 25% (loose volume = 1.25 × bank volume). Find the hourly production in bank cubic meters.",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "mste-l-equipment-productivity"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q049",
+  "subject": "mste",
+  "topic": "mste-cm",
+  "subtopic": "mste-cm-safety",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Disabling injury frequency rate of a project",
+  "stem": "A building project employed an average of 420 workers, each working 48 hours per week for 50 weeks. Six disabling injuries were recorded during this period. Using frequency rate = (number of disabling injuries × 1,000,000) / total employee-hours of exposure, find the disabling injury frequency rate.",
+  "estimatedTimeSeconds": 75,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "mste-q050",
+  "subject": "mste",
+  "topic": "mste-cm",
+  "subtopic": "mste-cm-quantity",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Surplus excavated soil to haul after footing backfill",
+  "stem": "Twelve footing pits, each 2.2 m × 2.2 m in plan and 1.8 m deep with vertical sides, are excavated. Each pit receives a footing 1.6 m × 1.6 m × 0.40 m thick and a pedestal 0.40 m × 0.40 m that rises 1.4 m from the top of the footing to the ground surface. The rest of each pit is backfilled with the excavated soil, compacted. The soil has a swell of 25% (loose = 1.25 × bank) and a shrinkage of 10% (compacted = 0.90 × bank). Find the loose volume of surplus soil to be hauled away.",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [
+   "mste-l-quantity-estimates"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q001",
+  "subject": "psad",
+  "topic": "psad-mech",
+  "subtopic": "psad-mech-equilibrium",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Reaction of a simple beam under an off-center point load",
+  "stem": "A simply supported beam AB has a span of 6 m. A concentrated load of 30 kN acts 2 m from support A. Neglecting the beam's weight, what is the reaction at A?",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [
+   "psad-equilibrium-reactions"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q002",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-axial",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Normal stress in a solid circular rod",
+  "stem": "A solid steel rod with a diameter of 20 mm carries an axial tensile load of 50 kN. What is the normal stress in the rod?",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [
+   "psad-axial-thermal-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q003",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-axial",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Thermal stress in a bar with an initial gap",
+  "stem": "A steel bar 5 m long is placed between two rigid walls with a gap of 1.0 mm at one end at the initial temperature. The temperature then rises by 50 °C. Use $\\alpha = 11.7\\times10^{-6}$ /°C and $E = 200$ GPa. What is the resulting compressive stress in the bar?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "psad-axial-thermal-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q004",
+  "subject": "psad",
+  "topic": "psad-mech",
+  "subtopic": "psad-mech-equilibrium",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Reaction of an overhanging beam",
+  "stem": "Beam ABC is 8 m long, with a pin support at A ($x = 0$) and a roller at B ($x = 6$ m), so BC is a 2-m overhang. The beam carries a uniform load of 10 kN/m over its entire 8-m length and a concentrated load of 20 kN at the free end C. What is the vertical reaction at A?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "psad-equilibrium-reactions"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q005",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-shearmoment",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Maximum moment of a uniformly loaded simple beam",
+  "stem": "A simply supported beam with a span of 8 m carries a uniform load of 12 kN/m (including its own weight) over the entire span. What is the maximum bending moment?",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [
+   "psad-shear-moment-diagrams"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q006",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-shearmoment",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Maximum moment under combined uniform and point loads",
+  "stem": "A simply supported beam with a span of 6 m carries a uniform load of 10 kN/m over the entire span and a concentrated load of 40 kN located 2 m from the left support A. What is the maximum bending moment in the beam?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "psad-shear-moment-diagrams"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q007",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-deflection",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Tip deflection of a cantilever with an end load",
+  "stem": "A steel cantilever beam 3 m long carries a concentrated load of 20 kN at its free end. $E = 200$ GPa and $I = 60\\times10^6$ mm⁴. Neglecting the beam's weight, what is the deflection at the free end?",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [
+   "psad-beam-deflections"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q008",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-trusses",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Tie force in a triangular roof truss",
+  "stem": "A symmetrical triangular roof truss has a span of 8 m and a rise of 3 m. Its two rafters meet at the apex, and a horizontal tie connects the two supports (pin at one end, roller at the other). A single vertical load of 60 kN acts at the apex. What is the force in the horizontal tie?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "psad-determinate-trusses",
+   "psad-equilibrium-reactions"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q009",
+  "subject": "psad",
+  "topic": "psad-steel",
+  "subtopic": "psad-steel-compression",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Slenderness ratio of a solid circular strut",
+  "stem": "A solid circular steel strut has a diameter of 40 mm and a length of 2 m. Both ends are pinned. What is its slenderness ratio $KL/r$?",
+  "estimatedTimeSeconds": 60,
+  "relatedLessonIds": [
+   "psad-column-buckling"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q010",
+  "subject": "psad",
+  "topic": "psad-rc",
+  "subtopic": "psad-rc-beams",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Nominal moment strength of a singly reinforced beam",
+  "stem": "A rectangular concrete beam is 300 mm wide with a total depth of 560 mm and an effective depth of 500 mm. It is reinforced with three 25-mm diameter tension bars. Use $f'_c = 28$ MPa and $f_y = 420$ MPa, and assume the steel yields. What is the nominal moment strength $M_n$?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "psad-rc-singly-reinforced"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q011",
+  "subject": "psad",
+  "topic": "psad-rc",
+  "subtopic": "psad-rc-beams",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Required tension steel for a factored moment",
+  "stem": "A singly reinforced rectangular beam with $b = 300$ mm and $d = 500$ mm must resist a factored moment $M_u = 250$ kN·m. Use $f'_c = 28$ MPa, $f_y = 420$ MPa, $\\beta_1 = 0.85$ and $\\phi = 0.90$ (verify that the section is tension-controlled, $\\varepsilon_t \\ge 0.005$). What is the required area of tension steel?",
+  "estimatedTimeSeconds": 300,
+  "relatedLessonIds": [
+   "psad-rc-singly-reinforced"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q012",
+  "subject": "psad",
+  "topic": "psad-steel",
+  "subtopic": "psad-steel-compression",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Euler load of a column with unequal moments of inertia",
+  "stem": "A 5-m steel column is pinned at both ends and is unbraced about both axes. Its section has $I_x = 80\\times10^6$ mm⁴ and $I_y = 25\\times10^6$ mm⁴. With $E = 200$ GPa, what is the Euler critical load? Assume elastic buckling governs.",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [
+   "psad-column-buckling"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q013",
+  "subject": "psad",
+  "topic": "psad-mech",
+  "subtopic": "psad-mech-friction",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Force to start a crate up an incline",
+  "stem": "A 500-N crate rests on a plank inclined at $25^\\circ$ to the horizontal in a construction-site loading ramp. The coefficient of static friction between the crate and the plank is 0.30. What force $P$, applied parallel to the incline, is required to start moving the crate **up** the incline?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q014",
+  "subject": "psad",
+  "topic": "psad-mech",
+  "subtopic": "psad-mech-centroid",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Centroidal moment of inertia of a T-section",
+  "stem": "A T-section consists of a flange 200 mm wide by 20 mm thick on top of a web 20 mm thick by 180 mm deep (overall depth 200 mm). Determine the moment of inertia of the section about its horizontal centroidal axis.",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q015",
+  "subject": "psad",
+  "topic": "psad-mech",
+  "subtopic": "psad-mech-dynamics",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Skidding distance on a downgrade",
+  "stem": "A 1,200-kg service vehicle travelling at 80 km/h on a road with a **4% downgrade** locks its wheels and skids to a stop. The coefficient of kinetic friction between the tires and the pavement is 0.55. Use $g = 9.81$ m/s². What is the skidding distance?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q016",
+  "subject": "psad",
+  "topic": "psad-mech",
+  "subtopic": "psad-mech-equilibrium",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Tension in two cables supporting a load",
+  "stem": "A 12-kN precast panel hangs from ring C, which is held by two cables. Cable AC goes up to the left at $25^\\circ$ above the horizontal and cable BC goes up to the right at $60^\\circ$ above the horizontal. What is the tension in cable BC?",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [
+   "psad-equilibrium-reactions"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q017",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-axial",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Stress in the bars of a short composite column",
+  "stem": "A short reinforced concrete pedestal is 300 mm × 300 mm and contains four 25-mm diameter steel bars. It carries an axial service load of 1,200 kN. Assume both materials remain elastic and are perfectly bonded, with $E_s = 200$ GPa and $E_c = 25$ GPa. What is the stress in the steel bars?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "psad-axial-thermal-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q018",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-torsion",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Shear stress in a shaft transmitting power",
+  "stem": "A solid steel shaft 70 mm in diameter transmits 150 kW at 300 rpm in a pumping station. What is the maximum torsional shear stress in the shaft?",
+  "estimatedTimeSeconds": 120,
+  "relatedLessonIds": [
+   "psad-torsion-shafts"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q019",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-torsion",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Angle of twist of a hollow shaft",
+  "stem": "A hollow steel shaft 2 m long has an outside diameter of 100 mm and an inside diameter of 80 mm. It is subjected to a torque of 8 kN·m. Using $G = 80$ GPa, what is the angle of twist between its ends, in degrees?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [
+   "psad-torsion-shafts"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q020",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-beams",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Maximum bending stress in a rectangular beam",
+  "stem": "A simply supported rectangular beam 150 mm wide and 300 mm deep spans 4 m and carries a uniform load of 15 kN/m (including its own weight). The beam is placed with its 300-mm dimension vertical. What is the maximum flexural stress?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "psad-shear-moment-diagrams"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q021",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-beams",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Maximum shear stress in a built-up I-section",
+  "stem": "A welded steel I-section has two flanges, each 200 mm × 20 mm, and a web 10 mm thick and 260 mm deep (overall depth 300 mm). At a certain section the vertical shear is 150 kN. Using $\\tau = VQ/(Ib)$, what is the maximum shear stress in the web?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q022",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-combined",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Minimum wall thickness of a pressurized cylindrical tank",
+  "stem": "A cylindrical steel water-pressure tank has an inside diameter of 2.0 m and must hold an internal pressure of 1.8 MPa. If the allowable tensile stress in the plate is 140 MPa, what is the minimum wall thickness required? Treat the tank as thin-walled and ignore joint efficiency.",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q023",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-combined",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Maximum principal stress from plane stress",
+  "stem": "At a point on the web of a loaded girder, the state of plane stress is $\\sigma_x = 80$ MPa (tension), $\\sigma_y = 40$ MPa (compression) and $\\tau_{xy} = 30$ MPa. What is the maximum principal stress?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q024",
+  "subject": "psad",
+  "topic": "psad-som",
+  "subtopic": "psad-som-axial",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Rigid bar supported by steel and aluminum rods",
+  "stem": "A rigid horizontal bar ABC, 3 m long, is hinged at A ($x = 0$). It is held horizontal by two vertical hangers: an aluminum rod at B ($x = 1.5$ m; length 1.5 m, $A = 500$ mm², $E = 70$ GPa) and a steel rod at C ($x = 3.0$ m; length 2.0 m, $A = 300$ mm², $E = 200$ GPa). Both rods are initially stress-free. A load of 50 kN is then applied to the bar at $x = 2.5$ m. Neglecting the bar's weight, what is the stress in the steel rod?",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [
+   "psad-axial-thermal-stress"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q025",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-shearmoment",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Maximum moment under a triangular load",
+  "stem": "A simply supported beam AB spans 6 m. It carries a distributed load that increases linearly from zero at A to 30 kN/m at B (for example, soil or water pressure on a vertical member). What is the maximum bending moment in the beam?",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [
+   "psad-shear-moment-diagrams"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q026",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-deflection",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Midspan deflection by superposition",
+  "stem": "A simply supported steel beam spans 7.5 m. It carries a uniform load of 18 kN/m over the full span plus a concentrated load of 60 kN at midspan. $E = 200$ GPa and $I = 350\\times10^6$ mm⁴. What is the total midspan deflection?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "psad-beam-deflections"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q027",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-deflection",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Free-end deflection of a cantilever with two loads",
+  "stem": "A 4-m steel cantilever carries a uniform load of 12 kN/m over its whole length and a concentrated load of 15 kN located 2.5 m from the fixed support. $E = 200$ GPa and $I = 120\\times10^6$ mm⁴. What is the deflection at the free end?",
+  "estimatedTimeSeconds": 300,
+  "relatedLessonIds": [
+   "psad-beam-deflections"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q028",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-trusses",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Top-chord force in a Pratt truss by the method of sections",
+  "stem": "A parallel-chord Pratt truss has six equal panels of 3 m (span 18 m) and a depth of 4 m. The bottom-chord joints are L0 to L6, and the top-chord joints U1 to U5 lie directly above L1 to L5. In the third panel the diagonal runs from U2 down to L3. The truss is supported by a pin at L0 and a roller at L6 and carries a vertical load of 20 kN at each of the bottom joints L1 to L5. What is the force in top-chord member U2–U3?",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [
+   "psad-determinate-trusses"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q029",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-indeterminate",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Maximum positive moment in a propped cantilever",
+  "stem": "A beam 6 m long is fixed at end A and simply supported (propped) at end B. It carries a uniform load of 24 kN/m over its entire length. EI is constant. What is the maximum **positive** bending moment in the span?",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [
+   "psad-beam-deflections",
+   "psad-shear-moment-diagrams"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q030",
+  "subject": "psad",
+  "topic": "psad-theory",
+  "subtopic": "psad-theory-indeterminate",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Middle reaction of a two-span continuous beam",
+  "stem": "A continuous beam ABC is simply supported at A, B and C, with span AB = 6 m and span BC = 4 m. Both spans carry a uniform load of 20 kN/m, and EI is constant. Using the three-moment equation, what is the vertical reaction at the interior support B?",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [
+   "psad-shear-moment-diagrams"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q031",
+  "subject": "psad",
+  "topic": "psad-rc",
+  "subtopic": "psad-rc-beams",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Neutral-axis depth of a singly reinforced beam",
+  "stem": "A rectangular beam 250 mm wide is reinforced with tension steel of area 1,500 mm². The concrete strength is $f'_c = 35$ MPa, the steel yields at $f_y = 415$ MPa, and $\\beta_1 = 0.80$ for this concrete. Using the Whitney rectangular stress block (strength design, ACI 318 / NSCP 2015 approach), what is the depth $c$ from the extreme compression fiber to the neutral axis?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "psad-rc-singly-reinforced"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q032",
+  "subject": "psad",
+  "topic": "psad-rc",
+  "subtopic": "psad-rc-beams",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Maximum steel for a tension-controlled section",
+  "stem": "A singly reinforced rectangular beam has $b = 300$ mm and $d = 520$ mm, with $f'_c = 28$ MPa and $f_y = 420$ MPa. Use $\\varepsilon_{cu} = 0.003$ and $\\beta_1 = 0.85$. What is the largest tension steel area for which the section is still tension-controlled, i.e. the net tensile strain is exactly $\\varepsilon_t = 0.005$?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [
+   "psad-rc-singly-reinforced"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q033",
+  "subject": "psad",
+  "topic": "psad-rc",
+  "subtopic": "psad-rc-beams",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Design moment of a beam in the transition zone",
+  "stem": "A rectangular beam has $b = 300$ mm and $d = 450$ mm and is reinforced with four 28-mm tension bars. Use $f'_c = 21$ MPa, $f_y = 415$ MPa, $E_s = 200$ GPa, $\\varepsilon_{cu} = 0.003$ and $\\beta_1 = 0.85$. Take $\\phi = 0.90$ if $\\varepsilon_t \\ge 0.005$, $\\phi = 0.65$ if $\\varepsilon_t \\le \\varepsilon_y$, and $\\phi = 0.65 + 0.25(\\varepsilon_t - \\varepsilon_y)/(0.005 - \\varepsilon_y)$ in between. Assuming the steel yields (verify), what is the design moment strength $\\phi M_n$?",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [
+   "psad-rc-singly-reinforced"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q034",
+  "subject": "psad",
+  "topic": "psad-rc",
+  "subtopic": "psad-rc-shear",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Nominal shear strength of concrete in a beam",
+  "stem": "A normal-weight concrete beam ($\\lambda = 1.0$) has a web width of 300 mm and an effective depth of 500 mm, with $f'_c = 28$ MPa. Using the simplified expression $V_c = 0.17\\lambda\\sqrt{f'_c}\\,b_wd$ (with $f'_c$ in MPa), what is the nominal shear strength provided by the concrete?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [
+   "psad-rc-beam-shear"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q035",
+  "subject": "psad",
+  "topic": "psad-rc",
+  "subtopic": "psad-rc-shear",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Required stirrup spacing for a factored shear",
+  "stem": "At the critical section of a rectangular beam ($b_w = 300$ mm, $d = 450$ mm), the factored shear is $V_u = 220$ kN. Use $f'_c = 21$ MPa (normal weight), $V_c = 0.17\\sqrt{f'_c}\\,b_wd$, $\\phi = 0.75$ and vertical two-legged 10-mm stirrups with $f_{yt} = 275$ MPa. What stirrup spacing is required for strength (before rounding down to a practical value or applying maximum-spacing limits)?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "psad-rc-beam-shear"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q036",
+  "subject": "psad",
+  "topic": "psad-rc",
+  "subtopic": "psad-rc-columns",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Maximum design axial strength of a tied column",
+  "stem": "A short tied column is 400 mm × 400 mm and is reinforced with eight 25-mm longitudinal bars. Use $f'_c = 28$ MPa and $f_y = 420$ MPa. For a tied column take $\\phi = 0.65$ and limit the axial strength to $0.80P_o$, where $P_o = 0.85f'_c(A_g - A_{st}) + f_yA_{st}$. What is the maximum design axial strength $\\phi P_{n,\\max}$?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q037",
+  "subject": "psad",
+  "topic": "psad-rc",
+  "subtopic": "psad-rc-footings",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Factored one-way shear in a square footing",
+  "stem": "A 400-mm square column carries a service dead load of 800 kN and a service live load of 500 kN. It rests on a 2.6 m × 2.6 m square footing with an effective depth of 500 mm. Using the load combination $1.2D + 1.6L$ and a uniform factored soil pressure (neglect the footing and soil weight), what is the factored one-way (beam) shear $V_u$ at the critical section located a distance $d$ from the face of the column?",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [
+   "psad-rc-beam-shear"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q038",
+  "subject": "psad",
+  "topic": "psad-psc",
+  "subtopic": "psad-psc-stresses",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Bottom-fiber stress from an eccentric prestress",
+  "stem": "A rectangular pretensioned beam is 300 mm wide and 600 mm deep. At transfer the prestressing force is 1,000 kN, applied 150 mm below the centroid. Considering the prestress only (ignore the beam's self-weight) and taking compression as positive, what is the stress at the bottom fiber?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q039",
+  "subject": "psad",
+  "topic": "psad-psc",
+  "subtopic": "psad-psc-stresses",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Bottom-fiber stress of a prestressed beam at service",
+  "stem": "A simply supported prestressed concrete beam spans 12 m and has a rectangular section 400 mm wide by 800 mm deep. The straight tendon has an eccentricity of 250 mm below the centroid and an effective prestress (after all losses) of 1,600 kN. In service the beam carries a superimposed load of 15 kN/m in addition to its self-weight (unit weight of concrete 24 kN/m³). Taking compression as positive, what is the stress at the bottom fiber at midspan?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q040",
+  "subject": "psad",
+  "topic": "psad-psc",
+  "subtopic": "psad-psc-stresses",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Effective prestress for zero tension at service",
+  "stem": "A simply supported post-tensioned beam spans 10 m and has a rectangular section 350 mm × 700 mm. At midspan the tendon is 200 mm below the centroid. The beam carries a superimposed service load of 20 kN/m plus its self-weight (concrete unit weight 24 kN/m³). What minimum effective prestress force (after losses) is needed so that the bottom fiber at midspan has **zero** tensile stress under full service load?",
+  "estimatedTimeSeconds": 300,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q041",
+  "subject": "psad",
+  "topic": "psad-psc",
+  "subtopic": "psad-psc-stresses",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Prestress force to balance a uniform load",
+  "stem": "A simply supported post-tensioned beam spans 14 m. Its parabolic tendon is anchored at the centroid at both ends and has a sag (drape) of 280 mm at midspan. Using the load-balancing concept, what effective prestress force is needed to exactly balance a uniform load of 18 kN/m?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q042",
+  "subject": "psad",
+  "topic": "psad-steel",
+  "subtopic": "psad-steel-tension",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Design tensile strength of a bolted plate",
+  "stem": "A 220 mm × 14 mm steel plate ($F_y = 248$ MPa, $F_u = 400$ MPa) is connected by 20-mm bolts, with two bolt holes in any one cross-section. Use a hole diameter of 23 mm for net-area calculations and take $A_e = A_n$ ($U = 1.0$). Using LRFD with $\\phi = 0.90$ for yielding on the gross area and $\\phi = 0.75$ for rupture on the net area, what is the design tensile strength of the plate (block shear not considered)?",
+  "estimatedTimeSeconds": 180,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q043",
+  "subject": "psad",
+  "topic": "psad-steel",
+  "subtopic": "psad-steel-tension",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Design strength of a plate with staggered holes",
+  "stem": "A 300 mm × 12 mm plate ($F_y = 345$ MPa, $F_u = 450$ MPa) has bolt holes on three gauge lines spaced $g = 75$ mm apart. The holes on the two outer lines are in the same cross-section, and the hole on the middle line is staggered $s = 50$ mm along the plate from them. Use an effective hole diameter of 24 mm, $A_e = A_n$ ($U = 1.0$), $\\phi = 0.90$ for gross yielding and $\\phi = 0.75$ for net rupture, and the $s^2/4g$ rule for diagonal segments. What is the design tensile strength of the plate (block shear not considered)?",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q044",
+  "subject": "psad",
+  "topic": "psad-steel",
+  "subtopic": "psad-steel-compression",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Design compressive strength of a wide-flange column",
+  "stem": "A wide-flange steel column 4.5 m long is pinned at both ends about both axes ($K = 1.0$). Its properties are $A = 9{,}300$ mm², $r_x = 110$ mm and $r_y = 64$ mm, with $F_y = 345$ MPa and $E = 200$ GPa; local buckling does not govern. Use $F_e = \\pi^2E/(KL/r)^2$; when $KL/r \\le 4.71\\sqrt{E/F_y}$, $F_{cr} = 0.658^{F_y/F_e}F_y$; and $\\phi_c = 0.90$. What is the design compressive strength $\\phi_cP_n$?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "psad-column-buckling"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q045",
+  "subject": "psad",
+  "topic": "psad-steel",
+  "subtopic": "psad-steel-beams",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Allowable live load on a laterally braced steel beam",
+  "stem": "A simply supported steel floor beam spans 8 m and is continuously braced against lateral-torsional buckling. The section is compact, with plastic section modulus $Z_x = 1.20\\times10^6$ mm³ and elastic section modulus $S_x = 1.05\\times10^6$ mm³; $F_y = 345$ MPa. The service dead load is 10 kN/m (including self-weight). Using LRFD with $\\phi_b = 0.90$, $M_n = F_yZ_x$ and the combination $1.2D + 1.6L$, what is the largest uniform service live load the beam can carry (flexure only)?",
+  "estimatedTimeSeconds": 240,
+  "relatedLessonIds": [
+   "psad-shear-moment-diagrams"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q046",
+  "subject": "psad",
+  "topic": "psad-steel",
+  "subtopic": "psad-steel-connections",
+  "type": "computational",
+  "difficulty": "easy",
+  "title": "Design shear strength of a bolted lap joint",
+  "stem": "A lap splice uses four 20-mm diameter high-strength bolts in **single shear**. Take the nominal shear stress of the bolt as $F_{nv} = 372$ MPa and $\\phi = 0.75$. Considering bolt shear only, what is the design shear strength of the connection?",
+  "estimatedTimeSeconds": 90,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q047",
+  "subject": "psad",
+  "topic": "psad-steel",
+  "subtopic": "psad-steel-connections",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Design strength of longitudinal fillet welds",
+  "stem": "A tension angle is connected to a gusset plate by two longitudinal 8-mm fillet welds, each 150 mm long. The electrode has $F_{EXX} = 485$ MPa. Use a weld nominal stress of $0.60F_{EXX}$ on the effective throat ($0.707$ times the leg size) and $\\phi = 0.75$; the base metal does not govern. What is the design strength of the welds?",
+  "estimatedTimeSeconds": 150,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q048",
+  "subject": "psad",
+  "topic": "psad-timber",
+  "subtopic": "psad-timber-members",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Safe uniform load on a timber beam (bending and shear)",
+  "stem": "A simply supported timber beam has an actual (dressed) section of 150 mm × 300 mm, with the 300-mm side vertical, and spans 3.6 m. The allowable bending stress is $F_b = 10.0$ MPa and the allowable horizontal shear stress is $F_v = 0.80$ MPa. Taking the maximum shear at the support and ignoring deflection and bearing, what is the largest total uniform load (including self-weight) the beam can safely carry?",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q049",
+  "subject": "psad",
+  "topic": "psad-timber",
+  "subtopic": "psad-timber-members",
+  "type": "computational",
+  "difficulty": "moderate",
+  "title": "Allowable axial load on a slender timber column",
+  "stem": "A 150 mm × 200 mm (dressed) timber column has an effective length of 4.0 m about both axes. The allowable compressive stress parallel to grain is $F_c = 11.0$ MPa and $E = 9{,}000$ MPa. Use $d$ = least dimension and $K = 0.671\\sqrt{E/F_c}$. The allowable stress is $F'_c = F_c$ for $L_e/d \\le 11$; $F'_c = F_c\\left[1 - \\tfrac{1}{3}\\left(\\tfrac{L_e/d}{K}\\right)^4\\right]$ for $11 < L_e/d \\le K$; and $F'_c = 0.30E/(L_e/d)^2$ for $K < L_e/d \\le 50$. What is the allowable axial load?",
+  "estimatedTimeSeconds": 210,
+  "relatedLessonIds": [
+   "psad-column-buckling"
+  ],
+  "smeReview": "pending"
+ },
+ {
+  "id": "psad-q050",
+  "subject": "psad",
+  "topic": "psad-timber",
+  "subtopic": "psad-timber-members",
+  "type": "computational",
+  "difficulty": "difficult",
+  "title": "Maximum span of a timber floor joist (bending and deflection)",
+  "stem": "Timber floor joists with an actual section of 50 mm × 200 mm are spaced at 400 mm on centers and are simply supported. The floor carries a total uniform load (dead plus live) of 4.8 kPa. The allowable bending stress is $F_b = 12$ MPa, $E = 10{,}000$ MPa, and the deflection under total load is limited to span/360. Assuming shear and bearing are adequate, what is the maximum span of the joists?",
+  "estimatedTimeSeconds": 360,
+  "relatedLessonIds": [
+   "psad-beam-deflections"
+  ],
+  "smeReview": "pending"
+ }
+]

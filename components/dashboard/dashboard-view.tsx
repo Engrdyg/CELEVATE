@@ -40,7 +40,6 @@ import {
   lessonCompletion,
   readiness,
   recommendations,
-  scoreExam,
   studyStreak,
   submittedExams,
   subjectMastery,
@@ -85,7 +84,7 @@ function Dashboard() {
     const today = new Date();
     const lc = lessonCompletion(state);
     const streak = studyStreak(state, today);
-    const exams = submittedExams(state).map(scoreExam);
+    const exams = submittedExams(state).map((e) => ({ percent: e.result!.percent, total: e.result!.total }));
     const week = dailySeries(state, 7);
     const last7 = state.attempts.filter((a) => new Date(a.at) >= addDays(today, -7));
     const prev7 = state.attempts.filter((a) => new Date(a.at) < addDays(today, -7) && new Date(a.at) >= addDays(today, -14));

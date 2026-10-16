@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { uid } from "@/lib/utils";
+import type { QuestionContextRef } from "@/lib/tutor/asks";
 
 export interface TutorMessage {
   id: string;
@@ -18,12 +19,14 @@ export interface Conversation {
   title: string;
   messages: TutorMessage[];
   updatedAt: string;
+  /** Verified question this conversation is grounded in (already revealed to the learner). */
+  context?: QuestionContextRef;
 }
 
 interface TutorState {
   conversations: Conversation[];
   activeId: string | null;
-  newConversation: () => string;
+  newConversation: (context?: QuestionContextRef) => string;
   select: (id: string) => void;
   append: (convId: string, m: Omit<TutorMessage, "id" | "at">) => string;
   update: (convId: string, msgId: string, patch: Partial<TutorMessage>) => void;
@@ -35,9 +38,10 @@ export const useTutor = create<TutorState>()(
     (set) => ({
       conversations: [],
       activeId: null,
-      newConversation: () => {
+      newConversation: (context) => {
         const id = uid("chat");
-        set((s) => ({ conversations: [{ id, title: "New conversation", messages: [], updatedAt: new Date().toISOString() }, ...s.conversations], activeId: id }));
+        const title = context ? `${context.questionId}: ${context.title}`.slice(0, 60) : "New conversation";
+        set((s) => ({ conversations: [{ id, title, messages: [], updatedAt: new Date().toISOString(), context }, ...s.conversations], activeId: id }));
         return id;
       },
       select: (activeId) => set({ activeId }),
@@ -49,7 +53,7 @@ export const useTutor = create<TutorState>()(
             c.id === convId
               ? {
                   ...c,
-                  title: c.messages.length === 0 && m.role === "user" ? m.content.slice(0, 60) : c.title,
+                  title: c.messages.length === 0 && m.role === "user" && !c.context ? m.content.slice(0, 60) : c.title,
                   messages: [...c.messages, { ...m, id, at }],
                   updatedAt: at,
                 }

@@ -1,0 +1,187 @@
+{
+  "$comment": "CELE subject → topic → subtopic map. Subject titles and weights follow the PRC Civil Engineering Licensure Examination programs (April 2024, November 2024, April 2025) as surfaced by web search on 2026-10-16. Direct PDF access to prc.gov.ph was blocked from the authoring environment, so the detailed topic lists below are a provisional map built from the program headings and standard CE curricula. Administrators must re-verify against the latest PRC Board of Civil Engineering resolution and examination program.",
+  "verification": {
+    "status": "partially-verified",
+    "verifiedItems": [
+      "Three subject groups and their 35% / 30% / 35% weights",
+      "Construction Management and Methods is grouped with Applied Mathematics, Surveying and Principles of Transportation and Highway Engineering",
+      "Principles of Structural Analysis and Design includes engineering mechanics, strength of materials, theory of structures, reinforced concrete beams and columns, prestressed concrete beams and steel members"
+    ],
+    "unverifiedItems": [
+      "Complete official subtopic lists (PDF content not accessible)",
+      "Passing rules (general average and minimum subject grade)",
+      "Reported change in subject order beginning March 2026"
+    ],
+    "sources": [
+      "https://www.prc.gov.ph/sites/default/files/exam%20program%20april%202024%20(civil%20engg)%20(1).pdf",
+      "https://prc.gov.ph/sites/default/files/exam%20program%20nov%202024%20(civil%20engg).pdf",
+      "https://www.prc.gov.ph/sites/default/files/exam%20program%20april%202025%20(civil%20engg).pdf",
+      "https://www.prc.gov.ph/sites/default/files/Board%20of%20Civil%20Engineering-SB.pdf"
+    ],
+    "checkedAt": "2026-10-16"
+  },
+  "subjects": [
+    {
+      "id": "mste",
+      "code": "MSTE",
+      "officialTitle": "Applied Mathematics, Surveying, Principles of Transportation and Highway Engineering, Construction Management and Methods",
+      "name": "Mathematics, Surveying, Transportation and Construction Management",
+      "shortName": "Math, Surveying, Transpo & CM",
+      "weight": 0.35,
+      "displayOrder": 1,
+      "topics": [
+        { "id": "mste-alg", "title": "Algebra", "subtopics": [
+          { "id": "mste-alg-equations", "title": "Equations, polynomials and inequalities" },
+          { "id": "mste-alg-progressions", "title": "Progressions and series" },
+          { "id": "mste-alg-word", "title": "Word problems (work, mixture, motion, age, clock)" },
+          { "id": "mste-alg-explog", "title": "Exponents and logarithms" }
+        ]},
+        { "id": "mste-trig", "title": "Trigonometry and Geometry", "subtopics": [
+          { "id": "mste-trig-plane", "title": "Plane trigonometry and solution of triangles" },
+          { "id": "mste-trig-spherical", "title": "Spherical trigonometry" },
+          { "id": "mste-geom-plane", "title": "Plane geometry and mensuration" },
+          { "id": "mste-geom-solid", "title": "Solid geometry" }
+        ]},
+        { "id": "mste-angeo", "title": "Analytic Geometry", "subtopics": [
+          { "id": "mste-angeo-lines", "title": "Points, lines and circles" },
+          { "id": "mste-angeo-conics", "title": "Conic sections" }
+        ]},
+        { "id": "mste-calc", "title": "Calculus and Differential Equations", "subtopics": [
+          { "id": "mste-calc-diff", "title": "Differential calculus and optimization" },
+          { "id": "mste-calc-int", "title": "Integral calculus: areas, volumes and centroids" },
+          { "id": "mste-calc-de", "title": "Differential equations" }
+        ]},
+        { "id": "mste-stat", "title": "Probability, Statistics and Engineering Economy", "subtopics": [
+          { "id": "mste-stat-prob", "title": "Probability" },
+          { "id": "mste-stat-stats", "title": "Descriptive statistics" },
+          { "id": "mste-stat-econ", "title": "Engineering economy" }
+        ]},
+        { "id": "mste-surv", "title": "Surveying", "subtopics": [
+          { "id": "mste-surv-distance", "title": "Distance measurement and taping corrections" },
+          { "id": "mste-surv-leveling", "title": "Leveling, curvature and refraction" },
+          { "id": "mste-surv-traverse", "title": "Traverse computations and areas" },
+          { "id": "mste-surv-stadia", "title": "Stadia and tacheometry" }
+        ]},
+        { "id": "mste-transpo", "title": "Transportation and Highway Engineering", "subtopics": [
+          { "id": "mste-transpo-hcurve", "title": "Horizontal curves" },
+          { "id": "mste-transpo-vcurve", "title": "Vertical curves" },
+          { "id": "mste-transpo-sight", "title": "Sight distance and geometric design" },
+          { "id": "mste-transpo-traffic", "title": "Traffic flow and traffic engineering" },
+          { "id": "mste-transpo-earthwork", "title": "Earthworks and mass haul" },
+          { "id": "mste-transpo-pavement", "title": "Pavement design" }
+        ]},
+        { "id": "mste-cm", "title": "Construction Management and Methods", "subtopics": [
+          { "id": "mste-cm-quantity", "title": "Quantity surveying and estimates" },
+          { "id": "mste-cm-scheduling", "title": "Project scheduling (CPM/PERT)" },
+          { "id": "mste-cm-equipment", "title": "Construction equipment productivity" },
+          { "id": "mste-cm-safety", "title": "Construction occupational safety and health" }
+        ]}
+      ]
+    },
+    {
+      "id": "hge",
+      "code": "HGE",
+      "officialTitle": "Hydraulics and Principles of Geotechnical Engineering",
+      "name": "Hydraulics and Geotechnical Engineering",
+      "shortName": "Hydraulics & Geotech",
+      "weight": 0.30,
+      "displayOrder": 2,
+      "topics": [
+        { "id": "hge-fluid", "title": "Fluid Properties", "subtopics": [
+          { "id": "hge-fluid-props", "title": "Density, specific gravity, viscosity, surface tension and compressibility" }
+        ]},
+        { "id": "hge-statics", "title": "Hydrostatics", "subtopics": [
+          { "id": "hge-statics-pressure", "title": "Pressure and manometry" },
+          { "id": "hge-statics-plane", "title": "Forces on plane surfaces" },
+          { "id": "hge-statics-curved", "title": "Forces on curved surfaces and dams" },
+          { "id": "hge-statics-buoyancy", "title": "Buoyancy and stability of floating bodies" },
+          { "id": "hge-statics-relative", "title": "Relative equilibrium (accelerated and rotating vessels)" }
+        ]},
+        { "id": "hge-flow", "title": "Fluid Flow and Pipe Systems", "subtopics": [
+          { "id": "hge-flow-energy", "title": "Continuity and the energy equation" },
+          { "id": "hge-flow-friction", "title": "Pipe friction and minor losses" },
+          { "id": "hge-flow-networks", "title": "Pipes in series and parallel, reservoir problems" },
+          { "id": "hge-flow-measurement", "title": "Orifices, weirs and flow measurement" },
+          { "id": "hge-flow-momentum", "title": "Impulse–momentum and jets" }
+        ]},
+        { "id": "hge-open", "title": "Open Channel Flow", "subtopics": [
+          { "id": "hge-open-uniform", "title": "Uniform flow (Manning and Chezy)" },
+          { "id": "hge-open-energy", "title": "Specific energy, critical depth and hydraulic jump" }
+        ]},
+        { "id": "hge-soil", "title": "Soil Properties and Classification", "subtopics": [
+          { "id": "hge-soil-phase", "title": "Weight–volume (phase) relationships" },
+          { "id": "hge-soil-classification", "title": "Atterberg limits and soil classification" },
+          { "id": "hge-soil-compaction", "title": "Compaction" }
+        ]},
+        { "id": "hge-seepage", "title": "Permeability and Seepage", "subtopics": [
+          { "id": "hge-seepage-permeability", "title": "Permeability and Darcy's law" },
+          { "id": "hge-seepage-flownet", "title": "Flow nets and seepage forces" }
+        ]},
+        { "id": "hge-stress", "title": "Stresses in Soil", "subtopics": [
+          { "id": "hge-stress-effective", "title": "Effective stress and pore pressure" },
+          { "id": "hge-stress-distribution", "title": "Stress distribution below loaded areas" }
+        ]},
+        { "id": "hge-consol", "title": "Consolidation and Settlement", "subtopics": [
+          { "id": "hge-consol-settlement", "title": "Primary consolidation settlement" },
+          { "id": "hge-consol-time", "title": "Time rate of consolidation" }
+        ]},
+        { "id": "hge-shear", "title": "Shear Strength of Soil", "subtopics": [
+          { "id": "hge-shear-mohr", "title": "Mohr–Coulomb failure criterion and tests" }
+        ]},
+        { "id": "hge-found", "title": "Foundations and Earth Structures", "subtopics": [
+          { "id": "hge-found-bearing", "title": "Bearing capacity of shallow foundations" },
+          { "id": "hge-found-lateral", "title": "Lateral earth pressure and retaining walls" },
+          { "id": "hge-found-piles", "title": "Pile capacity" },
+          { "id": "hge-found-slope", "title": "Slope stability" }
+        ]}
+      ]
+    },
+    {
+      "id": "psad",
+      "code": "PSAD",
+      "officialTitle": "Principles of Structural Analysis and Design",
+      "name": "Structural Analysis and Design",
+      "shortName": "Structural Analysis & Design",
+      "weight": 0.35,
+      "displayOrder": 3,
+      "topics": [
+        { "id": "psad-mech", "title": "Engineering Mechanics", "subtopics": [
+          { "id": "psad-mech-equilibrium", "title": "Force systems, equilibrium and reactions" },
+          { "id": "psad-mech-friction", "title": "Friction" },
+          { "id": "psad-mech-centroid", "title": "Centroids and moments of inertia" },
+          { "id": "psad-mech-dynamics", "title": "Kinematics and kinetics" }
+        ]},
+        { "id": "psad-som", "title": "Strength of Materials", "subtopics": [
+          { "id": "psad-som-axial", "title": "Axial stress, strain and thermal effects" },
+          { "id": "psad-som-torsion", "title": "Torsion" },
+          { "id": "psad-som-beams", "title": "Flexural and shear stresses in beams" },
+          { "id": "psad-som-combined", "title": "Combined stresses, thin-walled vessels and connections" }
+        ]},
+        { "id": "psad-theory", "title": "Theory of Structures", "subtopics": [
+          { "id": "psad-theory-shearmoment", "title": "Shear and moment diagrams" },
+          { "id": "psad-theory-deflection", "title": "Beam deflections" },
+          { "id": "psad-theory-trusses", "title": "Determinate trusses" },
+          { "id": "psad-theory-indeterminate", "title": "Indeterminate structures" }
+        ]},
+        { "id": "psad-rc", "title": "Reinforced Concrete Design", "subtopics": [
+          { "id": "psad-rc-beams", "title": "Beams: flexure" },
+          { "id": "psad-rc-shear", "title": "Beams: shear" },
+          { "id": "psad-rc-columns", "title": "Columns" },
+          { "id": "psad-rc-footings", "title": "Slabs and footings" }
+        ]},
+        { "id": "psad-psc", "title": "Prestressed Concrete", "subtopics": [
+          { "id": "psad-psc-stresses", "title": "Stresses in prestressed beams" }
+        ]},
+        { "id": "psad-steel", "title": "Steel Design", "subtopics": [
+          { "id": "psad-steel-tension", "title": "Tension members" },
+          { "id": "psad-steel-compression", "title": "Compression members and buckling" },
+          { "id": "psad-steel-beams", "title": "Beams" },
+          { "id": "psad-steel-connections", "title": "Bolted and welded connections" }
+        ]},
+        { "id": "psad-timber", "title": "Timber Design", "subtopics": [
+          { "id": "psad-timber-members", "title": "Timber beams and columns" }
+        ]}
+      ]
+    }
+  ]
+}

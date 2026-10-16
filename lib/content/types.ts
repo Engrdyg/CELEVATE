@@ -25,7 +25,6 @@ export type FigureId =
   | "rc-beam-section"
   | "column-buckling";
 
-export type Difficulty = "easy" | "medium" | "hard";
 
 export interface Step {
   /** Explanation of the step (rich text). */
@@ -88,26 +87,6 @@ export interface Chapter {
   lessons: LessonMeta[];
 }
 
-export type ChoiceId = "A" | "B" | "C" | "D";
-
-export interface Question {
-  id: string;
-  subjectId: SubjectId;
-  chapterId: string;
-  topic: string;
-  difficulty: Difficulty;
-  stem: RichText;
-  figure?: FigureId;
-  choices: { id: ChoiceId; text: RichText }[];
-  answer: ChoiceId;
-  solution: {
-    summary: RichText;
-    steps: Step[];
-    formulaIds: string[];
-    commonErrors: RichText[];
-  };
-  relatedLessonIds: string[];
-}
 
 export interface Formula {
   id: string;
@@ -125,6 +104,5 @@ export interface Formula {
 export interface SubjectContent {
   chapters: Chapter[];
   lessons: Lesson[];
-  questions: Question[];
   formulas: Formula[];
 }

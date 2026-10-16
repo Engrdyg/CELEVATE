@@ -26,9 +26,10 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip } from "@/components/ui/tooltip";
 import { Dialog, DialogTrigger, SheetContent } from "@/components/ui/dialog";
 import { Tex } from "@/components/math/tex";
-import { RichText, plainText } from "@/components/math/rich-text";
+import { RichText } from "@/components/math/rich-text";
 import { QuestionMeta } from "@/components/practice/question-card";
-import { adjacentLessons, getChapter, getFormula, getLesson, getQuestion, getSubject } from "@/lib/content";
+import { getCatalogEntry } from "@/lib/qbank/catalog";
+import { adjacentLessons, getChapter, getFormula, getLesson, getSubject } from "@/lib/content";
 import { usePrefs } from "@/lib/store/prefs";
 import { useProgress } from "@/lib/store/progress";
 import { useUI } from "@/lib/store/ui";
@@ -217,14 +218,14 @@ export function LessonReader({ lessonId, children }: { lessonId: string; childre
                   <h2 className="font-display text-[15px] font-semibold">Practice exercises</h2>
                   <ul className="mt-3 grid gap-2">
                     {lesson.questionIds.map((id) => {
-                      const q = getQuestion(id);
+                      const q = getCatalogEntry(id);
                       if (!q) return null;
                       return (
                         <li key={id}>
                           <Link href={`/practice?q=${id}`} className="group flex items-center gap-3 rounded-xl border border-line bg-surface p-3 transition-colors hover:border-line-strong">
                             <Target className="size-4 shrink-0 text-primary-text" aria-hidden />
                             <span className="min-w-0 flex-1">
-                              <span className="line-clamp-1 text-[13px] text-fg">{plainText(q.stem)}</span>
+                              <span className="line-clamp-1 text-[13px] text-fg">{q.title}</span>
                               <QuestionMeta q={q} className="mt-1.5" />
                             </span>
                             <ArrowRight className="size-4 shrink-0 text-faint group-hover:text-fg" />

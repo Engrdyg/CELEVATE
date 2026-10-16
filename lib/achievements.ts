@@ -1,6 +1,6 @@
 import { SUBJECT_IDS } from "@/config/cele";
 import type { ProgressState } from "@/lib/store/progress";
-import { lessonCompletion, scoreExam, studyStreak, submittedExams, totalStudyMinutes } from "@/lib/analytics";
+import { lessonCompletion, studyStreak, submittedExams, totalStudyMinutes } from "@/lib/analytics";
 
 export type AchievementIcon = "book" | "target" | "flame" | "trophy" | "compass" | "timer" | "layers" | "sparkles" | "bookmark" | "award";
 
@@ -86,8 +86,8 @@ export const ACHIEVEMENTS: AchievementDef[] = [
     icon: "trophy",
     tier: "gold",
     measure: (s) => {
-      const hit = submittedExams(s).map(scoreExam).find((r) => r.total >= 10 && r.percent >= 70);
-      return { current: hit ? 1 : 0, target: 1, earnedAt: hit?.exam.submittedAt };
+      const hit = submittedExams(s).find((e) => (e.result?.total ?? 0) >= 10 && (e.result?.percent ?? 0) >= 70);
+      return { current: hit ? 1 : 0, target: 1, earnedAt: hit?.submittedAt };
     },
   },
   {

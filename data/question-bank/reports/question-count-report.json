@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-10-16T03:11:32.420Z",
+  "counts": {
+    "generated": 150,
+    "verificationPassed": 150,
+    "validated": 150,
+    "awaitingHumanReview": 150,
+    "smeApproved": 0,
+    "published": 150,
+    "bySubject": {
+      "mste": 50,
+      "hge": 50,
+      "psad": 50
+    },
+    "publishedBySubject": {
+      "mste": 50,
+      "hge": 50,
+      "psad": 50
+    },
+    "byDifficulty": {
+      "easy": 45,
+      "moderate": 75,
+      "difficult": 30
+    },
+    "byValidation": {
+      "verified": 150
+    },
+    "byType": {
+      "computational": 150
+    }
+  },
+  "errors": 0,
+  "warnings": 0,
+  "duplicates": []
+}

@@ -1,12 +1,13 @@
 import { CELE_SUBJECTS, SUBJECT_IDS, type SubjectId } from "@/config/cele";
-import type { Chapter, Formula, Lesson, LessonMeta, Question, SubjectContent } from "./types";
+import type { Chapter, Formula, Lesson, LessonMeta, SubjectContent } from "./types";
+import { catalog } from "@/lib/qbank/catalog";
 import { content as mste } from "./mste";
 import { content as hge } from "./hge";
 import { content as psad } from "./psad";
 
 export * from "./types";
 
-const bySubject: Record<SubjectId, SubjectContent> = { mste, hge, psad };
+const bySubject: Record<SubjectId, Pick<SubjectContent, "chapters" | "lessons" | "formulas">> = { mste, hge, psad };
 
 export interface SubjectInfo {
   id: SubjectId;
@@ -23,9 +24,9 @@ export interface SubjectInfo {
 }
 
 const DESCRIPTIONS: Record<SubjectId, string> = {
-  mste: "Algebra to calculus, plane and route surveying, and highway and traffic engineering fundamentals.",
+  mste: "Applied mathematics, plane and route surveying, transportation and highway engineering, and construction management and methods.",
   hge: "Fluid statics and flow, pipe systems, soil properties, effective stress and foundation behavior.",
-  psad: "Statics, strength of materials, structural analysis, concrete and steel design, and construction methods.",
+  psad: "Engineering mechanics, strength of materials, theory of structures, and reinforced concrete, prestressed concrete, steel and timber design.",
 };
 
 export const subjects: SubjectInfo[] = SUBJECT_IDS.map((id) => {
@@ -38,25 +39,22 @@ export const subjects: SubjectInfo[] = SUBJECT_IDS.map((id) => {
     chapters: [...c.chapters].sort((a, b) => a.number - b.number),
     lessonCount: metas.length,
     availableLessonCount: metas.filter((l) => l.status === "available").length,
-    questionCount: c.questions.length,
+    questionCount: catalog.filter((q) => q.subject === id).length,
     formulaCount: c.formulas.length,
   };
 });
 
 export const allLessons: Lesson[] = SUBJECT_IDS.flatMap((id) => bySubject[id].lessons);
-export const allQuestions: Question[] = SUBJECT_IDS.flatMap((id) => bySubject[id].questions);
 export const allFormulas: Formula[] = SUBJECT_IDS.flatMap((id) => bySubject[id].formulas);
 export const allChapters: Chapter[] = subjects.flatMap((s) => s.chapters);
 
 const lessonMap = new Map(allLessons.map((l) => [l.id, l]));
-const questionMap = new Map(allQuestions.map((q) => [q.id, q]));
 const formulaMap = new Map(allFormulas.map((f) => [f.id, f]));
 const subjectMap = new Map(subjects.map((s) => [s.id, s]));
 const chapterMap = new Map(allChapters.map((c) => [c.id, c]));
 
 export const getSubject = (id: string) => subjectMap.get(id as SubjectId);
 export const getLesson = (id: string) => lessonMap.get(id);
-export const getQuestion = (id: string) => questionMap.get(id);
 export const getFormula = (id: string) => formulaMap.get(id);
 export const getChapter = (id: string) => chapterMap.get(id);
 
@@ -80,8 +78,3 @@ export function adjacentLessons(lessonId: string) {
   const i = list.findIndex((x) => x.id === lessonId);
   return { prev: list[i - 1], next: list[i + 1] };
 }
-
-export const topics = Array.from(new Set(allQuestions.map((q) => `${q.subjectId}::${q.topic}`))).map((k) => {
-  const [subjectId, topic] = k.split("::") as [SubjectId, string];
-  return { subjectId, topic };
-});

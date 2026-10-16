@@ -1,0 +1,189 @@
+{
+  "generatedAt": "2026-10-16T03:11:32.425Z",
+  "target": {
+    "total": 3000,
+    "perSubject": 1000,
+    "batchSize": "30-50 questions per subject batch"
+  },
+  "phases": [
+    {
+      "id": "phase-1",
+      "goal": "150 verified questions (50 per subject)",
+      "required": 150
+    },
+    {
+      "id": "phase-2",
+      "goal": "Expand to 3,000 approved, unique questions in reviewed batches",
+      "required": 3000
+    }
+  ],
+  "totals": {
+    "generated": 150,
+    "verificationPassed": 150,
+    "published": 150,
+    "awaitingHumanReview": 150,
+    "smeApproved": 0,
+    "remainingToTarget": 2850
+  },
+  "phaseStatus": {
+    "phase-1": "complete-pending-licensed-engineer-review",
+    "phase-2": "not-started"
+  },
+  "subjects": [
+    {
+      "id": "mste",
+      "published": 50,
+      "stored": 50,
+      "remainingToSubjectTarget": 950,
+      "topics": [
+        {
+          "id": "mste-alg",
+          "published": 4,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "mste-trig",
+          "published": 6,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "mste-angeo",
+          "published": 3,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "mste-calc",
+          "published": 6,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "mste-stat",
+          "published": 4,
+          "subtopicsWithoutQuestions": [
+            "mste-stat-stats"
+          ]
+        },
+        {
+          "id": "mste-surv",
+          "published": 10,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "mste-transpo",
+          "published": 11,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "mste-cm",
+          "published": 6,
+          "subtopicsWithoutQuestions": []
+        }
+      ]
+    },
+    {
+      "id": "hge",
+      "published": 50,
+      "stored": 50,
+      "remainingToSubjectTarget": 950,
+      "topics": [
+        {
+          "id": "hge-fluid",
+          "published": 3,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "hge-statics",
+          "published": 9,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "hge-flow",
+          "published": 9,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "hge-open",
+          "published": 4,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "hge-soil",
+          "published": 6,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "hge-seepage",
+          "published": 4,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "hge-stress",
+          "published": 4,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "hge-consol",
+          "published": 3,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "hge-shear",
+          "published": 3,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "hge-found",
+          "published": 5,
+          "subtopicsWithoutQuestions": []
+        }
+      ]
+    },
+    {
+      "id": "psad",
+      "published": 50,
+      "stored": 50,
+      "remainingToSubjectTarget": 950,
+      "topics": [
+        {
+          "id": "psad-mech",
+          "published": 6,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "psad-som",
+          "published": 10,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "psad-theory",
+          "published": 10,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "psad-rc",
+          "published": 9,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "psad-psc",
+          "published": 4,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "psad-steel",
+          "published": 8,
+          "subtopicsWithoutQuestions": []
+        },
+        {
+          "id": "psad-timber",
+          "published": 3,
+          "subtopicsWithoutQuestions": []
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Counts are recomputed from data/question-bank/*.json on every `npm run qbank:validate -- --write-reports`.",
+    "Published computational items passed an independent Python recomputation; none are counted as licensed-engineer reviewed unless smeReview = approved."
+  ]
+}

@@ -23,7 +23,10 @@ npm install
 npm run dev      # http://localhost:3000
 npm run build && npm start
 npm run lint
+npm test             # vitest: engine, tokens, bank integrity, workflow, sessions, stores (PGlite)
 ```
+
+Copy `.env.example` to `.env.local` for server settings (signing secret, staff accounts, optional database, optional AI key).
 
 ### Optional: live AI tutor
 
@@ -35,12 +38,29 @@ cp .env.example .env.local   # then set ANTHROPIC_API_KEY
 
 Without a key, the tutor runs in a **demo mode**. It plays scripted, pre-verified answers to the suggested questions, and every message is labelled "Demo response". The UI depends only on the `TutorProvider` interface in `lib/tutor/providers.ts`, so another backend can be plugged in.
 
+## Question bank
+
+The CELE question bank, mock board examinations and the authoring workflow are described in detail in [`spec.md`](spec.md). In short:
+
+- **Source of truth:** `data/question-bank/*.json` (one file per CELE subject), validated against `lib/qbank/schema.ts` (also exported as `data/question-bank/schema/question.schema.json`). With `DATABASE_URL` set, the same records live in PostgreSQL/Supabase (`supabase/migrations`).
+- **Verification:** every computational question has an independent Python check in `data/question-bank/verify/<subject>.py` that recomputes the answer from the givens. Nothing publishes unless that check passes and the schema, taxonomy, KaTeX and duplicate checks are clean. Human licensed-engineer (SME) review is tracked separately and is never set automatically.
+- **Answer security:** learners receive answer-free questions with per-attempt shuffled choices and a signed session token. Grading, solutions and AI context are released by the server only when the rules allow (instant feedback in practice; after submission in mock exams).
+- **Admin:** `/admin` (staff tokens from `CELEVATE_STAFF`) for editing, workflow (Draft → Technical review → Verified → Published), versions, import/export, reports and statistics.
+
+```bash
+npm run qbank:verify     # Python recomputation → writes verification results
+npm run qbank:validate   # schema, taxonomy, KaTeX, duplicates → count report, manifest
+npm run qbank:pipeline   # verify → validate → promote/publish passing items → client catalog
+npm run qbank:db:import -- --migrate        # load the JSON bank into DATABASE_URL
+npm run qbank:db:import -- --pglite --migrate --shim   # dry run in an in-memory Postgres
+```
+
 ## Data and honesty
 
-- **No backend or accounts.** Progress (lessons, attempts, exams, bookmarks, notes, study time) is stored in the browser's `localStorage`. Settings → *Your data* lets you export, import or reset it.
+- **Learner data stays on the device.** Progress (lessons, attempts, exams, bookmarks, notes, study time) is stored in the browser's `localStorage`; Settings → *Your data* lets you export, import or reset it. The server grades sessions statelessly and, with a database configured, records exam attempts.
 - **No fabricated statistics.** Every dashboard and analytics view is computed from the learner's own activity. Visitors can load clearly labelled **sample data** to preview the dashboards. While it is active, a persistent banner says so, and it can be cleared at any time.
 - **The readiness score is an internal learning estimate.** It is labelled everywhere as not being a prediction of PRC results.
-- **Content is original.** It includes no real board questions, pass rates, endorsements or testimonials. Lessons that aren't written yet are listed as "In preparation" and can't be opened.
+- **Content is original.** It includes no real board questions, pass rates, endorsements or testimonials. Questions are original CELE-style problems, never presented as actual PRC questions. Lessons that aren't written yet are listed as "In preparation" and can't be opened.
 
 ## Project structure
 
@@ -51,7 +71,10 @@ app/
   (app)/                    App shell routes: dashboard, review, subjects, practice,
                             exams, tutor, formulas, progress, achievements, settings
   (focus)/exams/take/       Distraction-free exam room (no app shell)
-  api/tutor/                Streaming Claude endpoint (optional)
+  admin/                    Question-bank admin console (staff only)
+  api/sessions/             Start / check / submit / review (answer key stays server-side)
+  api/admin/                Staff APIs: questions, workflow, import/export, reports, overview
+  api/tutor/                Streaming Claude endpoint grounded in revealed, verified questions
 components/
   ui/                       Design-system primitives (button, card, dialog, tabs, ...)
   shell/                    Sidebar, top bar, mobile nav, command menu, notifications
@@ -59,15 +82,21 @@ components/
   learn/ practice/ exam/    Learning, practice and examination experiences
   charts/ figures/ math/    Charts, engineering diagrams (SVG), KaTeX rendering
 config/cele.ts              Configurable subject labels, codes and weights
+data/question-bank/         Question bank JSON, taxonomy, exam config, verify/*.py, reports
+supabase/migrations/        PostgreSQL schema (RLS, constraints, versioning, audit log)
+scripts/qbank/              Validate, promote, catalog, DB import/export
+tests/                      Vitest suites
 lib/
-  content/                  Typed lessons, questions and formulas per subject
+  qbank/                    Schema, validation, selection/grading engine, CSV, client API
+  server/                   Tokens, staff auth, question stores (file / Postgres), sessions
+  content/                  Typed lessons and formulas per subject
   store/                    Persisted stores (progress, prefs, tutor) and UI state
   analytics.ts              Mastery, readiness, streaks, trends and recommendations
 ```
 
 ### Content model
 
-Content lives in `lib/content/<subject>/` as typed TypeScript (`lib/content/types.ts`). Rich text supports inline `$math$` and `**bold**`. Lessons are built from blocks: headings, paragraphs, display math, callouts, tables, worked examples, figures, and inline self-checks. Subject names and weights are set in `config/cele.ts`, so they can be aligned with the current PRC syllabus.
+Content lives in `lib/content/<subject>/` as typed TypeScript (`lib/content/types.ts`). Rich text supports inline `$math$` and `**bold**`. Lessons are built from blocks: headings, paragraphs, display math, callouts, tables, worked examples, figures, and inline self-checks. Subject names, topics and weights come from `data/question-bank/taxonomy.json` and exam presets from `data/question-bank/exam-config.json`, so they can be aligned with the current PRC syllabus without code changes.
 
 ## Design system
 

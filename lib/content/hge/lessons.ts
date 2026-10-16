@@ -14,7 +14,7 @@ const fluidPressure: Lesson = {
   status: "available",
   topics: ["Unit weight & specific gravity", "Hydrostatic pressure", "Gauge vs absolute pressure", "Manometers"],
   formulaIds: ["hge-f-specific-gravity", "hge-f-hydrostatic-pressure", "hge-f-manometer-rule"],
-  questionIds: ["hge-q01", "hge-q02"],
+  questionIds: ["hge-q001", "hge-q002"],
   blocks: [
     {
       type: "paragraph",
@@ -61,7 +61,7 @@ const fluidPressure: Lesson = {
       type: "paragraph",
       text: String.raw`For **layered liquids** (for example oil floating on water), add the contribution of each layer: $p = \gamma_1 h_1 + \gamma_2 h_2 + \cdots$. The lighter liquid always sits on top. A pressure can also be expressed as an equivalent **pressure head** $h = p/\gamma$, which is the height of a column of a stated liquid that produces that pressure.`,
     },
-    { type: "check", questionId: "hge-q01" },
+    { type: "check", questionId: "hge-q001" },
     {
       type: "paragraph",
       text: String.raw`The simplest pressure-measuring device is a **piezometer**, an open vertical tube tapped into a pipe or tank. The liquid rises in the tube until its column balances the pressure at the tap, so the pressure head is read directly as $p/\gamma$. Piezometers are limited to small positive pressures and cannot measure a vacuum, because a negative gauge pressure would draw air into the tube. Gauge pressures below zero are often called vacuum or suction pressures; the absolute pressure can never fall below zero, so the largest possible vacuum at sea level is about 101.3 kPa (roughly 10.3 m of water). For higher pressures or for vacuums, a manometer with a heavy gauge liquid such as mercury is used instead.`,
@@ -116,7 +116,7 @@ const fluidPressure: Lesson = {
       ],
       answer: String.raw`$p_A - p_B = 37.08\text{ kPa}$ (pressure at A is higher)`,
     },
-    { type: "check", questionId: "hge-q02" },
+    { type: "check", questionId: "hge-q002" },
     {
       type: "callout",
       tone: "exam",
@@ -140,7 +140,7 @@ const hydrostaticPlane: Lesson = {
   status: "available",
   topics: ["Total hydrostatic force", "Center of pressure", "Inclined surfaces", "Hinged gates"],
   formulaIds: ["hge-f-hydrostatic-force-plane", "hge-f-center-of-pressure", "hge-f-hydrostatic-pressure"],
-  questionIds: ["hge-q03", "hge-q04"],
+  questionIds: ["hge-q003", "hge-q004"],
   blocks: [
     {
       type: "paragraph",
@@ -203,7 +203,7 @@ const hydrostaticPlane: Lesson = {
       ],
       answer: String.raw`$F = 33.28\text{ kN}$ acting 3.03 m below the water surface`,
     },
-    { type: "check", questionId: "hge-q03" },
+    { type: "check", questionId: "hge-q003" },
     {
       type: "paragraph",
       text: String.raw`A useful special case is a vertical rectangular wall of width $b$ with water standing to depth $h$ against it, starting at the free surface. The pressure diagram is a triangle from zero at the top to $\gamma h$ at the bottom, so the force is the area of that triangle times the width, $F = \gamma h^2 b/2$, acting at $h/3$ above the base (the centroid of the triangle). This "pressure prism" view gives the same answer as $F = \gamma\bar{h}A$ with $\bar{h} = h/2$, and it is the fastest way to handle retaining walls, dam faces, and walls with water on both sides, where you simply subtract the two triangular diagrams.`,
@@ -227,7 +227,7 @@ const hydrostaticPlane: Lesson = {
         "Take moments about the hinge to solve for the unknown force or reaction.",
       ],
     },
-    { type: "check", questionId: "hge-q04" },
+    { type: "check", questionId: "hge-q004" },
     {
       type: "callout",
       tone: "exam",
@@ -251,7 +251,7 @@ const energyEquation: Lesson = {
   status: "available",
   topics: ["Continuity equation", "Bernoulli's equation", "Energy & hydraulic grade lines", "Darcy–Weisbach head loss"],
   formulaIds: ["hge-f-continuity", "hge-f-energy-equation", "hge-f-darcy-weisbach", "hge-f-darcy-weisbach-q"],
-  questionIds: ["hge-q05", "hge-q06", "hge-q07", "hge-q08"],
+  questionIds: ["hge-q005", "hge-q006", "hge-q007", "hge-q008"],
   blocks: [
     {
       type: "paragraph",
@@ -301,7 +301,7 @@ const energyEquation: Lesson = {
       type: "paragraph",
       text: String.raw`The **energy grade line** (EGL) plots the total head $p/\gamma + V^2/2g + z$ along the pipe. The **hydraulic grade line** (HGL) plots $p/\gamma + z$, so it lies $V^2/2g$ below the EGL. The EGL can only slope downward in the direction of flow unless a pump adds energy. Where the HGL falls below the pipe, the pressure there is negative (below atmospheric).`,
     },
-    { type: "check", questionId: "hge-q06" },
+    { type: "check", questionId: "hge-q006" },
     { type: "heading", id: "head-loss", text: "Friction loss: Darcy–Weisbach" },
     {
       type: "paragraph",
@@ -334,7 +334,7 @@ const energyEquation: Lesson = {
       ],
       answer: String.raw`$p_2 \approx 129.7\text{ kPa}$`,
     },
-    { type: "check", questionId: "hge-q07" },
+    { type: "check", questionId: "hge-q007" },
     {
       type: "paragraph",
       text: String.raw`Fittings, valves, bends, entrances and exits cause additional **minor losses**, written as a multiple of the velocity head: $h_m = K V^2/2g$. A sharp-edged entrance from a reservoir is commonly taken as $K = 0.5$, and a submerged exit into a reservoir as $K = 1.0$ because the whole velocity head is dissipated. In long pipelines minor losses are often small compared with friction and problems may say to neglect them; in short pipes with many fittings they can dominate. The total head loss is $h_L = h_f + \sum h_m$.`,
@@ -366,7 +366,7 @@ const soilPhase: Lesson = {
   status: "available",
   topics: ["Three-phase diagram", "Void ratio & porosity", "Water content & saturation", "Unit weights"],
   formulaIds: ["hge-f-void-ratio-porosity", "hge-f-se-wgs", "hge-f-moist-unit-weight", "hge-f-dry-unit-weight"],
-  questionIds: ["hge-q09", "hge-q10", "hge-q11"],
+  questionIds: ["hge-q009", "hge-q010", "hge-q011"],
   blocks: [
     {
       type: "paragraph",
@@ -419,7 +419,7 @@ const soilPhase: Lesson = {
       type: "paragraph",
       text: String.raw`The **submerged** (buoyant) unit weight $\gamma' = \gamma_{sat} - \gamma_w$ is used for soil below the water table and will be central to effective stress calculations in Chapter 4.`,
     },
-    { type: "check", questionId: "hge-q09" },
+    { type: "check", questionId: "hge-q009" },
     { type: "heading", id: "solving-strategy", text: "A reliable solving strategy" },
     {
       type: "list",
@@ -449,7 +449,7 @@ const soilPhase: Lesson = {
       ],
       answer: String.raw`$w = 15.2\%$, $\gamma = 17.85\text{ kN/m}^3$, $\gamma_d = 15.50\text{ kN/m}^3$, $e = 0.709$, $n = 0.415$, $S = 57.9\%$`,
     },
-    { type: "check", questionId: "hge-q10" },
+    { type: "check", questionId: "hge-q010" },
     {
       type: "paragraph",
       text: String.raw`For granular soils, the void ratio is also used to describe how dense the deposit is relative to its loosest and densest possible states. The **relative density** is $D_r = (e_{max} - e)/(e_{max} - e_{min})$, expressed as a percentage. A $D_r$ near 0% indicates a very loose sand that may densify or liquefy under shaking, while a value near 100% indicates a very dense sand. Because $e$ can be expressed through the dry unit weight, $D_r$ problems are really phase-relationship problems in disguise: convert each given dry unit weight to a void ratio first, then substitute.`,
@@ -477,7 +477,7 @@ const effectiveStress: Lesson = {
   status: "available",
   topics: ["Total stress & pore pressure", "Effective stress profiles", "Water-table changes", "Seepage & quick condition"],
   formulaIds: ["hge-f-effective-stress", "hge-f-moist-unit-weight", "hge-f-consolidation-nc"],
-  questionIds: ["hge-q12", "hge-q13", "hge-q15"],
+  questionIds: ["hge-q012", "hge-q013", "hge-q015"],
   blocks: [
     {
       type: "paragraph",
@@ -523,7 +523,7 @@ const effectiveStress: Lesson = {
       ],
       answer: String.raw`At 6 m: $\sigma' = 70.56\text{ kPa}$. At 8.5 m: $\sigma' \approx 91.0\text{ kPa}$ (the 0.01 difference is rounding of $u$).`,
     },
-    { type: "check", questionId: "hge-q12" },
+    { type: "check", questionId: "hge-q012" },
     {
       type: "paragraph",
       text: String.raw`Above the water table, fine-grained soils can hold water by **capillary rise**. Within a fully saturated capillary zone the pore water is in tension, so $u = -\gamma_w h_c$ at a height $h_c$ above the water table. Negative pore pressure increases effective stress, which is one reason moist fine sands can stand in a near-vertical cut for a short time. Unless a problem specifically describes a capillary zone, take $u = 0$ everywhere above the water table.`,
@@ -544,7 +544,7 @@ const effectiveStress: Lesson = {
         ["Surcharge placed (long term)", "Increases", "Returns to hydrostatic", "Increases"],
       ],
     },
-    { type: "check", questionId: "hge-q13" },
+    { type: "check", questionId: "hge-q013" },
     { type: "heading", id: "seepage-and-settlement", text: "Seepage, quick condition and settlement" },
     {
       type: "paragraph",

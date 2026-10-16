@@ -1,0 +1,20 @@
+{
+  "$comment": "Administrator-configurable examination settings. Subject weights mirror the PRC program weights; difficulty distribution is an internal practice target, not an official PRC specification.",
+  "requireSmeApprovalToPublish": false,
+  "difficultyDistribution": { "easy": 0.3, "moderate": 0.5, "difficult": 0.2 },
+  "subjectWeights": { "mste": 0.35, "hge": 0.30, "psad": 0.35 },
+  "passingReference": {
+    "generalAverage": 70,
+    "minimumSubjectGrade": 50,
+    "verified": false,
+    "note": "Commonly cited CELE rating rules shown for orientation only. Confirm with the Professional Regulation Commission."
+  },
+  "recentExclusionWindow": 40,
+  "presets": [
+    { "id": "mock-full", "title": "Full mock board", "description": "All three subjects in proportion to subject weights, under time pressure.", "subjects": ["mste", "hge", "psad"], "questionCount": 60, "minutes": 180, "autoSubmit": true, "revealSolutions": true, "useDifficultyDistribution": true },
+    { "id": "mixed-30", "title": "Mixed diagnostic", "description": "A broad 30-item readiness check across all subjects.", "subjects": ["mste", "hge", "psad"], "questionCount": 30, "minutes": 75, "autoSubmit": true, "revealSolutions": true, "useDifficultyDistribution": true },
+    { "id": "mste-25", "title": "Subject 1 sprint", "description": "Mathematics, surveying, transportation and construction management.", "subjects": ["mste"], "questionCount": 25, "minutes": 60, "autoSubmit": true, "revealSolutions": true, "useDifficultyDistribution": true },
+    { "id": "hge-25", "title": "Subject 2 sprint", "description": "Hydraulics and geotechnical engineering.", "subjects": ["hge"], "questionCount": 25, "minutes": 60, "autoSubmit": true, "revealSolutions": true, "useDifficultyDistribution": true },
+    { "id": "psad-25", "title": "Subject 3 sprint", "description": "Structural analysis and design.", "subjects": ["psad"], "questionCount": 25, "minutes": 60, "autoSubmit": true, "revealSolutions": true, "useDifficultyDistribution": true }
+  ]
+}

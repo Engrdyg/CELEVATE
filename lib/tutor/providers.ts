@@ -1,5 +1,7 @@
 import { plainText } from "@/components/math/rich-text";
 import { lessonOutline } from "@/lib/content";
+import type { ReviewQuestion } from "@/lib/qbank/engine";
+import { AI_ACTIONS, type QuestionContextRef } from "./asks";
 
 export interface ChatTurn {
   role: "user" | "assistant";
@@ -13,18 +15,18 @@ export interface ChatTurn {
 export interface TutorProvider {
   kind: "live" | "demo";
   label: string;
-  stream(history: ChatTurn[], signal: AbortSignal): AsyncGenerator<string>;
+  stream(history: ChatTurn[], signal: AbortSignal, context?: QuestionContextRef): AsyncGenerator<string>;
 }
 
 /** Streams from the server route, which calls Claude when an API key is configured. */
 export const liveProvider = (model: string): TutorProvider => ({
   kind: "live",
   label: `Connected · ${model}`,
-  async *stream(history, signal) {
+  async *stream(history, signal, context) {
     const res = await fetch("/api/tutor", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: history }),
+      body: JSON.stringify({ messages: history, context: context ? { questionId: context.questionId, revealToken: context.revealToken } : undefined }),
       signal,
     });
     if (!res.ok || !res.body) {
@@ -144,12 +146,58 @@ function demoReply(question: string) {
   }\n3. Ask your administrator to configure an AI provider (ANTHROPIC_API_KEY on the server) to enable live answers.`;
 }
 
+/** Fetches the verified solution for a question the learner has already seen answered. */
+export async function fetchRevealedQuestion(ctx: QuestionContextRef, signal?: AbortSignal): Promise<ReviewQuestion> {
+  const res = await fetch("/api/qbank/revealed", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ questionId: ctx.questionId, revealToken: ctx.revealToken }),
+    signal,
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error ?? "This question's solution isn't available.");
+  return data.question as ReviewQuestion;
+}
+
+/**
+ * Demo mode with a verified question: no model is involved, so the reply only
+ * restates the authored solution, organised around the learner's request.
+ */
+function groundedDemoReply(raw: ReviewQuestion, ask: string) {
+  // Choice letters were shuffled per attempt; drop "(Choice X)" references so nothing points at the wrong letter.
+  const noLetters = (t: string) => t.replace(/\s*\((?:Choice|choice) [A-D]\)/g, "");
+  const q: ReviewQuestion = {
+    ...raw,
+    finalAnswer: noLetters(raw.finalAnswer),
+    insight: noLetters(raw.insight),
+    commonErrors: raw.commonErrors.map(noLetters),
+    solution: raw.solution.map((st) => ({ ...st, text: noLetters(st.text) })),
+  };
+  const action = AI_ACTIONS.find((a) => a.prompt === ask.trim())?.id;
+  const head = `Demo mode — no AI model is connected, so this restates the verified CELEVATE solution for **${q.title}** rather than generating a new explanation.\n\n`;
+  const steps = q.solution.map((s, i) => `${i + 1}. **${s.title}** — ${s.text}${s.tex ? `\n$$${s.tex}$$` : ""}`).join("\n");
+  const formulas = q.formulas.map((f, i) => `${i + 1}. ${f.label}\n$$${f.tex}$$`).join("\n");
+  const vars = q.variables.map((v) => `$${v.symbol}$ — ${v.meaning}${v.unit ? ` (${v.unit})` : ""}`).join("\n\n");
+  switch (action) {
+    case "why-wrong":
+      return head + (q.commonErrors.length ? `Each distractor comes from a specific mistake:\n\n${q.commonErrors.map((e, i) => `${i + 1}. ${e}`).join("\n")}\n\n**Final answer:** ${q.finalAnswer}` : `The authored solution doesn't list distractor explanations for this item.\n\n**Final answer:** ${q.finalAnswer}`);
+    case "formulas":
+      return head + `**Formulas used**\n${formulas || "—"}\n\n**Variables**\n${vars || "—"}`;
+    case "alternative":
+      return head + `Alternative methods need a live AI model. Here is the verified method:\n\n${steps}\n\n**Final answer:** ${q.finalAnswer}`;
+    case "why-correct":
+      return head + `**Required:** ${q.required}\n\n${steps}\n\n**Final answer:** ${q.finalAnswer}\n\n${q.insight}`;
+    default:
+      return head + `**What's asked:** ${q.required}\n\n**Given:** ${q.given.join("; ")}\n\n${steps}\n\n**Final answer:** ${q.finalAnswer}\n\n**Key idea:** ${q.insight}`;
+  }
+}
+
 export const demoProvider: TutorProvider = {
   kind: "demo",
   label: "Demo mode · scripted responses",
-  async *stream(history, signal) {
+  async *stream(history, signal, context) {
     const last = history.filter((h) => h.role === "user").at(-1)?.content ?? "";
-    const text = demoReply(last);
+    const text = context ? groundedDemoReply(await fetchRevealedQuestion(context, signal), last) : demoReply(last);
     // Simulated streaming in small chunks.
     const tokens = text.match(/(\$\$[^$]+\$\$|\$[^$]+\$|\s+|[^\s$]+)/g) ?? [text];
     await new Promise((r) => setTimeout(r, 450));

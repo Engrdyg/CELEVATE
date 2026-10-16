@@ -29,13 +29,37 @@ import { Segmented } from "@/components/ui/segmented";
 import { Switch } from "@/components/ui/switch";
 import { EmptyState } from "@/components/ui/states";
 import { Stagger, StaggerItem } from "@/components/motion/reveal";
-import { EXAM_PRESETS, pickQuestions, poolSize, type ExamPreset } from "@/lib/exams";
 import { subjects, type SubjectId } from "@/lib/content";
-import { activeExam, scoreExam, submittedExams } from "@/lib/analytics";
-import { useProgress, type ExamConfig } from "@/lib/store/progress";
+import { catalog } from "@/lib/qbank/catalog";
+import { examConfig, type ExamPresetConfig } from "@/lib/qbank/taxonomy";
+import { qbankApi } from "@/lib/qbank/client";
+import { activeExam, submittedExams } from "@/lib/analytics";
+import { useProgress } from "@/lib/store/progress";
 import { useStoreReady } from "@/hooks/use-hydrated";
 import { SUBJECT_COLOR } from "@/lib/subject-style";
 import { cn, formatDuration } from "@/lib/utils";
+
+interface PendingExam {
+  presetId?: string;
+  title: string;
+  subjects: SubjectId[];
+  questionCount: number;
+  minutes: number;
+  autoSubmit: boolean;
+  revealSolutions: boolean;
+}
+
+const PRESETS = examConfig.presets;
+const fromPreset = (p: ExamPresetConfig): PendingExam => ({
+  presetId: p.id,
+  title: p.title,
+  subjects: p.subjects,
+  questionCount: p.questionCount,
+  minutes: p.minutes,
+  autoSubmit: p.autoSubmit,
+  revealSolutions: p.revealSolutions,
+});
+const poolSize = (subs: SubjectId[]) => catalog.filter((q) => subs.includes(q.subject)).length;
 
 export function ExamHub() {
   const router = useRouter();
@@ -46,11 +70,12 @@ export function ExamHub() {
   const discardExam = useProgress((s) => s.discardExam);
   const scheduleExam = useProgress((s) => s.scheduleExam);
 
-  const [pending, setPending] = useState<ExamConfig | null>(() => {
-    const id = params.get("preset");
-    return EXAM_PRESETS.find((p) => p.id === id)?.config ?? null;
+  const [pending, setPending] = useState<PendingExam | null>(() => {
+    const p = PRESETS.find((x) => x.id === params.get("preset"));
+    return p ? fromPreset(p) : null;
   });
-  const [scheduleFor, setScheduleFor] = useState<ExamPreset | null>(null);
+  const [starting, setStarting] = useState(false);
+  const [scheduleFor, setScheduleFor] = useState<ExamPresetConfig | null>(null);
 
   // Custom builder
   const [cSubjects, setCSubjects] = useState<SubjectId[]>(["mste", "hge", "psad"]);
@@ -61,16 +86,38 @@ export function ExamHub() {
   const available = poolSize(cSubjects);
 
   const active = ready ? activeExam(state) : null;
-  const history = useMemo(() => (ready ? submittedExams(state).map(scoreExam).reverse() : []), [ready, state]);
+  const history = useMemo(() => (ready ? submittedExams(state).reverse() : []), [ready, state]);
 
-  const begin = (config: ExamConfig) => {
-    const ids = pickQuestions(config);
-    if (!ids.length) {
-      toast.error("No questions available for that selection");
-      return;
+  const begin = async (x: PendingExam) => {
+    setStarting(true);
+    try {
+      const recentIds = [...useProgress.getState().attempts]
+        .sort((a, b) => b.at.localeCompare(a.at))
+        .slice(0, examConfig.recentExclusionWindow)
+        .map((a) => a.questionId);
+      const res = await qbankApi.start(
+        x.presetId
+          ? { mode: "mock", presetId: x.presetId, recentIds: Array.from(new Set(recentIds)) }
+          : {
+              mode: "mock",
+              title: x.title,
+              subjects: x.subjects,
+              count: x.questionCount,
+              minutes: x.minutes,
+              autoSubmit: x.autoSubmit,
+              revealSolutions: x.revealSolutions,
+              useDifficultyDistribution: true,
+              recentIds: Array.from(new Set(recentIds)),
+            },
+      );
+      startExam({ ...res, presetId: x.presetId });
+      setPending(null);
+      router.push("/exams/take");
+    } catch (e) {
+      toast.error((e as Error).message);
+    } finally {
+      setStarting(false);
     }
-    startExam({ ...config, questionCount: ids.length }, ids);
-    router.push("/exams/take");
   };
 
   return (
@@ -87,9 +134,9 @@ export function ExamHub() {
               <AlarmClock className="size-5" />
             </span>
             <div>
-              <p className="font-display text-[15px] font-semibold">Exam in progress: {active.config.title}</p>
+              <p className="font-display text-[15px] font-semibold">Exam in progress: {active.title}</p>
               <p className="text-[13px] text-muted">
-                {Object.keys(active.answers).length}/{active.questionIds.length} answered · autosaved in this browser
+                {Object.keys(active.answers).length}/{active.questions.length} answered · autosaved in this browser
               </p>
             </div>
           </div>
@@ -114,11 +161,11 @@ export function ExamHub() {
 
       <h2 className="mb-3 font-display text-base font-semibold">Exam presets</h2>
       <Stagger className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {EXAM_PRESETS.map((p) => (
+        {PRESETS.map((p) => (
           <StaggerItem key={p.id}>
             <Card className="flex h-full flex-col p-5 transition-colors hover:border-line-strong">
               <div className="flex items-center gap-1.5">
-                {p.config.subjects.map((s) => (
+                {p.subjects.map((s) => (
                   <span key={s} className="h-1.5 w-6 rounded-full" style={{ background: SUBJECT_COLOR[s] }} aria-hidden />
                 ))}
               </div>
@@ -126,14 +173,14 @@ export function ExamHub() {
               <p className="mt-1 flex-1 text-[13px] leading-5 text-muted">{p.description}</p>
               <div className="mt-4 flex gap-3 text-xs text-muted">
                 <span className="flex items-center gap-1">
-                  <ListChecks className="size-3.5" /> {p.config.questionCount} items
+                  <ListChecks className="size-3.5" /> {Math.min(p.questionCount, poolSize(p.subjects))} items
                 </span>
                 <span className="flex items-center gap-1">
-                  <Clock className="size-3.5" /> {p.config.minutes} min
+                  <Clock className="size-3.5" /> {p.minutes} min
                 </span>
               </div>
               <div className="mt-4 flex gap-2">
-                <Button size="sm" className="flex-1" onClick={() => setPending(p.config)}>
+                <Button size="sm" className="flex-1" onClick={() => setPending(fromPreset(p))}>
                   Start
                 </Button>
                 <Button size="icon-sm" variant="outline" aria-label={`Schedule ${p.title}`} onClick={() => setScheduleFor(p)}>
@@ -216,7 +263,6 @@ export function ExamHub() {
                   minutes: Number(cMinutes),
                   autoSubmit: cAuto,
                   revealSolutions: cReveal,
-                  shuffle: true,
                 })
               }
             >
@@ -248,7 +294,7 @@ export function ExamHub() {
                     <Button size="sm" variant="ghost" onClick={() => (scheduleExam(null), toast("Schedule cleared"))}>
                       Clear
                     </Button>
-                    <Button size="sm" onClick={() => setPending(EXAM_PRESETS.find((p) => p.id === state.scheduledExam!.presetId)?.config ?? EXAM_PRESETS[0].config)}>
+                    <Button size="sm" onClick={() => setPending(fromPreset(PRESETS.find((p) => p.id === state.scheduledExam!.presetId) ?? PRESETS[0]))}>
                       Start now
                     </Button>
                   </div>
@@ -273,20 +319,20 @@ export function ExamHub() {
               ) : (
                 <ul className="divide-y divide-line">
                   {history.map((r) => (
-                    <li key={r.exam.id}>
-                      <Link href={`/exams/results?id=${r.exam.id}`} className="-mx-2 flex items-center gap-3 rounded-lg px-2 py-3 transition-colors hover:bg-subtle/60">
+                    <li key={r.id}>
+                      <Link href={`/exams/results?id=${r.id}`} className="-mx-2 flex items-center gap-3 rounded-lg px-2 py-3 transition-colors hover:bg-subtle/60">
                         <span
                           className={cn(
                             "grid size-11 shrink-0 place-items-center rounded-lg font-mono text-[13px] font-semibold",
-                            r.percent >= 70 ? "bg-success-soft text-success" : r.percent >= 50 ? "bg-warning-soft text-warning" : "bg-danger-soft text-danger",
+                            r.result!.percent >= 70 ? "bg-success-soft text-success" : r.result!.percent >= 50 ? "bg-warning-soft text-warning" : "bg-danger-soft text-danger",
                           )}
                         >
-                          {r.percent}%
+                          {r.result!.percent}%
                         </span>
                         <span className="min-w-0 flex-1">
-                          <span className="block truncate text-[13px] font-medium">{r.exam.config.title}</span>
+                          <span className="block truncate text-[13px] font-medium">{r.title}</span>
                           <span className="block text-xs text-muted">
-                            {new Date(r.exam.submittedAt!).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })} · {r.correct}/{r.total} · {formatDuration(r.secondsUsed)}
+                            {new Date(r.submittedAt!).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })} · {r.result!.correct}/{r.result!.total} · {formatDuration(r.result!.durationSeconds)}
                           </span>
                         </span>
                         <ArrowRight className="size-4 text-faint" />
@@ -326,8 +372,9 @@ export function ExamHub() {
                 })}
               </div>
               <ol className="mt-5 list-decimal space-y-2 pl-5 text-[13px] leading-6 text-muted marker:font-mono marker:text-faint">
-                <li>Each item has one best answer. Unanswered items are scored as incorrect.</li>
-                <li>Correct answers and solutions stay hidden until you submit the whole exam.</li>
+                <li>Each item has one best answer. Unanswered items earn no credit.</li>
+                <li>Questions and the order of choices are randomised for every attempt.</li>
+                <li>Correct answers and solutions stay hidden until you submit the whole exam{pending.revealSolutions ? "" : " — this exam shows scores only"}.</li>
                 <li>Use <strong className="text-fg">Mark for review</strong> and the question palette to revisit items.</li>
                 <li>Your answers are autosaved in this browser, so you can resume after a refresh.</li>
                 <li>{pending.autoSubmit ? "The exam is submitted automatically when the timer reaches zero." : "When time runs out you'll be prompted to submit."}</li>
@@ -336,7 +383,7 @@ export function ExamHub() {
                 <DialogClose asChild>
                   <Button variant="ghost">Cancel</Button>
                 </DialogClose>
-                <Button onClick={() => (begin(pending), setPending(null))}>
+                <Button onClick={() => void begin(pending)} loading={starting}>
                   <PlayCircle /> Begin exam
                 </Button>
               </DialogFooter>
@@ -350,7 +397,7 @@ export function ExamHub() {
         onClose={() => setScheduleFor(null)}
         onSave={(at) => {
           if (!scheduleFor) return;
-          scheduleExam({ title: scheduleFor.config.title, at, presetId: scheduleFor.id });
+          scheduleExam({ title: scheduleFor.title, at, presetId: scheduleFor.id });
           toast.success("Mock exam scheduled", { description: new Date(at).toLocaleString() });
           setScheduleFor(null);
         }}
@@ -359,7 +406,7 @@ export function ExamHub() {
   );
 }
 
-function ScheduleDialog({ preset, onClose, onSave }: { preset: ExamPreset | null; onClose: () => void; onSave: (iso: string) => void }) {
+function ScheduleDialog({ preset, onClose, onSave }: { preset: ExamPresetConfig | null; onClose: () => void; onSave: (iso: string) => void }) {
   const [value, setValue] = useState("");
   return (
     <Dialog open={!!preset} onOpenChange={(o) => !o && onClose()}>

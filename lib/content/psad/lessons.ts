@@ -133,11 +133,11 @@ const equilibriumReactions: Lesson = {
       title: "Overhangs reverse the lever arm",
       text: String.raw`On a beam with an overhang, loads beyond a support produce moments about that support in the opposite sense to loads within the span. They can make the far reaction small or even negative (uplift), so keep careful track of signs.`,
     },
-    { type: "check", questionId: "psad-q01" },
-    { type: "check", questionId: "psad-q04" },
+    { type: "check", questionId: "psad-q001" },
+    { type: "check", questionId: "psad-q004" },
   ],
   formulaIds: ["psad-f-equilibrium", "psad-f-ss-point-load"],
-  questionIds: ["psad-q01", "psad-q04", "psad-q08"],
+  questionIds: ["psad-q001", "psad-q004", "psad-q008"],
 };
 
 // ---------------------------------------------------------------------------
@@ -283,11 +283,11 @@ const shearMomentDiagrams: Lesson = {
       title: "Shortcut: maximum moment from the shear triangle",
       text: String.raw`For a segment that starts at a simple support and carries only a uniform load, $M_{\max} = R^2/(2w)$, where $R$ is the reaction at that support. In the example, $39^2/(2 \times 6) = 126.75$ kN·m.`,
     },
-    { type: "check", questionId: "psad-q05" },
-    { type: "check", questionId: "psad-q06" },
+    { type: "check", questionId: "psad-q005" },
+    { type: "check", questionId: "psad-q006" },
   ],
   formulaIds: ["psad-f-load-shear-moment", "psad-f-ss-udl", "psad-f-ss-point-load"],
-  questionIds: ["psad-q05", "psad-q06", "psad-q07"],
+  questionIds: ["psad-q005", "psad-q006", "psad-q007"],
 };
 
 // ---------------------------------------------------------------------------
@@ -439,11 +439,11 @@ const rcSinglyReinforced: Lesson = {
       title: "Common unit and geometry slips",
       text: String.raw`Use the effective depth $d$, not the overall depth $h$. Divide N·mm by $10^6$ to obtain kN·m. And remember that $\beta_1$ only changes $c$ (and therefore $\varepsilon_t$ and $\phi$); it does not enter the equation for $a$.`,
     },
-    { type: "check", questionId: "psad-q10" },
-    { type: "check", questionId: "psad-q11" },
+    { type: "check", questionId: "psad-q010" },
+    { type: "check", questionId: "psad-q011" },
   ],
   formulaIds: ["psad-f-whitney-depth", "psad-f-beta1", "psad-f-nominal-moment-singly", "psad-f-tensile-strain"],
-  questionIds: ["psad-q10", "psad-q11"],
+  questionIds: ["psad-q010", "psad-q011"],
 };
 
 const columnBuckling: Lesson = {
@@ -568,127 +568,11 @@ const columnBuckling: Lesson = {
       title: "Units",
       text: String.raw`Keep $E$ in MPa, $I$ in mm⁴ and $KL$ in mm so that $P_{cr}$ comes out in newtons. Forgetting to convert the length from metres to millimetres changes the answer by a factor of $10^6$.`,
     },
-    { type: "check", questionId: "psad-q12" },
-    { type: "check", questionId: "psad-q09" },
+    { type: "check", questionId: "psad-q012" },
+    { type: "check", questionId: "psad-q009" },
   ],
   formulaIds: ["psad-f-euler-load", "psad-f-slenderness-ratio"],
-  questionIds: ["psad-q09", "psad-q12"],
-};
-
-// ---------------------------------------------------------------------------
-// Chapter 4 — Construction Management and Methods
-// ---------------------------------------------------------------------------
-const cpmScheduling: Lesson = {
-  id: "psad-cpm-scheduling",
-  subjectId: "psad",
-  chapterId: "psad-ch4",
-  title: "Critical Path Method (CPM) Scheduling",
-  summary:
-    "Run the forward and backward passes on an activity network, identify the critical path, and compute total and free float to judge the impact of delays.",
-  minutes: 15,
-  status: "available",
-  topics: ["Activity-on-node networks", "Forward pass", "Backward pass", "Total and free float", "Critical path", "Effect of delays"],
-  blocks: [
-    {
-      type: "paragraph",
-      text: String.raw`The Critical Path Method (CPM) is the standard tool for planning and controlling construction schedules. It answers three questions every project engineer faces: how long the project will take, which activities cannot slip without delaying completion, and how much slack the remaining activities have. Exam problems typically give a small network in a table and ask for the project duration, the critical path, or the float of a particular activity.`,
-    },
-    { type: "heading", id: "network-basics", text: "Activity networks" },
-    {
-      type: "paragraph",
-      text: String.raw`In an **activity-on-node (AON)** network each activity is a box and arrows show precedence: an activity may start only after all its predecessors finish (finish-to-start, zero lag). Each activity has a deterministic duration $t$. A **path** is any chain of activities from the start to the finish of the network; its length is the sum of the durations on it.`,
-    },
-    {
-      type: "paragraph",
-      text: String.raw`Older references draw the same logic as an **activity-on-arrow (AOA)** network, where activities are arrows between event nodes and dummy activities of zero duration preserve precedence. The arithmetic of the passes is identical; only the drawing differs. Whichever format a problem uses, first rewrite it as a simple table of activities, durations and predecessors before computing anything.`,
-    },
-    {
-      type: "callout",
-      tone: "concept",
-      title: "The critical path",
-      text: String.raw`The project duration equals the length of the **longest** path through the network. Activities on that path are critical: they have zero total float, and any delay to them delays the project by the same amount. A network can have more than one critical path.`,
-    },
-    { type: "heading", id: "forward-backward-pass", text: "Forward and backward passes" },
-    {
-      type: "paragraph",
-      text: String.raw`The **forward pass** moves from start to finish and computes each activity's early start (ES) and early finish (EF). The **backward pass** starts from the project duration and moves back, computing late finish (LF) and late start (LS). The key rule: at a merge take the **largest** EF going forward; at a burst take the **smallest** LS going backward.`,
-    },
-    {
-      type: "math",
-      tex: String.raw`ES = \max\left(EF_{\text{predecessors}}\right),\qquad EF = ES + t`,
-      label: "Forward pass",
-    },
-    {
-      type: "math",
-      tex: String.raw`LF = \min\left(LS_{\text{successors}}\right),\qquad LS = LF - t`,
-      label: "Backward pass",
-    },
-    { type: "heading", id: "float", text: "Total float and free float" },
-    {
-      type: "math",
-      tex: String.raw`TF = LS - ES = LF - EF,\qquad FF = \min\left(ES_{\text{successors}}\right) - EF`,
-      label: "Float",
-    },
-    {
-      type: "paragraph",
-      text: String.raw`**Total float** is how long an activity can be delayed without delaying project completion. **Free float** is how long it can be delayed without delaying the early start of any successor. Free float never exceeds total float. Total float is shared along a path: if one activity uses it, the other activities on that path lose it.`,
-    },
-    { type: "heading", id: "worked-example", text: "Worked example" },
-    {
-      type: "example",
-      title: "Six-activity network",
-      problem: String.raw`A small building project has the following activities (duration in days; predecessors in parentheses): A = 2 (none), B = 4 (none), C = 3 (A), D = 5 (A, B), E = 2 (C), F = 3 (D, E). Find the project duration, the critical path, and the total and free float of each activity.`,
-      steps: [
-        {
-          text: String.raw`Forward pass. A and B start at day 0. D waits for both A and B, so it takes the larger EF. F merges D and E.`,
-          tex: String.raw`\begin{aligned} &A: 0\to2,\quad B: 0\to4,\quad C: 2\to5 \\ &D: \max(2,4)=4\to9,\quad E: 5\to7,\quad F: \max(9,7)=9\to12 \end{aligned}`,
-        },
-        {
-          text: String.raw`The project duration is the largest EF: 12 days.`,
-          tex: String.raw`T = 12\text{ days}`,
-        },
-        {
-          text: String.raw`Backward pass from $LF_F = 12$. A feeds both C and D, so it takes the smaller LS.`,
-          tex: String.raw`\begin{aligned} &F: 9\leftarrow12,\quad D: 4\leftarrow9,\quad E: 7\leftarrow9,\quad C: 4\leftarrow7 \\ &B: 0\leftarrow4,\quad A: LF = \min(4,4) = 4,\ LS = 2 \end{aligned}`,
-        },
-        {
-          text: String.raw`Total float $TF = LS - ES$: A = 2, B = 0, C = 2, D = 0, E = 2, F = 0. The critical path is **B–D–F** (4 + 5 + 3 = 12 days).`,
-        },
-        {
-          text: String.raw`Free float: A has $FF = \min(2, 4) - 2 = 0$ because C starts right after it; C has $FF = 5 - 5 = 0$; E has $FF = 9 - 7 = 2$. The 2 days of float on path A–C–E is shared, and only the last activity, E, owns it as free float.`,
-        },
-      ],
-      answer: String.raw`Duration = 12 days; critical path B–D–F; TF(A, C, E) = 2 days, FF(E) = 2 days, all others zero.`,
-    },
-    {
-      type: "table",
-      caption: "Summary of the worked example",
-      head: ["Activity", "t", "ES", "EF", "LS", "LF", "TF", "FF"],
-      rows: [
-        ["A", "2", "0", "2", "2", "4", "2", "0"],
-        ["B", "4", "0", "4", "0", "4", "0", "0"],
-        ["C", "3", "2", "5", "4", "7", "2", "0"],
-        ["D", "5", "4", "9", "4", "9", "0", "0"],
-        ["E", "2", "5", "7", "7", "9", "2", "2"],
-        ["F", "3", "9", "12", "9", "12", "0", "0"],
-      ],
-    },
-    { type: "heading", id: "delays", text: "Effect of delays" },
-    {
-      type: "paragraph",
-      text: String.raw`If a single activity is delayed by $\Delta$ days and nothing else changes, the project is delayed by $\max(0,\ \Delta - TF)$. A delay larger than the float can create a **new** critical path, so after any change re-run the forward pass rather than relying on the old float values when more than one activity is affected.`,
-    },
-    {
-      type: "callout",
-      tone: "exam",
-      title: "Fast check for the duration",
-      text: String.raw`For small networks, list every path and add its durations. The longest sum is the duration, and an activity's total float equals the duration minus the length of the longest path passing through it. In the example, the longest path through C is A–C–E–F = 10 days, so TF(C) = 12 − 10 = 2 days.`,
-    },
-    { type: "check", questionId: "psad-q13" },
-    { type: "check", questionId: "psad-q14" },
-  ],
-  formulaIds: ["psad-f-cpm-float"],
-  questionIds: ["psad-q13", "psad-q14"],
+  questionIds: ["psad-q009", "psad-q012"],
 };
 
 export const lessons: Lesson[] = [
@@ -696,5 +580,4 @@ export const lessons: Lesson[] = [
   shearMomentDiagrams,
   rcSinglyReinforced,
   columnBuckling,
-  cpmScheduling,
 ];

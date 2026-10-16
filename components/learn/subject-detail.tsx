@@ -13,7 +13,8 @@ import { SearchInput } from "@/components/ui/search-input";
 import { Segmented } from "@/components/ui/segmented";
 import { EmptyState } from "@/components/ui/states";
 import { SubjectArt } from "./subject-art";
-import { allQuestions, getSubject, type SubjectId } from "@/lib/content";
+import { getLesson, getSubject, type SubjectId } from "@/lib/content";
+import { getCatalogEntry } from "@/lib/qbank/catalog";
 import { useProgress } from "@/lib/store/progress";
 import { useStoreReady } from "@/hooks/use-hydrated";
 import { accuracy, lessonCompletion } from "@/lib/analytics";
@@ -141,7 +142,7 @@ export function SubjectDetail({ subjectId }: { subjectId: SubjectId }) {
           ) : (
             <Accordion type="multiple" defaultValue={subject.chapters.map((c) => c.id)} key={`${filter}-${query ? 1 : 0}`}>
               {chapters.map((ch) => {
-                const chapterQs = allQuestions.filter((q) => q.chapterId === ch.id).length;
+                const chapterQs = new Set(ch.lessons.flatMap((l) => getLesson(l.id)?.questionIds ?? []).filter((id) => getCatalogEntry(id))).size;
                 const done = ch.lessons.filter((l) => lessonStatus(l.id) === "completed").length;
                 return (
                   <AccordionItem key={ch.id} value={ch.id} className="px-2 sm:px-3">

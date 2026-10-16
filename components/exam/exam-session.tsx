@@ -11,7 +11,10 @@ import { EmptyState } from "@/components/ui/states";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ThemeMenu } from "@/components/theme/theme-selector";
 import { QuestionBody } from "@/components/practice/question-card";
-import { getQuestion, getSubject, type ChoiceId } from "@/lib/content";
+import { toast } from "sonner";
+import { getSubject } from "@/lib/content";
+import { qbankApi } from "@/lib/qbank/client";
+import type { ChoiceKey } from "@/lib/qbank/schema";
 import { useProgress } from "@/lib/store/progress";
 import { usePrefs } from "@/lib/store/prefs";
 import { useStoreReady } from "@/hooks/use-hydrated";
@@ -55,8 +58,8 @@ function Session({ examId }: { examId: string }) {
   const answer = useProgress((s) => s.answerExam);
   const toggleFlag = useProgress((s) => s.toggleExamFlag);
   const setIndex = useProgress((s) => s.setExamIndex);
-  const submitExam = useProgress((s) => s.submitExam);
-  const record = useProgress((s) => s.recordAttempt);
+  const finishExam = useProgress((s) => s.finishExam);
+  const addTime = useProgress((s) => s.addExamTime);
   const showTimer = usePrefs((s) => s.showExamTimer);
   const setShowTimer = usePrefs((s) => s.setShowExamTimer);
 
@@ -65,41 +68,63 @@ function Session({ examId }: { examId: string }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [savedPulse, setSavedPulse] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const submittedRef = useRef(false);
 
-  const total = exam.questionIds.length;
+  const total = exam.questions.length;
   const idx = exam.currentIndex;
-  const qid = exam.questionIds[idx];
-  const q = getQuestion(qid)!;
+  const q = exam.questions[idx];
+  const qid = q.id;
   const answeredCount = Object.keys(exam.answers).length;
-  const remaining = now == null ? null : Math.max(0, Math.round((new Date(exam.deadline).getTime() - now) / 1000));
+  const remaining = now == null || !exam.deadline ? null : Math.max(0, Math.round((new Date(exam.deadline).getTime() - now) / 1000));
   const expired = remaining === 0;
 
+  // Per-question time: accumulate while a question is on screen.
+  const shownAt = useRef<{ id: string; at: number } | null>(null);
+  const flushTime = useCallback(() => {
+    const cur = shownAt.current;
+    if (cur) addTime(examId, cur.id, (Date.now() - cur.at) / 1000);
+    shownAt.current = null;
+  }, [addTime, examId]);
+  useEffect(() => {
+    shownAt.current = { id: qid, at: Date.now() };
+    return flushTime;
+  }, [qid, flushTime]);
+
   const finalize = useCallback(
-    (auto: boolean) => {
+    async (auto: boolean) => {
       if (submittedRef.current) return;
       submittedRef.current = true;
+      setSubmitting(true);
+      setSubmitError(null);
+      flushTime();
       const e = useProgress.getState().exams.find((x) => x.id === examId);
-      if (!e) return;
-      const perItem = Math.round((Math.min(Date.now(), new Date(e.deadline).getTime()) - new Date(e.startedAt).getTime()) / 1000 / Math.max(1, e.questionIds.length));
-      for (const id of e.questionIds) {
-        const qq = getQuestion(id);
-        if (!qq) continue;
-        const sel = e.answers[id] ?? null;
-        record({ questionId: id, subjectId: qq.subjectId, topic: qq.topic, selected: sel, correct: sel === qq.answer, seconds: perItem, mode: "exam" });
+      if (!e?.token) return;
+      try {
+        const times = Object.fromEntries(Object.entries(e.times).map(([k, v]) => [k, Math.round(v)]));
+        const result = await qbankApi.submit({ token: e.token, answers: e.answers, flagged: e.flagged, times, auto });
+        finishExam(examId, result);
+        if (result.autoSubmitted) toast("Time's up — your exam was submitted automatically");
+        router.replace(`/exams/results?id=${examId}`);
+      } catch (err) {
+        submittedRef.current = false;
+        setSubmitting(false);
+        setSubmitError((err as Error).message);
+        setConfirmOpen(true);
       }
-      submitExam(examId, auto);
-      router.replace(`/exams/results?id=${examId}`);
     },
-    [examId, record, submitExam, router],
+    [examId, finishExam, router, flushTime],
   );
 
   // Automatic submission at the deadline, if the exam rules require it.
   useEffect(() => {
-    if (expired && exam.config.autoSubmit) finalize(true);
-  }, [expired, exam.config.autoSubmit, finalize]);
+    if (!expired || !exam.autoSubmit || submitError) return;
+    const t = window.setTimeout(() => void finalize(true), 0);
+    return () => window.clearTimeout(t);
+  }, [expired, exam.autoSubmit, finalize, submitError]);
 
-  const choose = (c: ChoiceId) => {
+  const choose = (c: ChoiceKey) => {
     if (expired) return;
     answer(examId, qid, exam.answers[qid] === c ? null : c);
     setSavedPulse(true);
@@ -111,17 +136,17 @@ function Session({ examId }: { examId: string }) {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement;
       if (t.closest("[role=dialog],input[type=text],textarea") || e.metaKey || e.ctrlKey || e.altKey) return;
-      const map: Record<string, ChoiceId> = { "1": "A", "2": "B", "3": "C", "4": "D" };
-      if (map[e.key]) {
+      const n = ({ "1": 0, "2": 1, "3": 2, "4": 3 } as Record<string, number>)[e.key];
+      if (n !== undefined && q.choices[n] && !expired) {
         e.preventDefault();
-        answer(examId, qid, map[e.key]);
+        answer(examId, qid, q.choices[n].id);
       } else if (e.key === "ArrowRight" && !(t instanceof HTMLInputElement)) go(idx + 1);
       else if (e.key === "ArrowLeft" && !(t instanceof HTMLInputElement)) go(idx - 1);
       else if (e.key.toLowerCase() === "f") toggleFlag(examId, qid);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [answer, examId, qid, go, idx, toggleFlag]);
+  }, [answer, examId, qid, q, go, idx, toggleFlag, expired]);
 
   const flagged = exam.flagged.includes(qid);
   const low = remaining != null && remaining <= 300;
@@ -129,7 +154,7 @@ function Session({ examId }: { examId: string }) {
   const palette = (
     <div>
       <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-5">
-        {exam.questionIds.map((id, i) => {
+        {exam.questions.map(({ id }, i) => {
           const answered = !!exam.answers[id];
           const isFlagged = exam.flagged.includes(id);
           return (
@@ -179,7 +204,7 @@ function Session({ examId }: { examId: string }) {
         <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-3 sm:px-6">
           <LogoMark className="size-7 shrink-0" />
           <div className="min-w-0 flex-1">
-            <p className="truncate text-[13px] font-semibold">{exam.config.title}</p>
+            <p className="truncate text-[13px] font-semibold">{exam.title}</p>
             <p className="flex items-center gap-1.5 text-[11px] text-muted" aria-live="polite">
               <Cloud className={cn("size-3", savedPulse ? "text-success" : "text-faint")} aria-hidden />
               {savedPulse ? "Saved" : "Autosaved in this browser"}
@@ -217,14 +242,15 @@ function Session({ examId }: { examId: string }) {
           <div className="mb-3 flex items-center justify-between gap-3">
             <p className="font-mono text-[13px] font-medium">
               Question {idx + 1} <span className="text-faint">of {total}</span>
-              <span className="ml-2 rounded bg-subtle px-1.5 py-0.5 text-[10px] text-muted">{getSubject(q.subjectId)?.code}</span>
+              <span className="ml-2 rounded bg-subtle px-1.5 py-0.5 text-[10px] text-muted">{getSubject(q.subject)?.code}</span>
             </p>
             <Button variant={flagged ? "outline" : "ghost"} size="sm" onClick={() => toggleFlag(examId, qid)} aria-pressed={flagged} className={flagged ? "border-warning/50 text-warning" : undefined}>
               <Flag className={flagged ? "fill-warning" : undefined} /> {flagged ? "Marked for review" : "Mark for review"}
             </Button>
           </div>
           <div className="rounded-2xl border border-line bg-card p-4 shadow-elev-1 sm:p-7">
-            <QuestionBody key={qid} q={q} name={`exam-${qid}`} selected={exam.answers[qid]} onSelect={choose} disabled={expired} size="lg" />
+            <h2 className="sr-only">{q.title}</h2>
+            <QuestionBody key={qid} q={q} name={`exam-${exam.id}-${qid}`} selected={exam.answers[qid]} onSelect={choose} disabled={expired} size="lg" />
             {exam.answers[qid] && (
               <button type="button" onClick={() => answer(examId, qid, null)} className="mt-3 text-xs text-muted underline-offset-2 hover:text-fg hover:underline">
                 Clear answer
@@ -272,12 +298,16 @@ function Session({ examId }: { examId: string }) {
       </main>
 
       {/* Submit confirmation */}
-      <Dialog open={confirmOpen || (expired && !exam.config.autoSubmit)} onOpenChange={(o) => !expired && setConfirmOpen(o)}>
+      <Dialog open={confirmOpen || expired} onOpenChange={(o) => !expired && !submitting && setConfirmOpen(o)}>
         <DialogContent hideClose={expired}>
           <DialogHeader>
             <DialogTitle>{expired ? "Time is up" : "Submit your exam?"}</DialogTitle>
             <DialogDescription>
-              {expired ? "The time limit has been reached. Submit to see your results." : "You won't be able to change your answers after submitting."}
+              {expired
+                ? exam.autoSubmit && !submitError
+                  ? "The time limit has been reached. Submitting your answers…"
+                  : "The time limit has been reached. Submit to see your results."
+                : "You won't be able to change your answers after submitting."}
             </DialogDescription>
           </DialogHeader>
           <ul className="space-y-2 text-[13px]">
@@ -291,7 +321,7 @@ function Session({ examId }: { examId: string }) {
             </li>
             {total - answeredCount > 0 && (
               <li className="flex items-center justify-between rounded-lg bg-danger-soft px-3 py-2 text-danger">
-                <span>Unanswered (scored as incorrect)</span>
+                <span>Unanswered (no credit)</span>
                 <span className="font-mono font-semibold">{total - answeredCount}</span>
               </li>
             )}
@@ -302,14 +332,19 @@ function Session({ examId }: { examId: string }) {
               </li>
             )}
           </ul>
+          {submitError && (
+            <p role="alert" className="rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-[13px] text-danger">
+              {submitError} Your answers are still saved on this device.
+            </p>
+          )}
           <DialogFooter>
-            {!expired && (
+            {!expired && !submitting && (
               <DialogClose asChild>
                 <Button variant="ghost">Keep working</Button>
               </DialogClose>
             )}
-            <Button variant="iris" onClick={() => finalize(expired)}>
-              Submit exam
+            <Button variant="iris" onClick={() => void finalize(expired)} loading={submitting}>
+              {submitError ? "Try again" : "Submit exam"}
             </Button>
           </DialogFooter>
         </DialogContent>

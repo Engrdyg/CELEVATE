@@ -17,7 +17,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip } from "@/components/ui/tooltip";
 import { Tex } from "@/components/math/tex";
 import { RichText, plainText } from "@/components/math/rich-text";
-import { getFormula, getQuestion, getSubject, lessonHref, lessonOutline } from "@/lib/content";
+import { getFormula, getSubject, lessonHref, lessonOutline } from "@/lib/content";
+import { getCatalogEntry } from "@/lib/qbank/catalog";
+import { topicTitle } from "@/lib/qbank/taxonomy";
 import { activeExam } from "@/lib/analytics";
 import { useProgress, type BookmarkKind } from "@/lib/store/progress";
 import { useStoreReady } from "@/hooks/use-hydrated";
@@ -65,8 +67,8 @@ function Review() {
           return l && { key: `l-${b.refId}`, kind: b.kind, refId: b.refId, title: l.title, sub: `${getSubject(l.subjectId)?.code} · Lesson`, href: lessonHref(l.id), at: b.createdAt, search: l.title };
         }
         if (b.kind === "question") {
-          const qq = getQuestion(b.refId);
-          return qq && { key: `q-${b.refId}`, kind: b.kind, refId: b.refId, title: plainText(qq.stem), sub: `${getSubject(qq.subjectId)?.code} · ${qq.topic}`, href: `/practice?q=${qq.id}`, at: b.createdAt, search: plainText(qq.stem) + qq.topic };
+          const qq = getCatalogEntry(b.refId);
+          return qq && { key: `q-${b.refId}`, kind: b.kind, refId: b.refId, title: qq.title, sub: `${getSubject(qq.subject)?.code} · ${topicTitle(qq.topic)}`, href: `/practice?q=${qq.id}`, at: b.createdAt, search: qq.title + plainText(qq.stem) + topicTitle(qq.topic) };
         }
         if (b.kind === "formula") {
           const f = getFormula(b.refId);
@@ -132,7 +134,7 @@ function Review() {
                   <li>
                     <Link href="/exams/take" className="-mx-2 flex items-center gap-3 rounded-lg p-2 hover:bg-subtle/60">
                       <ClipboardCheck className="size-4 text-iris-text" />
-                      <span className="min-w-0 flex-1 truncate text-[13px] font-medium">{exam.config.title}</span>
+                      <span className="min-w-0 flex-1 truncate text-[13px] font-medium">{exam.title}</span>
                       <Badge tone="iris">Exam</Badge>
                     </Link>
                   </li>

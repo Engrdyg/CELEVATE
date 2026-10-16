@@ -1,6 +1,8 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { connection } from "next/server";
 import { TUTOR_SYSTEM_PROMPT } from "@/lib/tutor/prompt";
+import { questionContext } from "@/lib/tutor/question-context";
+import { revealedQuestion } from "@/lib/server/qbank/sessions";
 
 const MODEL = "claude-opus-5-5";
 const MAX_TURNS = 20;
@@ -27,7 +29,7 @@ export async function POST(req: Request) {
     return Response.json({ error: "No AI provider is configured on this server." }, { status: 503 });
   }
 
-  let body: { messages?: IncomingMessage[] };
+  let body: { messages?: IncomingMessage[]; context?: { questionId?: string; revealToken?: string } };
   try {
     body = await req.json();
   } catch {
@@ -41,6 +43,16 @@ export async function POST(req: Request) {
     return Response.json({ error: "Conversation must start and end with a user message." }, { status: 400 });
   }
 
+  // Optional grounding in a verified question the learner has already answered or submitted.
+  let grounding: string | null = null;
+  if (body.context?.questionId && body.context.revealToken) {
+    try {
+      grounding = questionContext(await revealedQuestion(body.context.revealToken, body.context.questionId));
+    } catch {
+      return Response.json({ error: "That question's solution is not available to this session yet." }, { status: 403 });
+    }
+  }
+
   const client = new Anthropic();
   const stream = client.beta.messages.stream(
     {
@@ -49,7 +61,10 @@ export async function POST(req: Request) {
       betas: ["server-side-fallback-2026-07-01"],
       fallbacks: "default",
       output_config: { effort: "medium" },
-      system: [{ type: "text", text: TUTOR_SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }],
+      system: [
+        { type: "text", text: TUTOR_SYSTEM_PROMPT, cache_control: { type: "ephemeral" } },
+        ...(grounding ? [{ type: "text" as const, text: grounding }] : []),
+      ],
       messages,
     },
     { signal: req.signal },

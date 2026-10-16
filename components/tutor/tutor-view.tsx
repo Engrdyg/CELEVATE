@@ -13,6 +13,8 @@ import { Tooltip } from "@/components/ui/tooltip";
 import { TutorMessageContent } from "./message-content";
 import { SUGGESTED_QUESTIONS, demoProvider, liveProvider, relatedLessonsFor, type TutorProvider } from "@/lib/tutor/providers";
 import { useTutor, type TutorMessage } from "@/lib/store/tutor";
+import { AI_ACTIONS, type QuestionContextRef } from "@/lib/tutor/asks";
+import { getCatalogEntry } from "@/lib/qbank/catalog";
 import { useProgress } from "@/lib/store/progress";
 import { useStoreReady } from "@/hooks/use-hydrated";
 import { lessonHref } from "@/lib/content";
@@ -114,10 +116,11 @@ function Workspace({ provider }: { provider: TutorProvider }) {
 
   useEffect(() => () => abortRef.current?.abort(), []);
 
-  const send = async (text: string) => {
+  const send = async (text: string, context?: QuestionContextRef) => {
     const q = text.trim();
     if (!q || busy) return;
-    const convId = active?.id ?? newConversation();
+    const convId = context ? newConversation(context) : (active?.id ?? newConversation());
+    const ctx = useTutor.getState().conversations.find((c) => c.id === convId)?.context;
     append(convId, { role: "user", content: q });
     setInput("");
     const history = [...(useTutor.getState().conversations.find((c) => c.id === convId)?.messages ?? [])]
@@ -129,7 +132,7 @@ function Workspace({ provider }: { provider: TutorProvider }) {
     abortRef.current = ctrl;
     let acc = "";
     try {
-      for await (const chunk of provider.stream(history, ctrl.signal)) {
+      for await (const chunk of provider.stream(history, ctrl.signal, ctx)) {
         acc += chunk;
         update(convId, msgId, { content: acc });
       }
@@ -142,6 +145,28 @@ function Workspace({ provider }: { provider: TutorProvider }) {
       inputRef.current?.focus();
     }
   };
+
+  // Deep link from a revealed solution: /tutor?q=<id>&rt=<revealToken>&ask=<action>
+  const sendRef = useRef(send);
+  useEffect(() => {
+    sendRef.current = send;
+  });
+  const [deepLink] = useState(() => {
+    const p = new URLSearchParams(window.location.search);
+    const qid = p.get("q");
+    const rt = p.get("rt");
+    if (!qid || !rt) return null;
+    const action = AI_ACTIONS.find((a) => a.id === p.get("ask")) ?? AI_ACTIONS[0];
+    return { prompt: action.prompt, context: { questionId: qid, revealToken: rt, title: getCatalogEntry(qid)?.title ?? qid } };
+  });
+  useEffect(() => {
+    if (!deepLink) return;
+    const t = window.setTimeout(() => {
+      window.history.replaceState(null, "", "/tutor");
+      void sendRef.current(deepLink.prompt, deepLink.context);
+    }, 0);
+    return () => window.clearTimeout(t);
+  }, [deepLink]);
 
   const messages = active?.messages ?? [];
 
@@ -171,7 +196,7 @@ function Workspace({ provider }: { provider: TutorProvider }) {
           </span>
           <div className="min-w-0 flex-1">
             <p className="font-display text-[15px] font-semibold">CELEVATE AI</p>
-            <p className="truncate text-[11px] text-muted">Engineering study assistant</p>
+            <p className="truncate text-[11px] text-muted">{active?.context ? `Grounded in verified question ${active.context.questionId} · ${active.context.title}` : "Engineering study assistant"}</p>
           </div>
           <Badge tone={provider.kind === "live" ? "success" : "warning"}>
             <span className={cn("size-1.5 rounded-full", provider.kind === "live" ? "bg-success" : "bg-warning")} aria-hidden />
@@ -251,6 +276,20 @@ function Workspace({ provider }: { provider: TutorProvider }) {
             send(input);
           }}
         >
+          {active?.context && !busy && (
+            <div className="mx-auto mb-2 flex max-w-3xl flex-wrap gap-1.5" aria-label="Quick follow-ups on this question">
+              {AI_ACTIONS.map((a) => (
+                <button
+                  key={a.id}
+                  type="button"
+                  onClick={() => send(a.prompt)}
+                  className="rounded-full border border-line bg-surface px-2.5 py-1 text-[12px] text-muted transition-colors hover:border-line-strong hover:text-fg"
+                >
+                  {a.label}
+                </button>
+              ))}
+            </div>
+          )}
           <div className="mx-auto flex max-w-3xl items-end gap-2 rounded-xl border border-line-strong bg-surface p-2 shadow-elev-1 focus-within:border-primary focus-within:shadow-[0_0_0_3px_var(--primary-soft)]">
             <label htmlFor="tutor-input" className="sr-only">
               Ask CELEVATE AI

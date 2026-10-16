@@ -117,4 +117,33 @@ export const chapters: Chapter[] = [
       },
     ],
   },
+  {
+    id: "mste-ch5",
+    subjectId: "mste",
+    number: 5,
+    title: "Construction Management and Methods",
+    summary:
+      "Project scheduling by the critical path method, quantity estimates for concrete work, and production rates of construction equipment.",
+    lessons: [
+      meta("mste-l-cpm-scheduling"),
+      {
+        id: "mste-l-quantity-estimates",
+        title: "Quantity Estimates: Concrete, Formwork and Rebar",
+        summary:
+          "Concrete volumes and material factors, formwork contact areas, and reinforcing bar lengths and weights.",
+        minutes: 15,
+        status: "in-preparation",
+        topics: ["Concrete volume", "Cement, sand and gravel", "Formwork area", "Rebar take-off"],
+      },
+      {
+        id: "mste-l-equipment-productivity",
+        title: "Equipment Productivity",
+        summary:
+          "Cycle time, bucket fill factor, job efficiency and hourly production of excavating and hauling equipment.",
+        minutes: 12,
+        status: "in-preparation",
+        topics: ["Cycle time", "Fill factor", "Job efficiency", "Hourly production"],
+      },
+    ],
+  },
 ];

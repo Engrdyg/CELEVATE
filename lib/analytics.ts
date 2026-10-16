@@ -1,6 +1,8 @@
 import { CELE_SUBJECTS, SUBJECT_IDS, type SubjectId } from "@/config/cele";
-import { allQuestions, getQuestion, lessonOutline, subjects } from "@/lib/content";
-import type { Attempt, ExamSession, ProgressState } from "@/lib/store/progress";
+import { lessonOutline, subjects } from "@/lib/content";
+import { catalog } from "@/lib/qbank/catalog";
+import { topicTitle } from "@/lib/qbank/taxonomy";
+import type { Attempt, ProgressState } from "@/lib/store/progress";
 import { addDays, dayKey, pct } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
@@ -62,55 +64,10 @@ function bestStreak(active: Set<string>) {
 /*  Exams                                                              */
 /* ------------------------------------------------------------------ */
 
-export interface ExamResult {
-  exam: ExamSession;
-  correct: number;
-  total: number;
-  answered: number;
-  percent: number;
-  secondsUsed: number;
-  bySubject: { subjectId: SubjectId; correct: number; total: number; percent: number }[];
-  byTopic: { subjectId: SubjectId; topic: string; correct: number; total: number; percent: number }[];
-}
-
-export function scoreExam(exam: ExamSession): ExamResult {
-  let correct = 0;
-  const subj = new Map<SubjectId, { c: number; t: number }>();
-  const top = new Map<string, { subjectId: SubjectId; topic: string; c: number; t: number }>();
-  for (const qid of exam.questionIds) {
-    const q = getQuestion(qid);
-    if (!q) continue;
-    const ok = exam.answers[qid] === q.answer;
-    if (ok) correct++;
-    const s = subj.get(q.subjectId) ?? { c: 0, t: 0 };
-    s.t++;
-    if (ok) s.c++;
-    subj.set(q.subjectId, s);
-    const key = `${q.subjectId}::${q.topic}`;
-    const t = top.get(key) ?? { subjectId: q.subjectId, topic: q.topic, c: 0, t: 0 };
-    t.t++;
-    if (ok) t.c++;
-    top.set(key, t);
-  }
-  const total = exam.questionIds.length;
-  const end = exam.submittedAt ? new Date(exam.submittedAt).getTime() : Date.now();
-  return {
-    exam,
-    correct,
-    total,
-    answered: Object.keys(exam.answers).length,
-    percent: pct(correct, total),
-    secondsUsed: Math.max(0, Math.round((end - new Date(exam.startedAt).getTime()) / 1000)),
-    bySubject: Array.from(subj.entries()).map(([subjectId, v]) => ({ subjectId, correct: v.c, total: v.t, percent: pct(v.c, v.t) })),
-    byTopic: Array.from(top.values())
-      .map((v) => ({ subjectId: v.subjectId, topic: v.topic, correct: v.c, total: v.t, percent: pct(v.c, v.t) }))
-      .sort((a, b) => a.percent - b.percent),
-  };
-}
-
+/** Submitted exams (graded by the server) in chronological order. */
 export function submittedExams(state: ProgressState) {
   return state.exams
-    .filter((e) => e.status === "submitted")
+    .filter((e) => e.status === "submitted" && e.result)
     .sort((a, b) => new Date(a.submittedAt!).getTime() - new Date(b.submittedAt!).getTime());
 }
 
@@ -138,7 +95,7 @@ export function subjectMastery(state: ProgressState): SubjectMastery[] {
     const lc = lessonCompletion(state, id);
     const att = state.attempts.filter((a) => a.subjectId === id);
     const acc = accuracy(att);
-    const questionPool = allQuestions.filter((q) => q.subjectId === id).length || 1;
+    const questionPool = catalog.filter((q) => q.subject === id).length || 1;
     const practiceCoverage = Math.min(1, new Set(att.map((a) => a.questionId)).size / questionPool);
     const mastery =
       att.length === 0 && lc.done === 0
@@ -172,8 +129,8 @@ export function readiness(state: ProgressState): Readiness {
   const recent = state.attempts.slice(-60);
   const recentAcc = accuracy(recent) ?? 0;
 
-  const exams = submittedExams(state).slice(-3).map(scoreExam);
-  const examAvg = exams.length ? exams.reduce((a, r) => a + r.percent, 0) / exams.length : 0;
+  const exams = submittedExams(state).slice(-3);
+  const examAvg = exams.length ? exams.reduce((a, e) => a + (e.result?.percent ?? 0), 0) / exams.length : 0;
 
   const last14 = Array.from({ length: 14 }, (_, i) => dayKey(addDays(new Date(), -i)));
   const activeDays = last14.filter((k) => (state.studyLog[k] ?? 0) > 0 || state.attempts.some((a) => dayKey(new Date(a.at)) === k)).length;
@@ -252,7 +209,9 @@ export function weeklySeries(state: ProgressState, weeks: number, subjectId?: Su
 
 export interface TopicStat {
   subjectId: SubjectId;
+  /** Taxonomy topic id. */
   topic: string;
+  title: string;
   attempts: number;
   correct: number;
   accuracy: number | null;
@@ -261,20 +220,28 @@ export interface TopicStat {
 
 export function topicStats(state: ProgressState): TopicStat[] {
   const map = new Map<string, TopicStat>();
-  for (const q of allQuestions) {
-    const k = `${q.subjectId}::${q.topic}`;
-    if (!map.has(k)) map.set(k, { subjectId: q.subjectId, topic: q.topic, attempts: 0, correct: 0, accuracy: null, poolSize: 0 });
-    map.get(k)!.poolSize++;
+  for (const q of catalog) {
+    if (!map.has(q.topic)) map.set(q.topic, { subjectId: q.subject, topic: q.topic, title: topicTitle(q.topic), attempts: 0, correct: 0, accuracy: null, poolSize: 0 });
+    map.get(q.topic)!.poolSize++;
   }
   for (const a of state.attempts) {
-    const k = `${a.subjectId}::${a.topic}`;
-    const t = map.get(k);
+    const t = map.get(a.topic);
     if (!t) continue;
     t.attempts++;
     if (a.correct) t.correct++;
   }
   for (const t of map.values()) t.accuracy = t.attempts ? Math.round((t.correct / t.attempts) * 100) : null;
   return Array.from(map.values());
+}
+
+/** Topic → weight map for weakness-based practice (weaker topics weigh more). */
+export function weaknessWeights(state: ProgressState): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const t of topicStats(state)) {
+    if (t.attempts === 0) out[t.topic] = 1.5; // untested topics are a mild priority
+    else out[t.topic] = Math.min(10, 1 + ((100 - (t.accuracy ?? 0)) / 100) * 6);
+  }
+  return out;
 }
 
 export function weakestTopics(state: ProgressState, n = 4) {
@@ -306,9 +273,9 @@ export function recommendations(state: ProgressState, limit = 4): Recommendation
     recs.push({
       id: `topic-${t.subjectId}-${t.topic}`,
       kind: "practice",
-      title: `Practice: ${t.topic}`,
+      title: `Practice: ${t.title}`,
       reason: `${t.accuracy}% accuracy across ${t.attempts} attempts`,
-      href: `/practice?subject=${t.subjectId}&topic=${encodeURIComponent(t.topic)}`,
+      href: `/practice?mode=topic&topic=${encodeURIComponent(t.topic)}`,
       subjectId: t.subjectId,
     });
   }
@@ -333,7 +300,7 @@ export function recommendations(state: ProgressState, limit = 4): Recommendation
       kind: "practice",
       title: `First practice set: ${CELE_SUBJECTS[untouched].code}`,
       reason: "No attempts recorded in this subject yet",
-      href: `/practice?subject=${untouched}`,
+      href: `/practice?mode=subject&subject=${untouched}`,
       subjectId: untouched,
     });
   }

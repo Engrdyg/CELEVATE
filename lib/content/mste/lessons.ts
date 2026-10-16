@@ -14,7 +14,7 @@ const solutionOfTriangles: Lesson = {
   status: "available",
   topics: ["Right triangles", "Law of sines", "Law of cosines", "Ambiguous case", "Angles of elevation"],
   formulaIds: ["mste-f-sine-law", "mste-f-cosine-law", "mste-f-triangle-area-sas"],
-  questionIds: ["mste-q01", "mste-q02", "mste-q03"],
+  questionIds: ["mste-q001", "mste-q002", "mste-q003"],
   blocks: [
     { type: "heading", id: "why-triangles", text: "Why triangles show up everywhere" },
     {
@@ -125,8 +125,8 @@ const solutionOfTriangles: Lesson = {
       ],
       answer: String.raw`Third side ≈ 112.62 m; area ≈ 4,584 m²`,
     },
-    { type: "check", questionId: "mste-q01" },
-    { type: "check", questionId: "mste-q02" },
+    { type: "check", questionId: "mste-q001" },
+    { type: "check", questionId: "mste-q002" },
 
     { type: "heading", id: "heights-and-distances", text: "Heights and distances" },
     {
@@ -172,7 +172,7 @@ const derivativesOptimization: Lesson = {
   status: "available",
   topics: ["Differentiation rules", "Critical points", "Maxima and minima", "Related rates"],
   formulaIds: ["mste-f-critical-point-test"],
-  questionIds: ["mste-q04", "mste-q05"],
+  questionIds: ["mste-q004", "mste-q005"],
   blocks: [
     { type: "heading", id: "derivative-review", text: "The derivative as a rate of change" },
     {
@@ -258,7 +258,7 @@ const derivativesOptimization: Lesson = {
       title: "Check the domain and the endpoints",
       text: "A critical point outside the physical range (negative length, a cut larger than the sheet) is meaningless. On a closed interval the absolute maximum or minimum may also occur at an endpoint, so evaluate the objective there as well when the problem allows it.",
     },
-    { type: "check", questionId: "mste-q04" },
+    { type: "check", questionId: "mste-q004" },
 
     { type: "heading", id: "classic-results", text: "Classic results worth remembering" },
     {
@@ -284,7 +284,7 @@ const derivativesOptimization: Lesson = {
       type: "paragraph",
       text: String.raw`To see where the river-lot result comes from: with $2x + y = P$, the area is $A = x(P - 2x)$, and $dA/dx = P - 4x = 0$ gives $x = P/4$ and $y = P/2$. The same three-line derivation, done once with symbols, produces every entry in the table and lets you answer a numerical version almost by inspection.`,
     },
-    { type: "check", questionId: "mste-q05" },
+    { type: "check", questionId: "mste-q005" },
 
     { type: "heading", id: "related-rates", text: "Related rates in one paragraph" },
     {
@@ -319,7 +319,7 @@ const differentialLeveling: Lesson = {
   status: "available",
   topics: ["Height of instrument", "Turning points", "Field notes", "Curvature and refraction", "Error of closure"],
   formulaIds: ["mste-f-height-of-instrument", "mste-f-curvature-refraction"],
-  questionIds: ["mste-q07", "mste-q08"],
+  questionIds: ["mste-q007", "mste-q008"],
   blocks: [
     { type: "heading", id: "principle", text: "The principle of differential leveling" },
     {
@@ -403,7 +403,7 @@ const differentialLeveling: Lesson = {
       title: "Balance your sight distances",
       text: "Keeping each backsight and foresight distance roughly equal cancels the error from a line of sight that is not perfectly horizontal (collimation error) and most of the curvature and refraction effect, because the same error appears in both readings and drops out in the difference.",
     },
-    { type: "check", questionId: "mste-q07" },
+    { type: "check", questionId: "mste-q007" },
 
     { type: "heading", id: "curvature-refraction", text: "Curvature and refraction" },
     {
@@ -419,7 +419,7 @@ const differentialLeveling: Lesson = {
       type: "paragraph",
       text: String.raw`For ordinary sights of 50 to 100 m the effect is well under a millimeter, which is why it is ignored in routine leveling. It matters in long sights, reciprocal leveling across rivers, and in problems that ask how far away an object of a given height is visible. For example, at $K = 2$ km, $h_{cr} = 0.0675(2)^2 = 0.270$ m.`,
     },
-    { type: "check", questionId: "mste-q08" },
+    { type: "check", questionId: "mste-q008" },
 
     {
       type: "paragraph",
@@ -466,7 +466,7 @@ const horizontalSimpleCurves: Lesson = {
     "mste-f-length-of-curve",
     "mste-f-curve-ordinates-chord",
   ],
-  questionIds: ["mste-q11", "mste-q12"],
+  questionIds: ["mste-q011", "mste-q012"],
   blocks: [
     { type: "heading", id: "elements", text: "Elements of a simple curve" },
     {
@@ -552,7 +552,7 @@ const horizontalSimpleCurves: Lesson = {
       type: "paragraph",
       text: String.raw`Problems are often stated in reverse: a building near the PI must be cleared, so the external distance is fixed and the radius is unknown. Rearranging gives $R = E/[\sec(I/2) - 1]$. For instance, with $I = 40^\circ$ and a required $E = 15$ m, $R = 15/(\sec 20^\circ - 1) = 233.73$ m, which corresponds to $D = 1145.916/233.73 \approx 4.90^\circ$. In design you would round to a flatter standard curve that still satisfies the clearance, then recompute every element from the adopted radius.`,
     },
-    { type: "check", questionId: "mste-q11" },
+    { type: "check", questionId: "mste-q011" },
 
     { type: "heading", id: "deflection-angles", text: "Deflection angles for layout" },
     {
@@ -574,8 +574,124 @@ const horizontalSimpleCurves: Lesson = {
       title: "Fast checks under time pressure",
       text: String.raw`Confirm that $E > M$, that $C < L < 2T$, and that the PT station is less than PI + T. If any of these fail, recheck whether you used $I$ instead of $I/2$ inside the trigonometric functions.`,
     },
-    { type: "check", questionId: "mste-q12" },
+    { type: "check", questionId: "mste-q012" },
   ],
+};
+
+// ---------------------------------------------------------------------------
+// Chapter 5 — Construction Management and Methods
+// ---------------------------------------------------------------------------
+const cpmScheduling: Lesson = {
+  id: "mste-l-cpm-scheduling",
+  subjectId: "mste",
+  chapterId: "mste-ch5",
+  title: "Critical Path Method (CPM) Scheduling",
+  summary:
+    "Run the forward and backward passes on an activity network, identify the critical path, and compute total and free float to judge the impact of delays.",
+  minutes: 15,
+  status: "available",
+  topics: ["Activity-on-node networks", "Forward pass", "Backward pass", "Total and free float", "Critical path", "Effect of delays"],
+  blocks: [
+    {
+      type: "paragraph",
+      text: String.raw`The Critical Path Method (CPM) is the standard tool for planning and controlling construction schedules. It answers three questions every project engineer faces: how long the project will take, which activities cannot slip without delaying completion, and how much slack the remaining activities have. Exam problems typically give a small network in a table and ask for the project duration, the critical path, or the float of a particular activity.`,
+    },
+    { type: "heading", id: "network-basics", text: "Activity networks" },
+    {
+      type: "paragraph",
+      text: String.raw`In an **activity-on-node (AON)** network each activity is a box and arrows show precedence: an activity may start only after all its predecessors finish (finish-to-start, zero lag). Each activity has a deterministic duration $t$. A **path** is any chain of activities from the start to the finish of the network; its length is the sum of the durations on it.`,
+    },
+    {
+      type: "paragraph",
+      text: String.raw`Older references draw the same logic as an **activity-on-arrow (AOA)** network, where activities are arrows between event nodes and dummy activities of zero duration preserve precedence. The arithmetic of the passes is identical; only the drawing differs. Whichever format a problem uses, first rewrite it as a simple table of activities, durations and predecessors before computing anything.`,
+    },
+    {
+      type: "callout",
+      tone: "concept",
+      title: "The critical path",
+      text: String.raw`The project duration equals the length of the **longest** path through the network. Activities on that path are critical: they have zero total float, and any delay to them delays the project by the same amount. A network can have more than one critical path.`,
+    },
+    { type: "heading", id: "forward-backward-pass", text: "Forward and backward passes" },
+    {
+      type: "paragraph",
+      text: String.raw`The **forward pass** moves from start to finish and computes each activity's early start (ES) and early finish (EF). The **backward pass** starts from the project duration and moves back, computing late finish (LF) and late start (LS). The key rule: at a merge take the **largest** EF going forward; at a burst take the **smallest** LS going backward.`,
+    },
+    {
+      type: "math",
+      tex: String.raw`ES = \max\left(EF_{\text{predecessors}}\right),\qquad EF = ES + t`,
+      label: "Forward pass",
+    },
+    {
+      type: "math",
+      tex: String.raw`LF = \min\left(LS_{\text{successors}}\right),\qquad LS = LF - t`,
+      label: "Backward pass",
+    },
+    { type: "heading", id: "float", text: "Total float and free float" },
+    {
+      type: "math",
+      tex: String.raw`TF = LS - ES = LF - EF,\qquad FF = \min\left(ES_{\text{successors}}\right) - EF`,
+      label: "Float",
+    },
+    {
+      type: "paragraph",
+      text: String.raw`**Total float** is how long an activity can be delayed without delaying project completion. **Free float** is how long it can be delayed without delaying the early start of any successor. Free float never exceeds total float. Total float is shared along a path: if one activity uses it, the other activities on that path lose it.`,
+    },
+    { type: "heading", id: "worked-example", text: "Worked example" },
+    {
+      type: "example",
+      title: "Six-activity network",
+      problem: String.raw`A small building project has the following activities (duration in days; predecessors in parentheses): A = 2 (none), B = 4 (none), C = 3 (A), D = 5 (A, B), E = 2 (C), F = 3 (D, E). Find the project duration, the critical path, and the total and free float of each activity.`,
+      steps: [
+        {
+          text: String.raw`Forward pass. A and B start at day 0. D waits for both A and B, so it takes the larger EF. F merges D and E.`,
+          tex: String.raw`\begin{aligned} &A: 0\to2,\quad B: 0\to4,\quad C: 2\to5 \\ &D: \max(2,4)=4\to9,\quad E: 5\to7,\quad F: \max(9,7)=9\to12 \end{aligned}`,
+        },
+        {
+          text: String.raw`The project duration is the largest EF: 12 days.`,
+          tex: String.raw`T = 12\text{ days}`,
+        },
+        {
+          text: String.raw`Backward pass from $LF_F = 12$. A feeds both C and D, so it takes the smaller LS.`,
+          tex: String.raw`\begin{aligned} &F: 9\leftarrow12,\quad D: 4\leftarrow9,\quad E: 7\leftarrow9,\quad C: 4\leftarrow7 \\ &B: 0\leftarrow4,\quad A: LF = \min(4,4) = 4,\ LS = 2 \end{aligned}`,
+        },
+        {
+          text: String.raw`Total float $TF = LS - ES$: A = 2, B = 0, C = 2, D = 0, E = 2, F = 0. The critical path is **B–D–F** (4 + 5 + 3 = 12 days).`,
+        },
+        {
+          text: String.raw`Free float: A has $FF = \min(2, 4) - 2 = 0$ because C starts right after it; C has $FF = 5 - 5 = 0$; E has $FF = 9 - 7 = 2$. The 2 days of float on path A–C–E is shared, and only the last activity, E, owns it as free float.`,
+        },
+      ],
+      answer: String.raw`Duration = 12 days; critical path B–D–F; TF(A, C, E) = 2 days, FF(E) = 2 days, all others zero.`,
+    },
+    {
+      type: "table",
+      caption: "Summary of the worked example",
+      head: ["Activity", "t", "ES", "EF", "LS", "LF", "TF", "FF"],
+      rows: [
+        ["A", "2", "0", "2", "2", "4", "2", "0"],
+        ["B", "4", "0", "4", "0", "4", "0", "0"],
+        ["C", "3", "2", "5", "4", "7", "2", "0"],
+        ["D", "5", "4", "9", "4", "9", "0", "0"],
+        ["E", "2", "5", "7", "7", "9", "2", "2"],
+        ["F", "3", "9", "12", "9", "12", "0", "0"],
+      ],
+    },
+    { type: "heading", id: "delays", text: "Effect of delays" },
+    {
+      type: "paragraph",
+      text: String.raw`If a single activity is delayed by $\Delta$ days and nothing else changes, the project is delayed by $\max(0,\ \Delta - TF)$. A delay larger than the float can create a **new** critical path, so after any change re-run the forward pass rather than relying on the old float values when more than one activity is affected.`,
+    },
+    {
+      type: "callout",
+      tone: "exam",
+      title: "Fast check for the duration",
+      text: String.raw`For small networks, list every path and add its durations. The longest sum is the duration, and an activity's total float equals the duration minus the length of the longest path passing through it. In the example, the longest path through C is A–C–E–F = 10 days, so TF(C) = 12 − 10 = 2 days.`,
+    },
+    { type: "check", questionId: "mste-q016" },
+    { type: "check", questionId: "mste-q017" },
+  ],
+  formulaIds: ["mste-f-cpm-float"],
+  questionIds: ["mste-q016", "mste-q017"],
 };
 
 export const lessons: Lesson[] = [
@@ -583,4 +699,5 @@ export const lessons: Lesson[] = [
   derivativesOptimization,
   differentialLeveling,
   horizontalSimpleCurves,
+  cpmScheduling,
 ];
