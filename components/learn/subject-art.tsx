@@ -14,10 +14,10 @@ export function SubjectArt({ id, className }: { id: string; className?: string }
       stroke={color}
       strokeWidth={w}
       strokeLinecap="round"
-      initial={reduce ? false : { pathLength: 0 }}
+      initial={{ pathLength: 0 }}
       whileInView={{ pathLength: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 1.6, ease: ease.outQuart, delay: 0.2 + i * 0.15 }}
+      transition={reduce ? { duration: 0 } : { duration: 1.6, ease: ease.outQuart, delay: 0.2 + i * 0.15 }}
     />
   );
   return (

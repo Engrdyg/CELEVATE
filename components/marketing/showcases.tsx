@@ -373,7 +373,7 @@ export function ExamShowcase() {
                 <Clock className="size-3.5 text-primary-text" /> 47:12
               </div>
             </div>
-            <div className="grid gap-5 p-5 sm:grid-cols-[1fr_auto]">
+            <div className="grid grid-cols-1 gap-5 p-5 sm:grid-cols-[1fr_auto]">
               <div>
                 <div className="h-1 rounded-full bg-subtle">
                   <div className="h-full w-[58%] rounded-full bg-primary" />

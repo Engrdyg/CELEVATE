@@ -12,7 +12,7 @@ export function Tabs({ value, className, ...props }: React.ComponentProps<typeof
   const id = useId();
   return (
     <TabsCtx.Provider value={{ value, id }}>
-      <T.Root value={value} className={className} {...props} />
+      <T.Root value={value} className={cn("min-w-0 max-w-full", className)} {...props} />
     </TabsCtx.Provider>
   );
 }

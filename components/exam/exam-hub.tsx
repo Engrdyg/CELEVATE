@@ -113,7 +113,7 @@ export function ExamHub() {
       )}
 
       <h2 className="mb-3 font-display text-base font-semibold">Exam presets</h2>
-      <Stagger className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <Stagger className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {EXAM_PRESETS.map((p) => (
           <StaggerItem key={p.id}>
             <Card className="flex h-full flex-col p-5 transition-colors hover:border-line-strong">
@@ -157,7 +157,7 @@ export function ExamHub() {
           <CardContent className="space-y-5">
             <fieldset>
               <legend className="mb-2 text-xs font-medium text-muted">Subjects</legend>
-              <div className="grid gap-2 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
                 {subjects.map((s) => {
                   const on = cSubjects.includes(s.id);
                   return (
@@ -178,7 +178,7 @@ export function ExamHub() {
                 })}
               </div>
             </fieldset>
-            <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="space-y-2">
                 <p className="text-xs font-medium text-muted">Questions</p>
                 <Segmented size="sm" label="Number of questions" value={cCount} onChange={setCCount} options={["10", "20", "30", "45"].map((v) => ({ value: v, label: v }))} />
@@ -228,7 +228,7 @@ export function ExamHub() {
           </CardContent>
         </Card>
 
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 gap-4">
           <Card>
             <CardHeader>
               <div>

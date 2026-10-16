@@ -6,14 +6,11 @@ import { ease } from "@/lib/motion";
 /** Structural drafting lines: a Pratt-truss elevation that draws itself, with dimension marks. */
 export function StructuralLines({ className, delay = 0.3 }: { className?: string; delay?: number }) {
   const reduce = useReducedMotion();
-  const draw = (i: number) =>
-    reduce
-      ? { initial: false as const }
-      : {
-          initial: { pathLength: 0, opacity: 0 },
-          animate: { pathLength: 1, opacity: 1 },
-          transition: { duration: 1.8, ease: ease.outQuart, delay: delay + i * 0.12 },
-        };
+  const draw = (i: number) => ({
+    initial: { pathLength: 0, opacity: 0 },
+    animate: { pathLength: 1, opacity: 1 },
+    transition: reduce ? { duration: 0 } : { duration: 1.8, ease: ease.outQuart, delay: delay + i * 0.12 },
+  });
   const panels = 8;
   const w = 720;
   const h = 150;
@@ -54,9 +51,9 @@ export function StructuralLines({ className, delay = 0.3 }: { className?: string
             fill="var(--canvas)"
             stroke="var(--primary)"
             strokeWidth="1.2"
-            initial={reduce ? false : { scale: 0, opacity: 0 }}
+            initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.8 }}
-            transition={{ delay: delay + 1 + i * 0.03, duration: 0.4, ease: ease.outExpo }}
+            transition={reduce ? { duration: 0 } : { delay: delay + 1 + i * 0.03, duration: 0.4, ease: ease.outExpo }}
           />
         ))}
       </g>

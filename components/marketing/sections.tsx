@@ -67,7 +67,7 @@ export function Introduction() {
             Regulation Commission (PRC) or the Board of Civil Engineering.
           </p>
         </Reveal>
-        <Stagger className="grid gap-4">
+        <Stagger className="grid grid-cols-1 gap-4">
           {pillars.map(({ icon: Icon, title, text }, i) => (
             <StaggerItem key={title}>
               <div className="group surface-card flex gap-5 rounded-xl p-5 transition-[border-color,transform] duration-200 hover:border-line-strong sm:p-6">
@@ -137,7 +137,7 @@ export function Features() {
             text="Every formula is typeset properly — fractions, roots, subscripts and Greek letters exactly as you'd write them."
             className="md:col-span-4"
           >
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {[
                 String.raw`\sigma = \frac{P}{A}`,
                 String.raw`h_L = f\frac{L}{D}\frac{v^2}{2g}`,

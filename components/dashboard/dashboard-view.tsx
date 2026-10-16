@@ -341,7 +341,7 @@ function Dashboard() {
           </CardContent>
         </Card>
 
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 gap-4">
           <Card className="overflow-hidden">
             <CardHeader>
               <div>

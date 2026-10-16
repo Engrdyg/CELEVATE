@@ -54,7 +54,7 @@ export function QuestionBody({
       {q.figure && <EngineeringFigure id={q.figure} className="mt-5 rounded-xl border border-line bg-canvas/50 p-4" />}
       <fieldset className="mt-5" disabled={disabled || revealed}>
         <legend className="sr-only">Answer choices</legend>
-        <div className="grid gap-2">
+        <div className="grid grid-cols-1 gap-2">
           {q.choices.map((c) => {
             const isSel = selected === c.id;
             const isAns = revealed && c.id === q.answer;

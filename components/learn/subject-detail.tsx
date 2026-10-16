@@ -223,7 +223,7 @@ export function SubjectDetail({ subjectId }: { subjectId: SubjectId }) {
           )}
         </Card>
 
-        <div className="grid gap-4 lg:sticky lg:top-24">
+        <div className="grid grid-cols-1 gap-4 lg:sticky lg:top-24">
           {next && (
             <Card className="p-5">
               <p className="text-xs font-medium text-muted">Recommended next lesson</p>

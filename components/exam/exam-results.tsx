@@ -209,7 +209,7 @@ export function ExamResults() {
             </ul>
           </CardContent>
         </Card>
-        <div className="grid gap-4">
+        <div className="grid grid-cols-1 gap-4">
           <Card className="p-5">
             <p className="flex items-center gap-2 text-[13px] font-semibold text-success">
               <TrendingUp className="size-4" /> Strongest areas

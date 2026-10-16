@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 function Section({ id, icon: Icon, title, description, children }: { id: string; icon: typeof Palette; title: string; description: string; children: React.ReactNode }) {
   return (
     <Card id={id} className="scroll-mt-24">
-      <div className="grid gap-6 p-5 sm:p-6 lg:grid-cols-[16rem_1fr]">
+      <div className="grid grid-cols-1 gap-6 p-5 sm:p-6 lg:grid-cols-[16rem_1fr]">
         <div>
           <h2 className="flex items-center gap-2 font-display text-[15px] font-semibold">
             <Icon className="size-4 text-primary-text" aria-hidden /> {title}
@@ -125,7 +125,7 @@ function Settings() {
       <div className="space-y-4">
         <Section id="profile" icon={UserRound} title="Review profile" description="Personalizes greetings, goals and recommendations.">
           <form onSubmit={saveProfile} className="space-y-5">
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="s-name">Display name</Label>
                 <Input id="s-name" value={name} onChange={(e) => setName(e.target.value)} maxLength={40} />

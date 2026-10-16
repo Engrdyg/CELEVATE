@@ -236,7 +236,7 @@ export function LessonReader({ lessonId, children }: { lessonId: string; childre
                 </div>
               )}
 
-              <nav aria-label="Lesson pagination" className="grid gap-3 sm:grid-cols-2">
+              <nav aria-label="Lesson pagination" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {prev ? (
                   <Link href={`/subjects/${prev.subjectId}/${prev.id}`} className="group rounded-xl border border-line p-4 transition-colors hover:border-line-strong">
                     <span className="flex items-center gap-1 text-xs text-muted">

@@ -226,7 +226,7 @@ function Review() {
                   }
                 />
               ) : (
-                <ul className="grid gap-3 md:grid-cols-2">
+                <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   {notes.map((n) => (
                     <li key={n.id} className="rounded-xl border border-line bg-surface p-4">
                       <div className="flex items-start justify-between gap-2">

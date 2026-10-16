@@ -12,14 +12,12 @@ import { ProductPreview } from "./product-preview";
 import { SampleChip } from "./section-heading";
 import { useParallaxFactor } from "./use-parallax";
 
-const intro = (delay: number, reduce: boolean | null) =>
-  reduce
-    ? {}
-    : {
-        initial: { opacity: 0, y: 22, filter: "blur(6px)" },
-        animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-        transition: { duration: 0.9, ease: ease.outExpo, delay },
-      };
+/** Same initial/animate props on server and client; reduced motion only zeroes the duration. */
+const intro = (delay: number, reduce: boolean | null) => ({
+  initial: { opacity: 0, y: 22, filter: "blur(6px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  transition: reduce ? { duration: 0 } : { duration: 0.9, ease: ease.outExpo, delay },
+});
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);

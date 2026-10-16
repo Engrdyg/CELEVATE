@@ -146,7 +146,7 @@ export function Onboarding() {
                     <p className="text-[13px] font-medium" id="exp-label">
                       Where are you in your journey?
                     </p>
-                    <div role="radiogroup" aria-labelledby="exp-label" className="grid gap-2 sm:grid-cols-3">
+                    <div role="radiogroup" aria-labelledby="exp-label" className="grid grid-cols-1 gap-2 sm:grid-cols-3">
                       {(
                         [
                           ["student", "Senior student", School],
@@ -217,7 +217,7 @@ export function Onboarding() {
                   <div className="space-y-2">
                     <p className="text-[13px] font-medium">Subjects to prioritize</p>
                     <FieldHint>Optional — choose any that need extra attention.</FieldHint>
-                    <div className="grid gap-2 pt-1">
+                    <div className="grid grid-cols-1 gap-2 pt-1">
                       {subjects.map((s) => {
                         const on = focus.includes(s.id);
                         return (
