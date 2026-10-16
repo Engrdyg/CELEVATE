@@ -2,14 +2,22 @@
 
 import { useEffect, useState } from "react";
 
-/** Seconds elapsed since `since` (ms epoch), ticking every second while `running`. */
-export function useElapsed(since: number | null, running = true) {
-  const [now, setNow] = useState<number | null>(null);
+/**
+ * Seconds elapsed since `resetKey` last changed, ticking every second while
+ * `running`. The clock restarts whenever the key changes.
+ */
+export function useElapsed(resetKey: string, running = true) {
+  const [state, setState] = useState({ key: resetKey, seconds: 0 });
   useEffect(() => {
-    if (!since || !running) return;
-    setNow(Date.now());
-    const id = window.setInterval(() => setNow(Date.now()), 1000);
-    return () => window.clearInterval(id);
-  }, [since, running]);
-  return since && now ? Math.max(0, Math.floor((now - since) / 1000)) : 0;
+    if (!running) return;
+    const start = Date.now();
+    const tick = () => setState({ key: resetKey, seconds: Math.floor((Date.now() - start) / 1000) });
+    const first = window.setTimeout(tick, 0);
+    const id = window.setInterval(tick, 1000);
+    return () => {
+      window.clearTimeout(first);
+      window.clearInterval(id);
+    };
+  }, [resetKey, running]);
+  return state.key === resetKey ? state.seconds : 0;
 }

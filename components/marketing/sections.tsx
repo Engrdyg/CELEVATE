@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import {
   ArrowRight,
   BarChart3,
@@ -24,7 +24,6 @@ import { Logo } from "@/components/brand/logo";
 import { SubjectArt } from "@/components/learn/subject-art";
 import { subjects } from "@/lib/content";
 import { CELE_RULES } from "@/config/cele";
-import { ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { Eyebrow, SectionHeading } from "./section-heading";
 import { useParallaxFactor } from "./use-parallax";

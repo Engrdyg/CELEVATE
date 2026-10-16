@@ -7,9 +7,13 @@ export function useNow(interval = 1000, enabled = true) {
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
     if (!enabled) return;
-    setNow(Date.now());
-    const id = window.setInterval(() => setNow(Date.now()), interval);
-    return () => window.clearInterval(id);
+    const tick = () => setNow(Date.now());
+    const first = window.setTimeout(tick, 0);
+    const id = window.setInterval(tick, interval);
+    return () => {
+      window.clearTimeout(first);
+      window.clearInterval(id);
+    };
   }, [interval, enabled]);
   return now;
 }

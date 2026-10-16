@@ -49,7 +49,22 @@ interface Answer {
   seconds: number;
 }
 
+/** Remount on query changes so filters initialize from the URL without syncing effects. */
 export function PracticeView() {
+  const params = useSearchParams();
+  return <Practice key={params.toString()} />;
+}
+
+interface Session {
+  key: string;
+  index: number;
+  answers: Record<string, Answer>;
+  finished: boolean;
+  flags: string[];
+}
+const freshSession = (key: string): Session => ({ key, index: 0, answers: {}, finished: false, flags: [] });
+
+function Practice() {
   const params = useSearchParams();
   const router = useRouter();
   const ready = useStoreReady();
@@ -71,15 +86,6 @@ export function PracticeView() {
   const [mode, setMode] = useState<Mode>("practice");
   const [showTimer, setShowTimer] = useState(false);
   const [seed, setSeed] = useState(0);
-
-  // Keep filters in sync when navigating here with new query params.
-  useEffect(() => {
-    const s = params.get("subject") as SubjectId | null;
-    const q = params.get("q");
-    setSubject(s ?? (q ? (getQuestion(q)?.subjectId ?? "all") : "all"));
-    setChapter(params.get("chapter") ?? "all");
-    setTopic(params.get("topic") ?? "all");
-  }, [params]);
 
   const pool = useMemo(() => {
     const answered = new Set(attempts.map((a) => a.questionId));
@@ -113,33 +119,31 @@ export function PracticeView() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subject, chapter, topic, difficulty, scope, seed, focusQ, ready]);
 
-  const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, Answer>>({});
-  const [finished, setFinished] = useState(false);
-  const [flags, setFlags] = useState<string[]>([]);
-  const [startedAt, setStartedAt] = useState<number | null>(null);
+  // A new filter selection or mode starts a fresh session (state adjusted during render).
+  const sessionKey = `${mode}::${pool.join("|")}`;
+  const [stored, setSession] = useState<Session>(() => freshSession(sessionKey));
+  if (stored.key !== sessionKey) setSession(freshSession(sessionKey));
+  const session = stored.key === sessionKey ? stored : freshSession(sessionKey);
+  const { index, answers, finished, flags } = session;
+  const setIndex = useCallback((v: number | ((i: number) => number)) => setSession((s) => ({ ...s, index: typeof v === "function" ? v(s.index) : v })), []);
+  const setAnswers = useCallback(
+    (fn: (a: Record<string, Answer>) => Record<string, Answer>) => setSession((s) => ({ ...s, answers: fn(s.answers) })),
+    [],
+  );
+  const setFinished = (v: boolean) => setSession((s) => ({ ...s, finished: v }));
+  const setFlags = (fn: (f: string[]) => string[]) => setSession((s) => ({ ...s, flags: fn(s.flags) }));
   const questionStart = useRef<number>(0);
-
-  // Reset the session whenever the pool changes.
-  useEffect(() => {
-    setIndex(0);
-    setAnswers({});
-    setFinished(false);
-    setFlags([]);
-    setStartedAt(Date.now());
-    questionStart.current = Date.now();
-  }, [pool, mode]);
 
   const qid = pool[index];
   const q = qid ? getQuestion(qid) : undefined;
   const answer = qid ? answers[qid] : undefined;
-  const elapsed = useElapsed(startedAt, showTimer && !finished);
+  const elapsed = useElapsed(sessionKey, showTimer && !finished);
   const marked = !!q && bookmarks.some((b) => b.kind === "question" && b.refId === q.id);
   const answeredCount = Object.values(answers).filter((a) => (mode === "practice" ? a.submitted : a.selected)).length;
 
   useEffect(() => {
     questionStart.current = Date.now();
-  }, [index]);
+  }, [index, sessionKey]);
 
   useEffect(() => {
     if (!ready) return;
@@ -159,7 +163,7 @@ export function PracticeView() {
       if (!qid || answers[qid]?.submitted || finished) return;
       setAnswers((a) => ({ ...a, [qid]: { selected: c, submitted: false, seconds: a[qid]?.seconds ?? 0 } }));
     },
-    [qid, answers, finished],
+    [qid, answers, finished, setAnswers],
   );
 
   const submit = useCallback(() => {
@@ -167,7 +171,7 @@ export function PracticeView() {
     const seconds = Math.round((Date.now() - questionStart.current) / 1000);
     setAnswers((a) => ({ ...a, [q.id]: { ...a[q.id], submitted: true, seconds } }));
     record({ questionId: q.id, subjectId: q.subjectId, topic: q.topic, selected: answer.selected, correct: answer.selected === q.answer, seconds, mode: "practice" });
-  }, [q, answer, record]);
+  }, [q, answer, record, setAnswers]);
 
   const finishExamSet = () => {
     // Record every answered item once, then reveal results.
@@ -182,7 +186,7 @@ export function PracticeView() {
     setIndex(0);
   };
 
-  const go = useCallback((d: number) => setIndex((i) => Math.max(0, Math.min(pool.length - 1, i + d))), [pool.length]);
+  const go = useCallback((d: number) => setIndex((i) => Math.max(0, Math.min(pool.length - 1, i + d))), [pool.length, setIndex]);
 
   // Keyboard: 1–4 / A–D select, Enter submits, ←/→ navigate.
   useEffect(() => {

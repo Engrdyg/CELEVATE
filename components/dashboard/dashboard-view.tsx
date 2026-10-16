@@ -105,6 +105,8 @@ function Dashboard() {
       ready: readiness(state),
       recs: recommendations(state, 4),
       achievements: evaluateAchievements(state),
+      daysToExam: state.profile?.examDate ? Math.ceil((new Date(state.profile.examDate + "T00:00:00").getTime() - today.getTime()) / 86_400_000) : null,
+      scheduleActive: !!state.scheduledExam && new Date(state.scheduledExam.at).getTime() > today.getTime() - 3_600_000,
     };
   }, [state]);
 
@@ -113,7 +115,7 @@ function Dashboard() {
   const resumeHref = state.lastLocation?.href ?? `/subjects/${firstLesson.subjectId}/${firstLesson.id}`;
   const goal = profile?.dailyGoalMinutes ?? 60;
   const goalPct = Math.min(100, Math.round((data.todayMinutes / goal) * 100));
-  const daysToExam = profile?.examDate ? Math.ceil((new Date(profile.examDate + "T00:00:00").getTime() - Date.now()) / 86_400_000) : null;
+  const daysToExam = data.daysToExam;
   const latestExam = data.exams.at(-1);
   const prevExam = data.exams.at(-2);
   const earned = data.achievements.filter((a) => a.earned).sort((a, b) => (b.earnedAt ?? "").localeCompare(a.earnedAt ?? ""));
@@ -398,7 +400,7 @@ function Dashboard() {
             <CalendarClock className="size-5 text-muted" aria-hidden />
           </CardHeader>
           <CardContent>
-            {state.scheduledExam && new Date(state.scheduledExam.at).getTime() > Date.now() - 3_600_000 ? (
+            {state.scheduledExam && data.scheduleActive ? (
               <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-line bg-subtle/50 p-4">
                 <div>
                   <p className="text-[13px] font-semibold">{state.scheduledExam.title}</p>

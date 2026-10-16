@@ -98,9 +98,6 @@ function Session({ examId }: { examId: string }) {
   useEffect(() => {
     if (expired && exam.config.autoSubmit) finalize(true);
   }, [expired, exam.config.autoSubmit, finalize]);
-  useEffect(() => {
-    if (expired && !exam.config.autoSubmit) setConfirmOpen(true);
-  }, [expired, exam.config.autoSubmit]);
 
   const choose = (c: ChoiceId) => {
     if (expired) return;
@@ -275,7 +272,7 @@ function Session({ examId }: { examId: string }) {
       </main>
 
       {/* Submit confirmation */}
-      <Dialog open={confirmOpen} onOpenChange={(o) => !expired && setConfirmOpen(o)}>
+      <Dialog open={confirmOpen || (expired && !exam.config.autoSubmit)} onOpenChange={(o) => !expired && setConfirmOpen(o)}>
         <DialogContent hideClose={expired}>
           <DialogHeader>
             <DialogTitle>{expired ? "Time is up" : "Submit your exam?"}</DialogTitle>

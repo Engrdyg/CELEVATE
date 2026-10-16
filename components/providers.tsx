@@ -7,10 +7,11 @@ import { ThemeProvider, useTheme } from "@/components/theme/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { usePrefs } from "@/lib/store/prefs";
 import { useHydrated, useProgress } from "@/lib/store/progress";
+import { useTutor } from "@/lib/store/tutor";
 
 function StoreHydration() {
   useEffect(() => {
-    Promise.all([usePrefs.persist.rehydrate(), useProgress.persist.rehydrate()]).finally(() => useHydrated.getState().set());
+    Promise.all([usePrefs.persist.rehydrate(), useProgress.persist.rehydrate(), useTutor.persist.rehydrate()]).finally(() => useHydrated.getState().set());
   }, []);
   return null;
 }
